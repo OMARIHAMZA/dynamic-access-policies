@@ -50,3 +50,21 @@ Route::post('/roles', 'RoleController@store')->name('role.save');
 Route::get('/roles/{role_id}', 'RoleController@showRoleInfo')->name('role.info');
 
 Route::post('/roles/update', 'RoleController@update')->name('role.update');
+
+//Purposes
+
+Route::get('/purposes', 'PurposeController@listPurposes')->name('purposes.show');
+
+Route::get('/purposes/delete/{role_id}', 'PurposeController@destroy')->name('purposes.destroy');
+
+Route::get('/purposes/create', 'PurposeController@create')->name('purposes.create');
+
+Route::post('/purposes', 'PurposeController@store')->name('purposes.store');
+
+Route::get('/purposes/{purpose_id}', 'PurposeController@showPurposeInfo')->name('purpose.info');
+
+Route::post('/purposes/update', 'PurposeController@update')->name('purpose.update');
+
+
+
+

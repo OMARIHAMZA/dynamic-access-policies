@@ -8,6 +8,6 @@ class Purpose extends Model
 {
     public function creator()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }

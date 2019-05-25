@@ -13,20 +13,22 @@
         <ul class="nav">
             <li class="{{request() -> is('home') ? 'active' : 'nav-item'}}">
                 <a class="nav-link" href="/home">
-                    <i class="material-icons">dashboard</i>
                     <p>Dashboard</p>
                 </a>
             </li>
             <li class="{{request() -> is('users') ? 'active' : 'nav-item'}}">
                 <a class="nav-link" href="/users">
-                    <i class="material-icons">person</i>
                     <p>Users</p>
                 </a>
             </li>
             <li class="{{request() -> is('roles') ? 'active' : 'nav-item'}}">
                 <a class="nav-link" href="/roles">
-                    <i class="material-icons">person</i>
                     <p>Roles</p>
+                </a>
+            </li>
+            <li class="{{request() -> is('purposes') ? 'active' : 'nav-item'}}">
+                <a class="nav-link" href="/purposes">
+                    <p>Purposes</p>
                 </a>
             </li>
         </ul>
