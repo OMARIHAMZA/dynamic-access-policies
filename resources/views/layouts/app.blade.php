@@ -23,90 +23,95 @@
 
 <body class="">
 <div class="wrapper ">
+    @include('layouts.sidebar')
     <div class="main-panel">
-        <div class="d-flex justify-content-center align-items-center">
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">{{ __('Login') }}</div>
+        <!-- Navbar -->
+    @include('layouts.navbar')
+    <!-- End Navbar -->
 
-                                <div class="card-body">
-                                    <form method="POST" action="{{ route('login') }}">
-                                        @csrf
-
-                                        <div class="form-group row">
-                                            <label for="email"
-                                                   class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="email" type="email"
-                                                       class="form-control @error('email') is-invalid @enderror" name="email"
-                                                       value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                                @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="password"
-                                                   class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                                            <div class="col-md-6">
-                                                <input id="password" type="password"
-                                                       class="form-control @error('password') is-invalid @enderror"
-                                                       name="password" required autocomplete="current-password">
-
-                                                @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-md-6 offset-md-4">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="remember"
-                                                           id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                                    <label class="form-check-label" for="remember">
-                                                        {{ __('Remember Me') }}
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row mb-0">
-                                            <div class="col-md-8 offset-md-4">
-                                                <button type="submit" class="btn btn-primary">
-                                                    {{ __('Login') }}
-                                                </button>
-
-                                                @if (Route::has('password.request'))
-                                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                        {{ __('Forgot Your Password?') }}
-                                                    </a>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="content" style="max-height: 90%">
+            <div class="container-fluid">
+                @yield('content')
             </div>
         </div>
+
+        @include('layouts.footer')
     </div>
 </div>
-
+<div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown">
+            <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="header-title"> Sidebar Filters</li>
+            <li class="adjustments-line">
+                <a href="javascript:void(0)" class="switch-trigger active-color">
+                    <div class="badge-colors ml-auto mr-auto">
+                        <span class="badge filter badge-purple" data-color="purple"></span>
+                        <span class="badge filter badge-azure" data-color="azure"></span>
+                        <span class="badge filter badge-green" data-color="green"></span>
+                        <span class="badge filter badge-warning" data-color="orange"></span>
+                        <span class="badge filter badge-danger" data-color="danger"></span>
+                        <span class="badge filter badge-rose active" data-color="rose"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+            <li class="header-title">Images</li>
+            <li class="active">
+                <a class="img-holder switch-trigger" href="javascript:void(0)">
+                    <img src="img/sidebar-1.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a class="img-holder switch-trigger" href="javascript:void(0)">
+                    <img src="img/sidebar-2.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a class="img-holder switch-trigger" href="javascript:void(0)">
+                    <img src="img/sidebar-3.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a class="img-holder switch-trigger" href="javascript:void(0)">
+                    <img src="img/sidebar-4.jpg" alt="">
+                </a>
+            </li>
+            <li class="button-container">
+                <a href="https://www.creative-tim.com/product/material-dashboard" target="_blank"
+                   class="btn btn-primary btn-block">Free Download</a>
+            </li>
+            <!-- <li class="header-title">Want more components?</li>
+                <li class="button-container">
+                    <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-warning btn-block">
+                      Get the pro version
+                    </a>
+                </li> -->
+            <li class="button-container">
+                <a href="https://demos.creative-tim.com/material-dashboard/docs/2.1/getting-started/introduction.html"
+                   target="_blank" class="btn btn-default btn-block">
+                    View Documentation
+                </a>
+            </li>
+            <li class="button-container github-star">
+                <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard"
+                   data-icon="octicon-star" data-size="large" data-show-count="true"
+                   aria-label="Star ntkme/github-buttons on GitHub">Star</a>
+            </li>
+            <li class="header-title">Thank you for 95 shares!</li>
+            <li class="button-container text-center">
+                <button id="twitter" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45
+                </button>
+                <button id="facebook" class="btn btn-round btn-facebook"><i class="fa fa-facebook-f"></i> &middot; 50
+                </button>
+                <br>
+                <br>
+            </li>
+        </ul>
+    </div>
+</div>
 <!--   Core JS Files   -->
 <script src="js/core/jquery.min.js"></script>
 <script src="js/core/popper.min.js"></script>
