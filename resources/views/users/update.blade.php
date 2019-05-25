@@ -3,18 +3,18 @@
 @section('content')
 
 
-    <h3>Create new user</h3>
+    <h3>Update user</h3>
 
-    <form class="pt-4" action="/users" method="post">
+    <form class="pt-4" action="/users/update" method="post">
         {{csrf_field()}}
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
+            <input type="text" class="form-control" id="name" name="name" value="{{$user -> name}}">
         </div>
 
         <div class="form-group mt-3">
             <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" name="email" value="{{old('email')}}">
+            <input type="text" class="form-control" id="email" name="email" value="{{$user -> email}}">
         </div>
 
         <div class="form-group mt-3">
@@ -22,13 +22,14 @@
             <input type="password" class="form-control" id="exampleInputPassword1" name="password">
         </div>
 
-        <input class="form-control" id="hidden_id" name="role_id" type="hidden">
+        <input class="form-control" id="hidden_id" name="role_id" type="hidden" value="{{$user -> role_id}}">
+        <input class="form-control" id="hidden_id" name="id" type="hidden" value="{{$user -> id}}">
 
         <div class="btn-group form-group">
             <button id="role" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false">
-                User Role
+                {{$user -> role -> title}}
             </button>
             <div class="dropdown-menu form-group">
 

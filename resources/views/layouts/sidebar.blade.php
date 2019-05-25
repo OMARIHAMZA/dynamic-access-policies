@@ -23,6 +23,12 @@
                     <p>Users</p>
                 </a>
             </li>
+            <li class="{{request() -> is('roles') ? 'active' : 'nav-item'}}">
+                <a class="nav-link" href="/roles">
+                    <i class="material-icons">person</i>
+                    <p>Roles</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
