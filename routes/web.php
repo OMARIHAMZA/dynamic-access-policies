@@ -11,10 +11,22 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect("/login");
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//Users
+
+Route::get('/users', 'HomeController@display_all_users');
+
+Route::get('/users/delete/{user_id}', 'UsersController@destroy');
+
+Route::get('/users/create', 'UsersController@create');
