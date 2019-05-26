@@ -16,6 +16,16 @@
                     <p>Dashboard</p>
                 </a>
             </li>
+            <li class="{{request() -> is('Policies') ? 'active' : 'nav-item'}}">
+                <a class="nav-link" href="/policies">
+                    <p>Policies</p>
+                </a>
+            </li>
+            <li class="{{request() -> is('purposes') ? 'active' : 'nav-item'}}">
+                <a class="nav-link" href="/purposes">
+                    <p>Purposes</p>
+                </a>
+            </li>
             <li class="{{request() -> is('users') ? 'active' : 'nav-item'}}">
                 <a class="nav-link" href="/users">
                     <p>Users</p>
@@ -26,11 +36,7 @@
                     <p>Roles</p>
                 </a>
             </li>
-            <li class="{{request() -> is('purposes') ? 'active' : 'nav-item'}}">
-                <a class="nav-link" href="/purposes">
-                    <p>Purposes</p>
-                </a>
-            </li>
+
         </ul>
     </div>
 </div>

@@ -1,3 +1,4 @@
+{{--
 <footer class="footer" style="position: fixed; top: 90%;">
     <div class="container-fluid">
         <nav class="float-left">
@@ -33,3 +34,4 @@
         </div>
     </div>
 </footer>
+--}}

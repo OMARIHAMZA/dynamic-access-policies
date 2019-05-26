@@ -10,4 +10,9 @@ class Purpose extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function policies()
+    {
+        return $this->belongsToMany(Policy::class);
+    }
 }

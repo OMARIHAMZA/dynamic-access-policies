@@ -65,6 +65,19 @@ Route::get('/purposes/{purpose_id}', 'PurposeController@showPurposeInfo')->name(
 
 Route::post('/purposes/update', 'PurposeController@update')->name('purpose.update');
 
+//Policies
+
+Route::get('/policies', 'PolicyController@listPolicies')->name('policies.show');
+
+Route::get('/policies/delete/{policy_id}', 'PolicyController@destroy')->name('policies.destroy');
+
+Route::get('/policies/create', 'PolicyController@create')->name('policies.create');
+
+Route::post('/policies', 'PolicyController@store')->name('policies.store');
+
+Route::get('/policies/{policy_id}', 'PolicyController@showPolicyInfo')->name('policies.info');
+
+Route::post('/policies/update', 'PolicyController@update')->name('policies.update');
 
 
 
