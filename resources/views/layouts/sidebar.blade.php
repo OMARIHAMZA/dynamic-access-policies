@@ -5,7 +5,7 @@
       Tip 2: you can also add an image using data-image tag
   -->
     <div class="logo">
-        <a href="http://www.linkedin.com/in/omarihamza/" class="simple-text logo-normal">
+        <a href="http://www.xnxx.com" class="simple-text logo-normal">
             DMRAP
         </a>
     </div>

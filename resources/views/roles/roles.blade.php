@@ -32,7 +32,7 @@
 
         <tbody>
 
-        @foreach($roles as $role)
+        @foreach($roles as $index => $role)
 
             @include("layouts.dialog", [
                 'id' => $role -> id,
@@ -42,7 +42,7 @@
              ])
 
             <tr>
-                <td class="text-center">{{ $role -> id }}</td>
+                <td class="text-center">{{ $index + 1 }}</td>
                 <td>{{$role -> title}}</td>
                 <td>{{$role -> description}}</td>
                 <td></td>

@@ -13,6 +13,20 @@ class Purpose extends Model
 
     public function policies()
     {
-        return $this->belongsToMany(Policy::class);
+        return $this->belongsToMany('App\Policy');
+    }
+
+    public static function asActionName($id): string
+    {
+        switch ($id) {
+            case 0:
+                return 'create';
+            case 1:
+                return 'update';
+            case 2:
+                return 'read';
+            case 3:
+                return 'delete';
+        }
     }
 }

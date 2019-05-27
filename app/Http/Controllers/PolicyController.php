@@ -47,13 +47,10 @@ class PolicyController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
-
             'name' => 'required|unique:policies',
-            'purposes' => 'required|min:1',
-            'description' => 'required'
-
+            'description' => 'required',
+            'creator_id' => 'required|numeric'
         ]);
 
         $logged_user = Auth::user();
@@ -66,17 +63,9 @@ class PolicyController extends Controller
 
         $policy->creator_id = $logged_user->id;
 
-        $purposesIds = str_split($request->request->get('purposes'));
-
-        $purposes = Purpose::find($purposesIds);
-
         $policy->save();
 
-        $policy->purposes()->attach($purposes);
-
         return redirect('/policies');
-
-
     }
 
     public function showPolicyInfo($id)
@@ -85,6 +74,14 @@ class PolicyController extends Controller
         $policy = Policy::find($id);
 
         $purposes = Purpose::all();
+
+        foreach ($policy->purposes()->get() as $p1) {
+            foreach ($purposes as $p2) {
+                if ($p1->id == $p2->id) {
+                    $p2['selected'] = true;
+                }
+            }
+        }
 
         return view('/policies/update', [
 
@@ -97,8 +94,6 @@ class PolicyController extends Controller
 
     public function update(Request $request)
     {
-
-
         $request->validate([
 
             'name' => 'unique:policies,name,' . $request->request->get('policy_id')

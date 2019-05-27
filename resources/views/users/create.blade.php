@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
     <h3>Create new user</h3>
 
     <form class="pt-4" action="/users" method="post">
@@ -42,17 +40,6 @@
 
             </div>
         </div>
-
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
         <button type="submit" class="btn btn-primary">Submit</button>
 

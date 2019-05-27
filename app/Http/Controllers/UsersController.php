@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 
 class UsersController extends Controller
 {
@@ -15,6 +17,14 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        $users = User::all();
+        return view('users/users', [
+            "users" => $users
+        ]);
     }
 
     public function create()
@@ -29,14 +39,11 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'name' => 'required|unique:users',
             'email' => 'required|email|unique:users',
-            'password' => 'required',
+            'password' => 'required|min:10',
             'role_id' => 'required|numeric'
-
         ]);
-
 
         $user = new User();
 
@@ -47,9 +54,7 @@ class UsersController extends Controller
 
         $user->save();
 
-
         return redirect('/users');
-
     }
 
     public function showUserInfo($id)

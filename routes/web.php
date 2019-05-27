@@ -25,7 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Users
 
-Route::get('/users', 'HomeController@display_all_users')->name('users.show');
+Route::get('/users', 'UsersController@index')->name('users.index');
 
 Route::get('/users/delete/{user_id}', 'UsersController@destroy')->name('users.destroy');
 
@@ -53,17 +53,19 @@ Route::post('/roles/update', 'RoleController@update')->name('role.update');
 
 //Purposes
 
-Route::get('/purposes', 'PurposeController@listPurposes')->name('purposes.show');
+Route::get('/purposes', 'PurposeController@index');
 
-Route::get('/purposes/delete/{role_id}', 'PurposeController@destroy')->name('purposes.destroy');
+Route::post('/purposes', 'PurposeController@store');
 
-Route::get('/purposes/create', 'PurposeController@create')->name('purposes.create');
+Route::get('/purposes/create', 'PurposeController@create');
 
-Route::post('/purposes', 'PurposeController@store')->name('purposes.store');
+Route::get('/purposes/{purpose_id}', 'PurposeController@show');
 
-Route::get('/purposes/{purpose_id}', 'PurposeController@showPurposeInfo')->name('purpose.info');
+Route::get('/purposes/{purpose_id}/edit', 'PurposeController@edit');
 
-Route::post('/purposes/update', 'PurposeController@update')->name('purpose.update');
+Route::post('/purposes/{purpose_id}', 'PurposeController@update');
+
+Route::get('/purposes/{purpose_id}/delete', 'PurposeController@destroy');
 
 //Policies
 
@@ -79,5 +81,9 @@ Route::get('/policies/{policy_id}', 'PolicyController@showPolicyInfo')->name('po
 
 Route::post('/policies/update', 'PolicyController@update')->name('policies.update');
 
-
+Route::get('/notifications', function () {
+    $data = session()->get('notifications');
+    session()->remove('notifications');
+    return $data;
+});
 

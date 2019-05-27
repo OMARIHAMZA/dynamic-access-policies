@@ -16,6 +16,7 @@ class CreatePoliciesTable extends Migration
         Schema::create('policies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->string('description')->nullable();
             $table->unsignedInteger('creator_id');
             $table->timestamps();
         });

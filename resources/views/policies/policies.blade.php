@@ -1,87 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-    <table class="table" style="table-layout: fixed">
+    <div class="card">
+        <div class="card-header card-header-tabs card-header-primary">
+            <a href="policies/create" class="float-right btn btn-primary btn-sm" title="create new policy">
+                <i class="fa fa-plus-circle"></i>
+            </a>
+            <h4>{{$policies->count()}} Total policies</h4>
+        </div>
+        <div class="card-body">
+            <table class="table" style="table-layout: fixed">
+                <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Created By</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+                </thead>
 
-        <thead>
-        <tr style="background: lightgray">
-            <th class="text-center" style="fill: white">{{$policies->count()}} Total policies</th>
-            <td></td>
-            <td></td>
-            <th></th>
-            <th></th>
-            <td></td>
-            <td align="right" class="pr-3 td-actions">
-                <button type="button" rel="tooltip" class="btn btn-primary" style="font-size: medium"
-                        onclick="document.location.href = 'policies/create'">
-                    &nbsp;+&nbsp;
-                </button>
-            </td>
-        </tr>
+                <tbody>
+                @foreach($policies as $index => $policy)
 
-        <tr>
-            <th class="text-center">#</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Purposes</th>
-            <th>Created By</th>
-            <th></th>
-            <th class="text-right">Actions</th>
-        </tr>
-        </thead>
+                    @include("policies.view", [
+                        'policy' => $policy,
+                        'id' => $index
+                    ])
 
-        <tbody>
-
-        @foreach($policies as $policy)
-
-            @include("layouts.dialog", [
-                'id' => $policy -> id,
-                'title' => "Delete Confirmation",
-                'body' => "Are you sure you want to delete policy \"$policy->name\"?",
-                'href' => "/policies/delete/{$policy -> id}"
-             ])
-
-            <tr>
-                <td class="text-center">{{ $policy -> id }}</td>
-                <td>{{$policy -> name}}</td>
-                <td>{{$policy -> description}}</td>
-                <td>
-                    <table>
-                        @foreach($policy -> purposes as $purpose)
-
-                            <tr>
-                                {{$purpose -> name}}<br>
-                            </tr>
-
-                        @endforeach
-                    </table>
-                </td>
-                <td>{{$policy -> creator -> name}}</td>
-                <td></td>
-                <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" class="btn btn-success"
-                            onclick="document.location.href = 'policies/{{$policy->id}}'">
-                        <i class="material-icons">edit</i>
-                    </button>
+                    <tr>
+                        <td class="text-center">{{ $index + 1 }}</td>
+                        <td>{{$policy->name}}</td>
+                        <td>{{$policy->description}}</td>
+                        <td>{{$policy->creator()->first()->name}}</td>
+                        <td class="td-actions text-right">
+                            <button type="button" rel="tooltip" class="btn btn-success"
+                                    onclick="document.location.href = 'policies/{{$policy->id}}'">
+                                <i class="material-icons">edit</i>
+                            </button>
 
 
-                    <button type="button" rel="tooltip" class="btn btn-danger"
-                            data-toggle="modal"
-                            data-backdrop="static" data-keyboard="false" data-target="#modal{{$policy->id}}">
-                        <i class="material-icons">close</i>
-                    </button>
+                            <button type="button" rel="tooltip" class="btn btn-danger"
+                                    data-toggle="modal"
+                                    data-backdrop="static" data-keyboard="false"
+                                    data-target="#modal-{{$index}}">
+                                <i class="material-icons">close</i>
+                            </button>
+                        </td>
+                    </tr>
 
-
-                </td>
-            </tr>
-
-
-        @endforeach
-
-        </tbody>
-
-
-    </table>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     @if ($errors->any())
         <div class="alert alert-danger">
