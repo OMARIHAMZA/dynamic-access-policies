@@ -79,7 +79,9 @@ Route::post('/policies', 'PolicyController@store')->name('policies.store');
 
 Route::get('/policies/{policy_id}', 'PolicyController@showPolicyInfo')->name('policies.info');
 
-Route::post('/policies/update', 'PolicyController@update')->name('policies.update');
+Route::post('/policies/{policy_id}/update', 'PolicyController@update')->name('policies.update');
+
+
 
 Route::get('/notifications', function () {
     $data = session()->get('notifications');

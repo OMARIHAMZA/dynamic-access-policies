@@ -25,6 +25,8 @@
                                       name="purpose"> {{old('purpose')}}</textarea>
                         </div>
 
+                        <input type="hidden" name="creator_id" value="{{$user_id}}">
+
                         <input type="hidden" id="action_value" name="action" value="{{old('action')}}">
                         <div class="form-group pt-4">
                             {{--<label for="action">Action</label>--}}
@@ -53,11 +55,12 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="creator_id" value="{{$user_id}}">
-
-                        {{--<smart-multiselect></smart-multiselect>--}}
-
-                        <hr>
+                        <div class="form-group mt-3">
+                            <label for="policies">Policies</label>
+                            <div id="policies">
+                                @include('layouts.multiselect', ['items' => $policies, 'key1' => 'name', 'name' => 'policies'])
+                            </div>
+                        </div>
 
                         <div class="btn-group form-group">
                             <button type="submit" class="btn btn-primary">Create</button>

@@ -8,7 +8,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
-                    <form class="pt-4" action="/policies/update" method="post">
+                    <form class="pt-4" action="/policies/{{$policy->id}}/update" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -23,7 +23,7 @@
                         </div>
 
                         <div class="form-group mt-3">
-                            <label for="policies">Policies</label>
+                            <label for="policies">Purposes</label>
                             <div id="policies">
                                 @include('layouts.multiselect', ['items' => $purposes, 'key1' => 'name', 'name' => 'purposes'])
                             </div>

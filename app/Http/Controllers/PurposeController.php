@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Policy;
 use App\PolicyPurpose;
 use App\Purpose;
+use App\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,10 +35,12 @@ class PurposeController extends Controller
 
     public function create()
     {
+        $policies = Policy::all();
         $logged_user = Auth::user();
 
         return view('purposes.create', [
             'user_id' => $logged_user['id'],
+            'policies' => $policies
         ]);
     }
 
@@ -53,13 +56,17 @@ class PurposeController extends Controller
         $logged_user = Auth::user();
 
         $purpose = new Purpose();
-
         $purpose->name = $request->request->get('name');
         $purpose->purpose = $request->request->get('purpose');
         $purpose->action = $request->request->get('action');
         $purpose->creator_id = $logged_user->id;
-
         $purpose->save();
+
+        $policies = Purpose::find($request['policies']);
+        if (!empty($policies)) {
+            $purpose->policies()->detach();
+            $purpose->policies()->attach($policies);
+        }
 
         session()->put('notifications', [
             ["icon" => "fa fa-info", "message" => "Purpose created successfully"]
@@ -72,11 +79,15 @@ class PurposeController extends Controller
     public function show($id)
     {
         $purpose = Purpose::find($id);
+        $creator_name = User::find($purpose['creator_id'])->name;
+        $policies = $purpose->policies()->get();
         $logged_user = Auth::user();
 
         return view('purposes.view', [
             'purpose' => $purpose,
-            'user_id' => $logged_user->id
+            'user_id' => $logged_user->id,
+            'creator_name' => $creator_name,
+            'policies' => $policies
         ]);
 
     }
@@ -115,17 +126,12 @@ class PurposeController extends Controller
         $purpose->purpose = $request['purpose'];
         $purpose->action = $request['action'];
         $purpose->creator_id = $request['creator_id'];
-
         $purpose->save();
 
-        PolicyPurpose::where('purpose_id', $purpose['id'])->delete();
-
-        foreach ($request['policies'] as $policy) {
-            echo $policy;
-            PolicyPurpose::create([
-                'policy_id' => $policy,
-                'purpose_id' => $purpose['id']
-            ]);
+        $policies = Purpose::find($request['policies']);
+        if (!empty($policies)) {
+            $purpose->policies()->detach();
+            $purpose->policies()->attach($policies);
         }
 
         session()->put('notifications', [

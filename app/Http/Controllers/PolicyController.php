@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Policy;
+use App\PolicyPurpose;
 use App\Purpose;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,25 +57,25 @@ class PolicyController extends Controller
         $logged_user = Auth::user();
 
         $policy = new Policy();
-
         $policy->name = $request->request->get('name');
-
         $policy->description = $request->request->get('description');
-
         $policy->creator_id = $logged_user->id;
-
         $policy->save();
+
+        $purposes = Purpose::find($request['purposes']);
+        if (!empty($purposes)) {
+            $policy->purposes()->detach();
+            $policy->purposes()->attach($purposes);
+        }
 
         return redirect('/policies');
     }
 
     public function showPolicyInfo($id)
     {
-
         $policy = Policy::find($id);
 
         $purposes = Purpose::all();
-
         foreach ($policy->purposes()->get() as $p1) {
             foreach ($purposes as $p2) {
                 if ($p1->id == $p2->id) {
@@ -92,25 +93,18 @@ class PolicyController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request->validate([
-
-            'name' => 'unique:policies,name,' . $request->request->get('policy_id')
-
+            //  'name' => 'unique:policies,name,' . $request->request->get('policy_id')
         ]);
 
-        $policy = Policy::find($request->request->get('policy_id'));
-
-        $policy->name = $request->request->get('name');
-
-        $policy->description = $request->request->get('description');
-
-        $purposesIds = str_split($request->request->get('purposes'));
-
-        $purposes = Purpose::find($purposesIds);
-
+        $policy = Policy::find($id);
+        $policy->name = $request['name'];
+        $policy->description = $request['description'];
         $policy->save();
+
+        $purposes = Purpose::find($request['purposes']);
 
         if (!empty($purposes)) {
             $policy->purposes()->detach();
@@ -118,7 +112,6 @@ class PolicyController extends Controller
         }
 
         return redirect('/policies');
-
     }
 
 

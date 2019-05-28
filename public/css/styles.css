@@ -1,0 +1,41 @@
+.brand-title {
+    text-align: center;
+    position: relative;
+}
+
+.brand-title span {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 22px;
+    font-family: 'Copperplate Gothic', serif;
+    position: relative;
+    transition: all 0.5s linear;
+}
+
+.brand-title span:nth-of-type(1) {
+    color: #2196f3 !important;
+}
+
+.brand-title span:nth-of-type(2) {
+    /*color: #f44336 !important;*/
+    color: #2196f3 !important;
+}
+
+.brand-title span:nth-of-type(3) {
+    /*color: #00bcd4 !important;*/
+    color: #343a40 !important;
+}
+
+.brand-title span:nth-of-type(4) {
+    /*color: #343a40 !important;*/
+    color: #343a40 !important;
+}
+
+.brand-title span:nth-of-type(5) {
+    /*color: #4caf50 !important;*/
+    color: #343a40 !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

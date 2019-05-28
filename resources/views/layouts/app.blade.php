@@ -18,6 +18,7 @@
 <!-- CSS Files -->
     <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/material-dashboard.css?v=2.1.1') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
 </head>
 <body class="">
 {{--<div id="app">--}}

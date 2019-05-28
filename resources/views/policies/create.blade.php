@@ -23,31 +23,36 @@
 
         <input type="hidden" name="creator_id" value="{{$user_id}}">
 
-        <input id="purposes" type="hidden" name="purposes">
-
-        <h5 id="selected_purposes"></h5>
-
-        <div class="btn-group form-group">
-            <button id="action" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false">
-                Select Access Purposes
-            </button>
-            <ul class="dropdown-menu">
-
-                @foreach($purposes as $purpose)
-
-                    <li><a class="small" onclick="getCheckedBoxes('checkbox')" data-value="{{$purpose->id}}"
-                           tabIndex="-1"><input name="checkbox" type="checkbox"
-                                                value="{{$purpose->id}}"/>&nbsp;{{$purpose->name}}
-                        </a>
-                    </li>
-
-                @endforeach
-
-            </ul>
-
+        <div class="form-group mt-3">
+            <label for="policies">Purposes</label>
+            <div id="policies">
+                @include('layouts.multiselect', ['items' => $purposes, 'key1' => 'name', 'name' => 'purposes'])
+            </div>
         </div>
+
+        {{--<h5 id="selected_purposes"></h5>--}}
+
+        {{--<div class="btn-group form-group">--}}
+        {{--<button id="action" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"--}}
+        {{--aria-haspopup="true"--}}
+        {{--aria-expanded="false">--}}
+        {{--Select Access Purposes--}}
+        {{--</button>--}}
+        {{--<ul class="dropdown-menu">--}}
+
+        {{--@foreach($purposes as $purpose)--}}
+
+        {{--<li><a class="small" onclick="getCheckedBoxes('checkbox')" data-value="{{$purpose->id}}"--}}
+        {{--tabIndex="-1"><input name="checkbox" type="checkbox"--}}
+        {{--value="{{$purpose->id}}"/>&nbsp;{{$purpose->name}}--}}
+        {{--</a>--}}
+        {{--</li>--}}
+
+        {{--@endforeach--}}
+
+        {{--</ul>--}}
+
+        {{--</div>--}}
 
 
         @if ($errors->any())

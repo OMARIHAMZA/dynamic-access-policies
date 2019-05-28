@@ -49,10 +49,13 @@
                             </p>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="#">Settings</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
+                            <button class="dropdown-item w-100 mx-0 cursor-pointer"
+                                    onclick="document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out-alt"></i> Logout
+                            </button>
+                            <form method="post" action="logout" id="logout-form">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                 </ul>
