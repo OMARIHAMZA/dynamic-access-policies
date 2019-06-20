@@ -79,8 +79,21 @@
                 <div class="card-body">
                     <h4 class="card-title">Daily Sales</h4>
                     <p class="card-category">
-                        <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today
-                        sales.</p>
+                    <form method="post" action="/integrate" class="form">
+                        @csrf
+                        <div class="card card-stats">
+                            {{--<input type="file" name="data" accept="application/json">--}}
+                            <textarea name="data" rows="10"></textarea>
+
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons text-danger">warning</i>
+                                    <button type="submit" class="btn btn-sm btn-outline-light">POST</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </p>
                 </div>
                 <div class="card-footer">
                     <div class="stats">

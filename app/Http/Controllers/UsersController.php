@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ExternalRole;
+use App\ExternalTable;
 use App\Role;
 use App\User;
 use http\Env\Response;
@@ -120,5 +122,42 @@ class UsersController extends Controller
 
     }
 
+
+    public function integrate(Request $request)
+    {
+        $user_id = Auth()->user()->id;
+        $data = json_decode($request["data"], true);
+
+        foreach ($data as $key => $value) {
+            switch ($key)
+            {
+                case "tables":
+                    foreach ($value as $table_name) {
+                        $external_table = new ExternalTable([
+                            'creator_id' => $user_id,
+                            'name' => $table_name
+                        ]);
+                        $external_table->save();
+                    }
+                    break;
+                case "roles":
+                    foreach ($value as $role) {
+                        $role = new ExternalRole([
+                            'creator_id' => $user_id,
+                            'name' => $role['name'],
+                            'description' => $role['description']
+                        ]);
+                        $role->save();
+                    }
+                    break;
+            }
+        }
+
+        session()->put('notifications', [
+            ["icon" => "fa fa-info", "message" => "System integrated successfully."]
+        ]);
+
+        return back();
+    }
 
 }

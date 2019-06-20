@@ -51,4 +51,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Purpose::class);
     }
+
+    public function externalRoles()
+    {
+        return $this->hasMany(ExternalRole::class);
+    }
+
+    public function externalTables()
+    {
+        return $this->hasMany(ExternalTable::class);
+    }
 }

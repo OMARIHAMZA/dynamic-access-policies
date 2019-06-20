@@ -89,3 +89,8 @@ Route::get('/notifications', function () {
     session()->remove('notifications');
     return $data;
 });
+
+Route::post('/integrate', 'UsersController@integrate');
+
+
+
