@@ -274,7 +274,7 @@
         })
     }
 
-    $.ajax('http://localhost:8000/alerts', {
+    $.ajax('http://localhost:5326/alerts', {
         method: 'GET',
         dataType: 'json',
         success: pushNotifications

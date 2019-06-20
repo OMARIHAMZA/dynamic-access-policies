@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function roleTitle()
     {
-        return $this->belongsTo(Role::class)->find(1)['title'];
+        return $this->role()->first()['title'];
     }
 
     public function purposes()

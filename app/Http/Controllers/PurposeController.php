@@ -68,7 +68,7 @@ class PurposeController extends Controller
             $purpose->policies()->attach($policies);
         }
 
-        session()->put('notifications', [
+        session()->put('alerts', [
             ["icon" => "fa fa-info", "message" => "Purpose created successfully"]
         ]);
 
@@ -134,7 +134,7 @@ class PurposeController extends Controller
             $purpose->policies()->attach($policies);
         }
 
-        session()->put('notifications', [
+        session()->put('alerts', [
             ["icon" => "fa fa-info", "message" => "Purpose updated successfully"]
         ]);
         return redirect('/purposes');
@@ -147,7 +147,7 @@ class PurposeController extends Controller
 
         $purpose->delete();
 
-        session()->put('notifications', [
+        session()->put('alerts', [
             ["icon" => "fa fa-info", "message" => "Purpose deleted successfully"]
         ]);
         return redirect('/purposes');

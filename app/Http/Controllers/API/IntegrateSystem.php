@@ -7,9 +7,9 @@ use App\ExternalTable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AccessPermissionRequest extends Controller
+class IntegrateSystem extends Controller
 {
-    public function check(Request $request)
+    public function integrate(Request $request)
     {
         if (!isset($request['token'])) {
             return response()
@@ -19,6 +19,7 @@ class AccessPermissionRequest extends Controller
                 ]);
         }
 
+        // token => tw7vdE4e6xKXtR2
         $user = \App\User::where('token', $request['token'])->first();
 
         if (!$user) {
@@ -39,27 +40,26 @@ class AccessPermissionRequest extends Controller
 
         $data = json_decode($request['data']);
 
-        $role_name = $data->role;
-        if (ExternalRole::where('name', $role_name) == null) {
-            return response()
-                ->json([
-                    "status" => "OK",
-                    "permission" => "ACCESS DENIED"
-                ]);
+        $tables = $data->tables;
+        foreach ($tables as $table) {
+            ExternalTable::create([
+                'name' => $table,
+                'creator_id' => $user->id
+            ]);
         }
 
-        $ts = array_unique($data->tables);
-        $tables = ExternalTable::whereIn('name', $ts)->get();
-        if (count($tables) != count($ts)) {
-            return response()
-                ->json([
-                    "status" => "OK",
-                    "permission" => "ACCESS DENIED"
-                ]);
+        $roles = $data->roles;
+        foreach ($roles as $role) {
+            ExternalRole::create([
+                'name' => $role,
+                'description' => '',
+                'creator_id' => $user->id
+            ]);
         }
 
-        return response()
-            ->json(["status" => "OK",
-                "permission" => "GRANTED"]);
+        return response()->json([
+            'status' => 'done',
+            'message' => 'system integrated successfully!'
+        ]);
     }
 }

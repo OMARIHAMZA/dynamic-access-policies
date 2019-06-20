@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header card-header-tabs card-header-primary">
-            <a href="{{$purpose['id']}}/edit" class="float-right btn btn-light btn-sm"
+            <a href="edit" class="float-right btn btn-light btn-sm"
                title="Edit">
                 <i class="fa fa-pen text-primary"></i>
             </a>

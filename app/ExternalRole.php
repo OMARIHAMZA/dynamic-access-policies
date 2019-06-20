@@ -9,7 +9,9 @@ class ExternalRole extends Model
     public $fillable = [
         'creator_id',
         'name',
-        'description'
+        'description',
+        'updated_at',
+        'created_at'
     ];
 
     public $creator_id;

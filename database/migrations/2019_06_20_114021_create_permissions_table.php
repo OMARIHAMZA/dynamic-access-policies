@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDescriptionToPolicy extends Migration
+class CreatePermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddDescriptionToPolicy extends Migration
      */
     public function up()
     {
-        Schema::table('policies', function (Blueprint $table) {
-            $table -> text('description');
+        Schema::create('permissions', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->string('description');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddDescriptionToPolicy extends Migration
      */
     public function down()
     {
-        Schema::table('policies', function (Blueprint $table) {
-            $table -> dropColumn('description');
-        });
+        Schema::dropIfExists('permissions');
     }
 }
