@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -88,4 +89,8 @@ Route::get('/notifications', function () {
     session()->remove('notifications');
     return $data;
 });
+
+Route::post('/integrate', 'UsersController@integrate');
+
+
 
