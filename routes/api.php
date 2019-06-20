@@ -18,41 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/access_permission_request', function (Request $request) {
-    if (!isset($request['token'])) {
-        return response()
-            ->json([
-                "status" => "ERROR",
-                "cause" => "Token is required"
-            ]);
-    }
+Route::post('/integrate', 'UsersController@integrate');
 
-    //$user = \App\User::where('token', $request['token'])->first();
-//    $user = \App\User::first();
 
-//    if (!$user) {
-//        return [
-//            "status" => "ERROR",
-//            "cause" => "Invalid token."
-//        ];
-//    }
-
-    $data = $request['data'];
-
-//    foreach ($data as $el) {
-//        echo $el;
-////        if (false) {
-////            return [
-////                "status" => "OK",
-////                "permission" => "ACCESS DENIED"
-////            ];
-////        }
-//    }
-
-//    return response()
-//        ->json(["status" => "OK",
-//            "permission" => "GRANTED"]);
-
-    return "GRANTED";
-});
-
+Route::get('/access_permission_request', 'API\AccessPermissionRequest@check');

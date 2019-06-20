@@ -21,33 +21,33 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
 </head>
 <body class="">
-{{--<div id="app">--}}
-<div class="wrapper ">
-    @include('layouts.sidebar')
-    <div class="main-panel">
-        <!-- Navbar -->
-    @include('layouts.navbar')
-    <!-- End Navbar -->
+<div id="app">
+    <div class="wrapper ">
+        @include('layouts.sidebar')
+        <div class="main-panel">
+            <!-- Navbar -->
+        @include('layouts.navbar')
+        <!-- End Navbar -->
 
-        <div class="content" style="max-height: 90%;">
-            <div class="container-fluid">
-                @yield('content')
-                {{--@if ($errors->any())--}}
-                {{--<div class="alert alert-danger">--}}
-                {{--<ul>--}}
-                {{--@foreach ($errors->all() as $error)--}}
-                {{--<li>{{ $error }}</li>--}}
-                {{--@endforeach--}}
-                {{--</ul>--}}
-                {{--</div>--}}
-                {{--@endif--}}
+            <div class="content" style="max-height: 90%;">
+                <div class="container-fluid">
+                    @yield('content')
+                    {{--@if ($errors->any())--}}
+                    {{--<div class="alert alert-danger">--}}
+                    {{--<ul>--}}
+                    {{--@foreach ($errors->all() as $error)--}}
+                    {{--<li>{{ $error }}</li>--}}
+                    {{--@endforeach--}}
+                    {{--</ul>--}}
+                    {{--</div>--}}
+                    {{--@endif--}}
+                </div>
             </div>
-        </div>
 
-        @include('layouts.footer')
+            @include('layouts.footer')
+        </div>
     </div>
 </div>
-{{--</div>--}}
 
 <!-- Vue js -->
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
@@ -274,7 +274,7 @@
         })
     }
 
-    $.ajax('http://localhost:8000/notifications', {
+    $.ajax('http://localhost:8000/alerts', {
         method: 'GET',
         dataType: 'json',
         success: pushNotifications

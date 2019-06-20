@@ -83,14 +83,10 @@ Route::get('/policies/{policy_id}', 'PolicyController@showPolicyInfo')->name('po
 Route::post('/policies/{policy_id}/update', 'PolicyController@update')->name('policies.update');
 
 
-
-Route::get('/notifications', function () {
-    $data = session()->get('notifications');
-    session()->remove('notifications');
+Route::get('/alerts', function () {
+    $data = session()->get('alerts');
+    session()->remove('alerts');
     return $data;
 });
-
-Route::post('/integrate', 'UsersController@integrate');
-
 
 
