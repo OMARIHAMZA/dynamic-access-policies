@@ -77,6 +77,9 @@ Route::get('/permissions/{id}/edit', 'PermissionController@edit');
 Route::post('/permissions/{id}', 'PermissionController@update');
 Route::get('/permissions/{id}/delete', 'PermissionController@destroy');
 
+//Rules
+Route::get('/rules', 'RuleController@index');
+
 Route::get('/alerts', function () {
     $data = session()->get('alerts');
     session()->remove('alerts');
