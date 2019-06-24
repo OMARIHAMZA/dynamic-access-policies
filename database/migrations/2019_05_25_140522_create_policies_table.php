@@ -14,11 +14,14 @@ class CreatePoliciesTable extends Migration
     public function up()
     {
         Schema::create('policies', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->unique();
-            $table->text('description')->nullable();
-            $table->unsignedInteger('creator_id');
+            $table->bigInteger('creator_id');
+            $table->bigInteger('data_element');
+            $table->string('name')->nullable(false);
+
             $table->timestamps();
+
+            $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('data_element')->references('id')->on('external_tables')->onDelete('cascade');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExternalRolesTable extends Migration
+class CreateKeysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateExternalRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('external_roles', function (Blueprint $table) {
+        Schema::create('keys', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('creator_id')->nullable(false);
             $table->string('name')->nullable(false);
             $table->timestamps();
         });
@@ -28,6 +27,6 @@ class CreateExternalRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('external_roles');
+        Schema::dropIfExists('keys');
     }
 }
