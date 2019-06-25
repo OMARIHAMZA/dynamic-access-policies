@@ -20,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/integrate', 'UsersController@integrate');
 
+Route::post('/emergency_access', 'API\AccessPermissionRequest@emergencyCheck');
+
 Route::get('/access_permission_request', 'API\AccessPermissionRequest@check');
