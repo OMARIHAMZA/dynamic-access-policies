@@ -4,8 +4,14 @@ namespace App\Http\Controllers\API;
 
 use App\ExternalRole;
 use App\ExternalTable;
+use App\Policy;
+use App\Rule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\Console\Helper\Table;
+use test\Mockery\AllowsExpectsSyntaxTest;
 
 class AccessPermissionRequest extends Controller
 {
@@ -74,52 +80,88 @@ class AccessPermissionRequest extends Controller
 
         $request->validate([
 
-            'rules' => 'json|required',
-            'external_table_id' => 'integer|required',
-            'user_role' => 'integer|required'
+            'external_tables' => 'json|required',
+            'keys' => 'json|required'
 
         ]);
 
-        $accessPermissionGranted = true;
-        $allRulesSatisfied = true;
-        $rules = $request["rules"];
-        $emergencyRules = $request["emergency_rules"];
+        $externalTables = json_decode($request["external_tables"]);
 
+        $keys = json_decode($request['keys'], true);
 
-        foreach ($rules as $rule) {
-            if (!in_array($request["user_role"], $rule["values"])) {
-                $allRulesSatisfied = false;
-                $accessPermissionGranted = false;
-                break;
-            }
+        if (!$this->allRulesSatisfied($externalTables, $keys, 'rules')) {
+
+            return Redirect::route("access_denied", [
+                "external_tables" => $request["external_tables"],
+                "keys" => $request['keys']
+            ]);
+
         }
 
-        if (!$allRulesSatisfied) {
-            //Check Emergency Rules
-            $allEmergencyRulesSatisfied = true;
-            foreach ($emergencyRules as $rule) {
-                if (!in_array($request["user_role"], $rule["values"])) {
-                    $allEmergencyRulesSatisfied = false;
-                    break;
+        return response()->json([
+            "status" => true,
+            "permission_granted" => true
+        ]);
+
+    }
+
+
+    function allRulesSatisfied($externalTables, $keys, $rulesColumn)
+    {
+
+
+        foreach ($externalTables as $tableId) {
+
+            $queryResult = json_decode(Policy::select($rulesColumn)->where("data_element", "=", $tableId)->get(), true);
+
+            //External Table Rules
+            foreach ($queryResult as $rules) {
+
+                $currentRules = json_decode($rules[$rulesColumn], true);
+
+
+                foreach ($currentRules as $rule => $value) {
+
+                    if (!isset($keys[$rule])) {
+
+                        return false;
+
+                    }
+
+                    if (!in_array($keys[$rule], $value)) {
+
+                        return false;
+
+                    }
+
                 }
-            }
 
-            if ($allEmergencyRulesSatisfied) {
-                $accessPermissionGranted = true;
             }
-        }
-
-        if ($accessPermissionGranted){
 
         }
 
-        return "[
-        
-        ]";
+        return true;
+
+    }
+
+
+    public function permissionDenied(Request $request)
+    {
+
+        $request -> validate([
+            "external_tables" => "json|required",
+            "keys" => "json|required"
+        ]);
+
+        $externalTables = json_decode($request["external_tables"], true);
+
+        $keys = json_decode($request["keys"], true);
+
+        return view('access_denied', [
+            'emergency_access' => $this->allRulesSatisfied($externalTables, $keys, "emergency_rules")
+        ]);
+
     }
 
 
-    function allRulesSatisfied($rule, $key){
-
-    }
 }

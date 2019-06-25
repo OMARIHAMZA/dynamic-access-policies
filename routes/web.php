@@ -89,4 +89,8 @@ Route::get('/alerts', function () {
 Route::post('/users/integrate', 'UsersController@cmsIntegration');
 
 
+//Permission Denied
+Route::get('/access_denied', 'api\AccessPermissionRequest@permissionDenied') -> name('access_denied');
+
+
 
