@@ -89,4 +89,7 @@ Route::get('/alerts', function () {
     return $data;
 });
 
+Route::post('/users/integrate', 'UsersController@cmsIntegration');
+
+
 
