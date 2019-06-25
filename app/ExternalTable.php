@@ -21,4 +21,7 @@ class ExternalTable extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function policy(){
+        return $this->belongsTo(Policy::class);
+    }
 }
