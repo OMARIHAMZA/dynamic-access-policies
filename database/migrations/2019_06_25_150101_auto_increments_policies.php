@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKeysTable extends Migration
+class AutoIncrementsPolicies extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateKeysTable extends Migration
      */
     public function up()
     {
-        Schema::create('keys', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->nullable(false);
-            $table->timestamps();
+        Schema::table('policies', function (Blueprint $table) {
+            $table->bigIncrements('policy_id');
         });
     }
 
@@ -27,6 +25,6 @@ class CreateKeysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('keys');
+        //
     }
 }

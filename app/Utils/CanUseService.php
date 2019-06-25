@@ -8,11 +8,15 @@
 
 namespace App\Utils;
 
+use App\Permission;
+
 class CanUseService
 {
     public static function isAuthorized(...$permission_titles): bool
     {
-        $permissions = auth()->user()->role->permissions;
+        //$permissions = auth()->user()->role->permissions;
+        $permissions = Permission::all();
+
 
         foreach ($permission_titles as $title) {
             $flag = 0;

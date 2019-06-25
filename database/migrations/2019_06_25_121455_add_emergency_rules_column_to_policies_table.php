@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExternalRolesTable extends Migration
+class AddEmergencyRulesColumnToPoliciesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateExternalRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('external_roles', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('creator_id')->nullable(false);
-            $table->string('name')->nullable(false);
-            $table->timestamps();
+        Schema::table('policies', function (Blueprint $table) {
+            $table->json('emergency_rules')->nullable(true);
         });
     }
 
@@ -28,6 +25,8 @@ class CreateExternalRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('external_roles');
+        Schema::table('policies', function (Blueprint $table) {
+            $table->removeColumn('emergency_rules');
+        });
     }
 }

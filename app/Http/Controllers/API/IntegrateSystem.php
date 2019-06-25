@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\ExternalRole;
 use App\ExternalTable;
+use App\Policy;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class IntegrateSystem extends Controller
 {
@@ -40,20 +42,30 @@ class IntegrateSystem extends Controller
 
         $data = json_decode($request['data']);
 
+        $roles = $data->roles;
+//        foreach ($roles as $role) {
+//            ExternalRole::create([
+//                'name' => "$role",
+//                'creator_id' => $user->id
+//            ]);
+//        }
+
         $tables = $data->tables;
         foreach ($tables as $table) {
-            ExternalTable::create([
-                'name' => $table,
-                'creator_id' => $user->id
-            ]);
-        }
+            $name = $table->name;
+            $policy = $table->policy;
 
-        $roles = $data->roles;
-        foreach ($roles as $role) {
-            ExternalRole::create([
-                'name' => $role,
-                'description' => '',
-                'creator_id' => $user->id
+//            ExternalTable::create([
+//                'creator_id' => $user->id,
+//                'name' => $name
+//            ]);
+
+            Policy::create([
+                'creator_id' => $user->id,
+                'data_element' => 101,
+                'name' => $policy->name,
+                'rules' => json_encode($policy->rules),
+                'emergency_rules' => json_encode($policy->emergency_rules)
             ]);
         }
 

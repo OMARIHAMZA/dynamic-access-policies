@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePurposesTable extends Migration
+class Permissions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreatePurposesTable extends Migration
      */
     public function up()
     {
-        Schema::create('purposes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('purpose');
-            $table->enum('action', ["create", "read", 'update', 'delete']);
-            $table->unsignedInteger('creator_id');
+        Schema::create('permissions', function (Blueprint $table) {
+            $table->bigIncrements('permission_id');
+            $table->string('title')->unique();
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreatePurposesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purposes');
+        Schema::dropIfExists('permissions');
     }
 }

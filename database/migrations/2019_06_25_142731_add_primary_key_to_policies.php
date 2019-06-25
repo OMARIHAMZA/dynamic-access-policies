@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropPurposesTable extends Migration
+class AddPrimaryKeyToPolicies extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class DropPurposesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('policy_purpose');
-        Schema::dropIfExists('purposes');
+        Schema::table('policies', function (Blueprint $table) {
+            $table->bigInteger('id');
+            $table->primary(['id']);
+        });
     }
 
     /**
@@ -24,6 +26,8 @@ class DropPurposesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('policies', function (Blueprint $table) {
+            //
+        });
     }
 }

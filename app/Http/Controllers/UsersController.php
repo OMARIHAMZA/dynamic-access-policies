@@ -43,18 +43,16 @@ class UsersController extends Controller
         $request->validate([
             'name' => 'required|unique:users',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:10',
+            'password' => 'required|min:8',
             'role_id' => 'required|numeric'
         ]);
 
-        $user = new User();
-
-        $user->name = $request->request->get('name');
-        $user->email = $request->request->get('email');
-        $user->password = Hash::make($request->request->get('password'));
-        $user->role_id = $request->request->get('role_id');
-
-        $user->save();
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'role_id' => $request['role_id']
+        ]);
 
         return redirect('/users');
     }

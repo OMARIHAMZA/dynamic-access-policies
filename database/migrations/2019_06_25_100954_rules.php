@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangePolicyPurposeTableName extends Migration
+class Rules extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,14 @@ class ChangePolicyPurposeTableName extends Migration
      */
     public function up()
     {
-        Schema::rename('policy_purposes', 'policy_purpose');
+        Schema::create('rules', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('KEY_ID');
+            $table->string('value')->nullable(false);
+            $table->timestamps();
+
+            $table->foreign('KEY_ID')->references('id')->on('keys');
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class ChangePolicyPurposeTableName extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('policy_purpose');
+        //
     }
 }
