@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExternalTable extends Model
 {
+    protected $primaryKey = 'table_id';
+
     public $fillable = [
         'creator_id',
         'name'

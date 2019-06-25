@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRulesTable extends Migration
+class ExternalTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateRulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('rules', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('key_id');
-            $table->string('value')->nullable(false);
+        Schema::create('external_tables', function (Blueprint $table) {
+            $table->bigIncrements('table_id');
+            $table->bigInteger('creator_id')->nullable(false);
+            $table->string('name')->nullable(false);
             $table->timestamps();
 
-            //$table->foreign('key_id')->references('id')->on('keys')->onDelete('cascade');
+            $table->foreign('creator_id')->references('id')->on('users');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateRulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rules');
+        Schema::dropIfExists('external_tables');
     }
 }
