@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class AccessPermissionRequest extends Controller
 {
+    
+    public function rekt(Request $request){
+        dd($request);
+    }
     public function check(Request $request)
     {
         if (!isset($request['token'])) {

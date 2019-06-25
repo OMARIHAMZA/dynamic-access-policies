@@ -34,11 +34,6 @@ class Navigations
             array_push($navigations, 'policies');
         }
 
-        if (CanUseService::isAuthorized('can_viewPurposes')) {
-            array_push($navigations, 'purposes');
-        }
-
-
         return $navigations;
     }
 }

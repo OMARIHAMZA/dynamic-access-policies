@@ -120,15 +120,52 @@ class UsersController extends Controller
 
     }
 
+    public function cmsIntegration(Request $request)
+    {
+
+        $request->validate([
+
+            'tables' => 'required|min:1',
+            'roles' => 'required|min:1'
+
+        ]);
+
+        $user_id = Auth()->user()->id;
+
+        foreach (explode(',', $request->get('tables')) as $table) {
+            $external_table = new ExternalTable([
+                'creator_id' => $user_id,
+                'name' => $table
+            ]);
+            $external_table->save();
+        }
+
+        foreach (explode(',', $request->get('roles')) as $role) {
+            $role = new ExternalRole([
+                'creator_id' => $user_id,
+                'name' => $role,
+                'description' => ""
+            ]);
+            $role->save();
+        }
+
+        session()->put('notifications', [
+            ["icon" => "fa fa-info", "message" => "System integrated successfully."]
+        ]);
+
+        return back();
+
+    }
 
     public function integrate(Request $request)
     {
+
         $user_id = Auth()->user()->id;
+
         $data = json_decode($request["data"], true);
 
         foreach ($data as $key => $value) {
-            switch ($key)
-            {
+            switch ($key) {
                 case "tables":
                     foreach ($value as $table_name) {
                         $external_table = new ExternalTable([

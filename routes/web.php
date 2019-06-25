@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 
 //Users
@@ -85,5 +85,8 @@ Route::get('/alerts', function () {
     session()->remove('alerts');
     return $data;
 });
+
+Route::post('/users/integrate', 'UsersController@cmsIntegration');
+
 
 

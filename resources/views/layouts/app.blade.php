@@ -19,8 +19,19 @@
     <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/material-dashboard.css?v=2.1.1') }}" rel="stylesheet"/>
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
+
+    <script src="{{ asset('js/core/jquery.min.js') }}"></script>
+
+    <script src="{{ asset('js/tokenize2.min.js') }}"></script>
+
+    <link href="{{ asset('css/tokenize2.min.css') }}" rel="stylesheet"/>
+
+
 </head>
 <body class="">
+
+
+
 <div id="app">
     <div class="wrapper ">
         @include('layouts.sidebar')
@@ -49,10 +60,12 @@
     </div>
 </div>
 
+
+
+
 <!-- Vue js -->
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <!--   Core JS Files   -->
-<script src="{{ asset('js/core/jquery.min.js') }}"></script>
 <script src="{{ asset('js/core/popper.min.js') }}"></script>
 <script src="{{ asset('js/core/bootstrap-material-design.min.js') }}"></script>
 <script src="{{ asset('js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
@@ -311,6 +324,7 @@
         })
     }
 </script>
+
 </body>
 
 </html>
