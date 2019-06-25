@@ -48,14 +48,9 @@
                                     data-backdrop="static" data-keyboard="false" data-target="#modal{{$user->id}}">
                                 <i class="material-icons">close</i>
                             </button>
-
-
                         </td>
                     </tr>
-
-
                 @endforeach
-
                 </tbody>
             </table>
         </div>

@@ -93,8 +93,6 @@
 <script src="{{ asset('js/plugins/jquery-jvectormap.js') }}"></script>
 <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
 <script src="{{ asset('js/plugins/nouislider.min.js') }}"></script>
-<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <!-- Library for adding dinamically elements -->
 <script src="{{ asset('js/plugins/arrive.min.js') }}"></script>
 <!--  Google Maps Plugin    -->
@@ -277,21 +275,54 @@
     });
 </script>
 <script>
-    function pushNotification(notification) {
-        md.showNotification('top', 'right', notification.message, notification.icon);
-    }
+    const Notification = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
 
-    function pushNotifications(notifications) {
-        notifications.forEach(i => {
-            pushNotification(i)
+    function makeNotification(notification) {
+        Notification.fire({
+            type: notification.icon,
+            title: notification.message
         })
     }
 
-    $.ajax('http://localhost:8000/alerts', {
+    $.ajax('http://localhost:5326/alerts', {
         method: 'GET',
         dataType: 'json',
-        success: pushNotifications
+        success: function (data) {
+            data.forEach(i => makeNotification(i));
+        }
     })
+</script>
+<script>
+    const Modal = Swal.mixin({})
+</script>
+<script>
+    function confirm(title, text, type, callback = function () {
+        Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+        )
+    }) {
+        Swal.fire({
+            position: 'top',
+            title: title,
+            text: text,
+            type: type,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.value) {
+                callback();
+            }
+        })
+    }
 </script>
 
 </body>

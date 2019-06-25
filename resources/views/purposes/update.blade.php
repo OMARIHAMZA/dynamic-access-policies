@@ -9,7 +9,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
-                    <form class="pt-4" action="/purposes/{{$purpose['id']}}/" method="post">
+                    <form class="pt-4" action="/purposes/{{$purpose->id}}" method="post">
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="name">Title</label>

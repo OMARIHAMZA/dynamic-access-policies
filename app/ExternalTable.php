@@ -14,7 +14,6 @@ class ExternalTable extends Model
     public $creator_id;
     public $name;
 
-
     public function creator()
     {
         return $this->belongsTo(User::class);
