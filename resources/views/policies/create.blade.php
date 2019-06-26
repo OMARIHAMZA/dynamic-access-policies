@@ -21,8 +21,19 @@
             <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
         </div>
 
+        <div class="btn-group">
+            <button id="dataElementName" type="button" class="btn btn-primary">Data Element</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div id="data_element" class="dropdown-menu">
+                @foreach($external_tables as $external_table)
+                    <a class="dropdown-item" onclick="setSelection(`{{$external_table["table_id"]}}`,`{{$external_table["name"]}}`)">{{$external_table["name"]}}</a>
+                @endforeach
+            </div>
+        </div>
 
-        <h4>Data Elements</h4>
         <br>
         <div class="card-body">
 
@@ -43,39 +54,10 @@
 
         </div>
 
-
-        {{--
-
-                    <table id="keys_table" class="table" cellspacing="5" cellpadding="0">
-                        <tr>
-                            <td>
-                                <label for="key1">Key</label>
-                                <input id="key1" title="Key" type="text"
-                                       class="form-control" name="1">
-
-                                <label for="values1">Values</label>
-                                <select id="values1" class="roles-tokens custom-tokens form-control" style="width: 200px"
-                                        name="1" multiple></select>
-
-                                <script>$('.custom-tokens').tokenize2({
-                                        tokensAllowCustom: true,
-                                        delimiter: [',', '-']
-                                    });</script>
-                            </td>
-
-                            <td>
-                                <button type="button" class="btn btn-danger btn-fab"
-                                        onclick="deleteRow(this)">
-                                    <i class="material-icons">close</i>
-                                </button>
-                            </td>
-                        </tr>
-
-                    </table>
-        --}}
-
-
         <input type="hidden" name="creator_id" value="{{$user_id}}">
+        <input type="hidden" name="rules" id="_rules">
+        <input type="hidden" name="emergency_rules" id="_emergency_rules">
+        <input type="hidden" name="data_element" id="_table_id">
 
 
         @if ($errors->any())
@@ -95,7 +77,38 @@
 
     <script>
 
-        
+        function setSelection(id, name) {
+
+            document.getElementById('_table_id').value = id;
+            document.getElementById('dataElementName').innerText = name;
+
+        }
+
+
+        function parseRules() {
+
+            let rules = {};
+            // Get Rules
+            let rulesTable = document.getElementById('Rules_table');
+            for (let i = 1; i < rulesTable.rows.length; i++) {
+                let currentRow = rulesTable.rows[i];
+                rules[currentRow.cells[1].innerText] = '[' + currentRow.cells[2].innerText + ']';
+            }
+
+
+            let emergencyRules = {};
+            // Get Rules
+            let emergencyRulesTable = document.getElementById('EmergencyRules_table');
+            for (let i = 1; i < emergencyRulesTable.rows.length; i++) {
+                let currentRow = emergencyRulesTable.rows[i];
+                emergencyRules[currentRow.cells[1].innerText] = '[' + currentRow.cells[2].innerText + ']';
+            }
+
+            document.getElementById('_rules').value = JSON.stringify(rules);
+            document.getElementById('_emergency_rules').value = JSON.stringify(emergencyRules);
+
+        }
+
 
         {{--DON'T DELETE THIS FUCNTION, IT IS BEING USED BY THE KEYS_VALUES LAYOUT--}}
         function deleteRow(currentElement, title) {

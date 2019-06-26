@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ExternalTable;
 use App\Policy;
 use App\PolicyPurpose;
 use App\Purpose;
@@ -37,34 +38,33 @@ class PolicyController extends Controller
     {
 
         $logged_user = Auth::user();
+        $external_tables = ExternalTable::all();
 
         return view('policies/create', [
-            'user_id' => $logged_user->id
+            'user_id' => $logged_user->id,
+            'external_tables' => $external_tables
         ]);
 
     }
 
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|unique:policies',
-            'description' => 'required',
-            'creator_id' => 'required|numeric'
+            'creator_id' => 'required|numeric',
+            'data_element' => 'required'
         ]);
 
         $logged_user = Auth::user();
 
         $policy = new Policy();
         $policy->name = $request->request->get('name');
-        $policy->description = $request->request->get('description');
         $policy->creator_id = $logged_user->id;
+        $policy->rules = $request->request->get('rules');
+        $policy->emergency_rules = $request->request->get('emergency_rules');
+        $policy->data_element = $request->request->get('data_element');
         $policy->save();
-
-        $purposes = Purpose::find($request['purposes']);
-        if (!empty($purposes)) {
-            $policy->purposes()->detach();
-            $policy->purposes()->attach($purposes);
-        }
 
         return redirect('/policies');
     }

@@ -35,7 +35,8 @@
                 <button id="addItemButton" type="button" class="btn btn-success"
                         onclick="addItem('<?php Print(str_replace(' ', '', $title))?>')">Add
                 </button>
-                <button id="{{str_replace(' ', '', $title)}}_closeButton" type="button" class="btn btn-secondary" data-dismiss="modal">
+                <button id="{{str_replace(' ', '', $title)}}_closeButton" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">
                     Cancel
                 </button>
             </div>
@@ -84,6 +85,7 @@
         document.getElementById(title + '_key').value = '';
         $(`.${title}-roles-tokens`).data('tokenize2').clear();
 
+        parseRules();
     }
 
 </script>
