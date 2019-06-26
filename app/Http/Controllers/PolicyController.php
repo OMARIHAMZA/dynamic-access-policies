@@ -36,11 +36,9 @@ class PolicyController extends Controller
     public function create()
     {
 
-        $purposes = Purpose::all();
         $logged_user = Auth::user();
 
         return view('policies/create', [
-            'purposes' => $purposes,
             'user_id' => $logged_user->id
         ]);
 

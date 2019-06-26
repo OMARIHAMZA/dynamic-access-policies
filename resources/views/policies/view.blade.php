@@ -17,26 +17,8 @@
                     </div>
                     <div class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between">
-                            <span class="font-weight-bold">Purpose</span>
-                            <span>{{ $policy['description'] }}</span>
-                        </div>
-                    </div>
-                    <div class="list-group-item list-group-item-action">
-                        <div class="d-flex justify-content-between">
                             <span class="font-weight-bold">Created By</span>
                             <span>{{$policy['creator_id']}}</span>
-                        </div>
-                    </div>
-                    <div class="list-group-item list-group-item-action">
-                        <div class="d-flex justify-content-between">
-                            <span class="font-weight-bold">Related purposes</span>
-                            <div class="list-group" style="max-height: 500px; overflow-y: auto;">
-                                @foreach($policy->purposes()->get() as $purpose)
-                                    <div class="list-group-item list-group-item-action">
-                                        <span>{{ $purpose['name'] }}</span> <i class="fa fa-chevron-left"></i>
-                                    </div>
-                                @endforeach
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -46,4 +28,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

@@ -14,7 +14,6 @@
                 <tr>
                     <th class="text-center">#</th>
                     <th>Title</th>
-                    <th>Description</th>
                     <th>Created By</th>
                     <th class="text-right">Actions</th>
                 </tr>
@@ -31,7 +30,6 @@
                     <tr>
                         <td class="text-center">{{ $index + 1 }}</td>
                         <td>{{$policy->name}}</td>
-                        <td>{{$policy->description}}</td>
                         <td>{{$policy->creator()->first()->name}}</td>
                         <td class="td-actions text-right">
                             <button type="button" rel="tooltip" class="btn btn-success"

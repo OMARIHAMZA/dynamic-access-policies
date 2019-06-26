@@ -26,10 +26,11 @@
 
     <link href="{{ asset('css/tokenize2.min.css') }}" rel="stylesheet"/>
 
+    <script src="{{ asset('js/plugins/jquery.bootstrap-wizard.js') }}"></script>
+
 
 </head>
 <body class="">
-
 
 
 <div id="app">
@@ -61,8 +62,6 @@
 </div>
 
 
-
-
 <!-- Vue js -->
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <!--   Core JS Files   -->
@@ -76,7 +75,6 @@
 <!-- Forms Validations Plugin -->
 <script src="{{ asset('js/plugins/jquery.validate.min.js') }}"></script>
 <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-<script src="{{ asset('js/plugins/jquery.bootstrap-wizard.js') }}"></script>
 <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
 <script src="{{ asset('js/plugins/bootstrap-selectpicker.js') }}"></script>
 <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
