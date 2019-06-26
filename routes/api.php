@@ -18,9 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/integrate', 'UsersController@integrate');
+Route::post('/integrate', 'API\IntegrateSystem@integrate');
 
-Route::post('/access_request', 'API\AccessPermissionRequest@accessRequest');
+Route::get('/access_request', 'API\AccessPermissionRequest@accessRequest');
 
 Route::post('/emergency_access_log', "API\AccessPermissionRequest@emergencyAccessLog");
 
