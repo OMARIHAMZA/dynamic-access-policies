@@ -75,8 +75,34 @@ class AccessPermissionRequest extends Controller
                 "permission" => "GRANTED"]);
     }
 
-    function emergencyCheck(Request $request)
+    function accessRequest(Request $request)
     {
+
+        if (!isset($request['token'])) {
+            return response()
+                ->json([
+                    "status" => false,
+                    "cause" => "Token is required"
+                ]);
+        }
+
+        $user = \App\User::where('token', $request['token'])->first();
+
+        if (!$user) {
+            return response()
+                ->json([
+                    "status" => false,
+                    "cause" => "Invalid user token."
+                ]);
+        }
+
+        if ($user->roleTitle() != "user") { // user role must be 'User'
+            return response()
+                ->json([
+                    "status" => false,
+                    "cause" => "You aren't allowed to use this system function."
+                ]);
+        }
 
         $request->validate([
 
@@ -91,17 +117,34 @@ class AccessPermissionRequest extends Controller
 
         if (!$this->allRulesSatisfied($externalTables, $keys, 'rules')) {
 
-            return Redirect::route("access_denied", [
-                "external_tables" => $request["external_tables"],
-                "keys" => $request['keys']
+            if ($this->allRulesSatisfied($externalTables, $keys, 'emergency_rules')) {
+
+                return response()->json([
+                    "status" => true,
+                    "permission_granted" => true,
+                    "emergency_access" => true
+                ]);
+
+            } else {
+
+                return response()->json([
+                    "status" => true,
+                    "permission_granted" => false,
+                    "emergency_access" => false
+                ]);
+
+            }
+
+
+        } else {
+
+            return response()->json([
+                "status" => true,
+                "permission_granted" => true,
+                "emergency_access" => false
             ]);
 
         }
-
-        return response()->json([
-            "status" => true,
-            "permission_granted" => true
-        ]);
 
     }
 
@@ -148,7 +191,7 @@ class AccessPermissionRequest extends Controller
     public function permissionDenied(Request $request)
     {
 
-        $request -> validate([
+        $request->validate([
             "external_tables" => "json|required",
             "keys" => "json|required"
         ]);
@@ -162,6 +205,5 @@ class AccessPermissionRequest extends Controller
         ]);
 
     }
-
 
 }
