@@ -11,6 +11,7 @@ class Permission extends Model
         'description',
     ];
 
+    protected $primaryKey = 'permission_id';
     public $title;
     public $description;
 

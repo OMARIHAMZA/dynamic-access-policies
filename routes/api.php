@@ -22,4 +22,6 @@ Route::post('/integrate', 'UsersController@integrate');
 
 Route::post('/access_request', 'API\AccessPermissionRequest@accessRequest');
 
+Route::post('/emergency_access_log', "API\AccessPermissionRequest@emergencyAccessLog");
+
 Route::get('/access_permission_request', 'API\AccessPermissionRequest@check');

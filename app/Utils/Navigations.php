@@ -34,6 +34,10 @@ class Navigations
             array_push($navigations, 'policies');
         }
 
+        if (CanUseService::isAuthorized('can_viewHistory')){
+            array_push($navigations, 'history');
+        }
+
         return $navigations;
     }
 }

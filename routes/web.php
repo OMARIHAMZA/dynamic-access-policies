@@ -90,7 +90,10 @@ Route::post('/users/integrate', 'UsersController@cmsIntegration');
 
 
 //Permission Denied
-Route::get('/access_denied', 'api\AccessPermissionRequest@permissionDenied') -> name('access_denied');
+Route::get('/access_denied', 'api\AccessPermissionRequest@permissionDenied')->name('access_denied');
+
+//Emergency Access History
+Route::get('/history', 'api\AccessPermissionRequest@showHistory')->name('history.index');
 
 
 

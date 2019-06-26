@@ -6,6 +6,7 @@ use App\ExternalRole;
 use App\ExternalTable;
 use App\Policy;
 use App\Rule;
+use EmergencyAccessHistory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
@@ -206,4 +207,60 @@ class AccessPermissionRequest extends Controller
 
     }
 
+    public function emergencyAccessLog(Request $request)
+    {
+
+        if (!isset($request['token'])) {
+            return response()
+                ->json([
+                    "status" => false,
+                    "cause" => "Token is required"
+                ]);
+        }
+
+        $user = \App\User::where('token', $request['token'])->first();
+
+        if (!$user) {
+            return response()
+                ->json([
+                    "status" => false,
+                    "cause" => "Invalid user token."
+                ]);
+        }
+
+        if ($user->roleTitle() != "user") { // user role must be 'User'
+            return response()
+                ->json([
+                    "status" => false,
+                    "cause" => "You aren't allowed to use this system function."
+                ]);
+        }
+
+        $request->validate([
+
+            'external_tables' => 'json|required'
+
+        ]);
+
+        $log = new \App\EmergencyAccessHistory();
+
+        $log->requester_id = $user->id;
+        $log->external_tables = $request['external_tables'];
+        $log->save();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Log inserted successfully"
+        ]);
+    }
+
+    public function showHistory()
+    {
+
+        $logs = \App\EmergencyAccessHistory::all();
+
+        return view('log.history', [
+            "logs" => $logs
+        ]);
+    }
 }

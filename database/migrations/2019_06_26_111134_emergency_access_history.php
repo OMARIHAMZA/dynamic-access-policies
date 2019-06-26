@@ -13,10 +13,10 @@ class EmergencyAccessHistory extends Migration
      */
     public function up()
     {
-        Schema::create('emergency_access_history', function (Blueprint $table) {
+        Schema::create('emergency_access_histories', function (Blueprint $table) {
             $table->bigInteger('requester_id');
             $table->json('external_tables');
-            $table->timestamp('access_date');
+            $table->timestamp('access_date')->useCurrent();
             $table->foreign('requester_id')->references('id')->on('users');
         });
     }
@@ -28,6 +28,6 @@ class EmergencyAccessHistory extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('emergency_access_history');
+        Schema::dropIfExists('emergency_access_histories');
     }
 }
