@@ -95,5 +95,3 @@ Route::get('/access_denied', 'api\AccessPermissionRequest@permissionDenied')->na
 //Emergency Access History
 Route::get('/history', 'api\AccessPermissionRequest@showHistory')->name('history.index');
 
-
-

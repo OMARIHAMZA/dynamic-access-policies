@@ -7,10 +7,12 @@ use App\ExternalTable;
 use App\Policy;
 use App\Rule;
 use EmergencyAccessHistory;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 use Symfony\Component\Console\Helper\Table;
 use test\Mockery\AllowsExpectsSyntaxTest;
 
@@ -24,61 +26,72 @@ class AccessPermissionRequest extends Controller
 
     public function check(Request $request)
     {
-        if (!isset($request['token'])) {
-            return response()
-                ->json([
-                    "status" => "ERROR",
-                    "cause" => "Token is required"
-                ]);
-        }
+//        if (!isset($request['token'])) {
+//            return response()
+//                ->json([
+//                    "status" => "ERROR",
+//                    "cause" => "Token is required"
+//                ]);
+//        }
+//
+//        $user = \App\User::where('token', $request['token'])->first();
+//
+//        if (!$user) {
+//            return response()
+//                ->json([
+//                    "status" => "ERROR",
+//                    "cause" => "Invalid user token."
+//                ]);
+//        }
+//
+//        if ($user->roleTitle() != "user") { // user role must be 'User'
+//            return response()
+//                ->json([
+//                    "status" => "ERROR",
+//                    "cause" => "You are n't allowed to use this system function."
+//                ]);
+//        }
+//
+//        $data = json_decode($request['data']);
+//
+//        return Response::json([
+//            "data" => $data
+//        ]);
+//
+//        $role_name = $data->role;
+//        if (ExternalRole::where('name', $role_name) == null) {
+//            return response()
+//                ->json([
+//                    "status" => "OK",
+//                    "permission" => "ACCESS DENIED"
+//                ]);
+//        }
+//
+//        $ts = array_unique($data->tables);
+//        $tables = ExternalTable::whereIn('name', $ts)->get();
+//        if (count($tables) != count($ts)) {
+//            return response()
+//                ->json([
+//                    "status" => "OK",
+//                    "permission" => "ACCESS DENIED"
+//                ]);
+//        }
 
-        $user = \App\User::where('token', $request['token'])->first();
-
-        if (!$user) {
-            return response()
-                ->json([
-                    "status" => "ERROR",
-                    "cause" => "Invalid user token."
-                ]);
-        }
-
-        if ($user->roleTitle() != "user") { // user role must be 'User'
-            return response()
-                ->json([
-                    "status" => "ERROR",
-                    "cause" => "You are n't allowed to use this system function."
-                ]);
-        }
-
-        $data = json_decode($request['data']);
-
-        $role_name = $data->role;
-        if (ExternalRole::where('name', $role_name) == null) {
-            return response()
-                ->json([
-                    "status" => "OK",
-                    "permission" => "ACCESS DENIED"
-                ]);
-        }
-
-        $ts = array_unique($data->tables);
-        $tables = ExternalTable::whereIn('name', $ts)->get();
-        if (count($tables) != count($ts)) {
-            return response()
-                ->json([
-                    "status" => "OK",
-                    "permission" => "ACCESS DENIED"
-                ]);
-        }
+        $html = \view('access_denied', [
+            'emergency_access' => true
+        ])->render();
 
         return response()
-            ->json(["status" => "OK",
-                "permission" => "GRANTED"]);
+            ->json([
+                "status" => "OK",
+                "permission_granted" => "true",
+                "emergency_access" => "true",
+                "view" => $html
+            ]);
     }
 
     function accessRequest(Request $request)
     {
-
         if (!isset($request['token'])) {
             return response()
                 ->json([
