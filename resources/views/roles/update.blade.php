@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <h3>Update user</h3>
+    <h3>Update Role</h3>
 
     <form class="pt-4" action="/roles/update" method="post">
         {{csrf_field()}}

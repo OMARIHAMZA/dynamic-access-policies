@@ -32,18 +32,25 @@
                         <td>{{$policy->name}}</td>
                         <td>{{$policy->creator()->first()->name}}</td>
                         <td class="td-actions text-right">
-                            <button type="button" rel="tooltip" class="btn btn-success"
-                                    onclick="document.location.href = 'policies/{{$policy->id}}'">
-                                <i class="material-icons">edit</i>
-                            </button>
 
-
-                            <button type="button" rel="tooltip" class="btn btn-danger"
+                            <button type="button" rel="tooltip" class="btn btn-info"
                                     data-toggle="modal"
                                     data-backdrop="static" data-keyboard="false"
                                     data-target="#modal-{{$index}}">
+                                <i class="material-icons">remove_red_eye</i>
+                            </button>
+
+                            <button type="button" rel="tooltip" class="btn btn-success"
+                                    onclick="document.location.href = '/policies/{{$policy->policy_id}}'">
+                                <i class="material-icons">edit</i>
+                            </button>
+
+                            <button type="button" rel="tooltip" class="btn btn-danger"
+                                    onclick="document.location.href = '/policies/delete/{{$policy->policy_id}}'">
                                 <i class="material-icons">close</i>
                             </button>
+
+
                         </td>
                     </tr>
 

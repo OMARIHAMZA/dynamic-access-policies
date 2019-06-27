@@ -73,19 +73,9 @@ class PolicyController extends Controller
     {
         $policy = Policy::find($id);
 
-        $purposes = Purpose::all();
-        foreach ($policy->purposes()->get() as $p1) {
-            foreach ($purposes as $p2) {
-                if ($p1->id == $p2->id) {
-                    $p2['selected'] = true;
-                }
-            }
-        }
-
         return view('/policies/update', [
 
-            'policy' => $policy,
-            'purposes' => $purposes
+            'policy' => $policy
 
         ]);
 
@@ -93,21 +83,18 @@ class PolicyController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $request->validate([
-            //  'name' => 'unique:policies,name,' . $request->request->get('policy_id')
+//              'name' => 'unique:policies'
         ]);
 
         $policy = Policy::find($id);
-        $policy->name = $request['name'];
-        $policy->description = $request['description'];
+        $policy->name = $request->request->get('name');
+        $policy->rules = $request->request->get('rules');
+        $policy->emergency_rules = $request->request->get('emergency_rules');
+        $policy->data_element = $request->request->get('data_element');
         $policy->save();
 
-        $purposes = Purpose::find($request['purposes']);
-
-        if (!empty($purposes)) {
-            $policy->purposes()->detach();
-            $policy->purposes()->attach($purposes);
-        }
 
         return redirect('/policies');
     }

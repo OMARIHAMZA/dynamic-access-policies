@@ -18,7 +18,7 @@
                     <div class="list-group-item list-group-item-action">
                         <div class="d-flex justify-content-between">
                             <span class="font-weight-bold">Created By</span>
-                            <span>{{$policy['creator_id']}}</span>
+                            <span>{{\App\User::find($policy['creator_id'])->name}}</span>
                         </div>
                     </div>
                 </div>

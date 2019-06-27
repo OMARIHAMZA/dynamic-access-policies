@@ -20,6 +20,27 @@
 
             <tbody id="{{str_replace(' ', '', $title)}}_table_body">
 
+            @if (isset($rules))
+                @foreach(json_decode($rules, true) as $key => $values)
+
+                    <?php $i = 0 ?>
+
+                    <tr>
+                        <td class="text-center">{{++$i}}</td>
+                        <td>{{$key}}</td>
+                        <td>{{$values}}</td>
+                        <td class="text-right">
+                            <button type="button" class="btn btn-danger btn-fab"
+                                    onclick="deleteRow(this, '{{str_replace(' ', '', $title)}}')">
+                                <i class="material-icons">close</i>
+                            </button>
+                        </td>
+
+                    </tr>
+
+                @endforeach
+            @endif
+
             {{--Content will be added by the key_values_dialog--}}
 
             </tbody>
