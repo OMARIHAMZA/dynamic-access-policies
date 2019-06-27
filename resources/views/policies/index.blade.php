@@ -22,10 +22,6 @@
                 <tbody>
                 @foreach($policies as $index => $policy)
 
-                    @include("policies.view", [
-                        'policy' => $policy,
-                        'id' => $index
-                    ])
 
                     <tr>
                         <td class="text-center">{{ $index + 1 }}</td>
@@ -34,14 +30,12 @@
                         <td class="td-actions text-right">
 
                             <button type="button" rel="tooltip" class="btn btn-info"
-                                    data-toggle="modal"
-                                    data-backdrop="static" data-keyboard="false"
-                                    data-target="#modal-{{$index}}">
+                                   onclick="document.location.href = '/policies/show/{{$policy->policy_id}}'">
                                 <i class="material-icons">remove_red_eye</i>
                             </button>
 
                             <button type="button" rel="tooltip" class="btn btn-success"
-                                    onclick="document.location.href = '/policies/{{$policy->policy_id}}'">
+                                    onclick="document.location.href = '/policies/edit/{{$policy->policy_id}}'">
                                 <i class="material-icons">edit</i>
                             </button>
 

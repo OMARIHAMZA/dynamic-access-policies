@@ -23,12 +23,12 @@ class PolicyController extends Controller
     }
 
 
-    public function listPolicies()
+    public function index()
     {
 
         $policies = Policy::all();
 
-        return view('policies/policies', [
+        return view('policies.index', [
             'policies' => $policies
         ]);
 
@@ -73,7 +73,19 @@ class PolicyController extends Controller
     {
         $policy = Policy::find($id);
 
-        return view('/policies/update', [
+        return view('policies.view', [
+
+            'policy' => $policy
+
+        ]);
+
+    }
+
+    public function editPolicyInfo($id)
+    {
+        $policy = Policy::find($id);
+
+        return view('policies.update', [
 
             'policy' => $policy
 
