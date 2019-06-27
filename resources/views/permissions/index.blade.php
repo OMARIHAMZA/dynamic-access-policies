@@ -6,7 +6,7 @@
             <a href="permissions/create" class="float-right btn btn-primary btn-sm" title="New Permission">
                 <i class="fa fa-plus-circle text-light"></i>
             </a>
-            <h4 class="card-title">{{$permissions->count()}} Total purposes</h4>
+            <h4 class="card-title">{{$permissions->count()}} Total Permissions</h4>
         </div>
         <div class="card-body">
             <table class="table" style="table-layout: fixed">
@@ -22,32 +22,32 @@
                 <tbody>
                 @foreach($permissions as $index=>$permission)
                     @include("layouts.dialog", [
-                        'id' => $permission['id'],
+                        'id' => $permission['permission_id'],
                         'title' => "Delete Confirmation",
                         'body' => "Are you sure you want to delete permission \"" . $permission['title'] . "\"?",
-                        'href' => "/permissions/{$permission['id']}/delete/"
+                        'href' => "/permissions/{$permission['permission_id']}/delete/"
                      ])
                     <tr>
                         <td class="text-center">{{ $index+1 }}</td>
                         <td>{{$permission['title']}}</td>
                         <td>{{$permission['description']}}</td>
                         <td class="td-actions text-right">
-                            <button type="button" class="btn btn-default"
+                            <button type="button" class="btn btn-info"
                                     title="Show"
-                                    onclick="document.location.href = 'permissions/{{$permission['id']}}'">
-                                <i class="fa fa-expand"></i>
+                                    onclick="document.location.href = '/permissions/{{$permission['permission_id']}}'">
+                                <i class="material-icons">remove_red_eye</i>
                             </button>
-                            <button type="button" class="btn btn-default"
+                            <button type="button" class="btn btn-success"
                                     title="Edit"
-                                    onclick="document.location.href = 'permissions/{{$permission['id']}}/edit'">
-                                <i class="fa fa-pen"></i>
+                                    onclick="document.location.href = '/permissions/{{$permission['permission_id']}}/edit'">
+                                <i class="material-icons">edit</i>
                             </button>
-                            <button type="button" class="btn btn-default"
+                            <button type="button" class="btn btn-danger"
                                     title="Delete"
                                     data-toggle="modal"
                                     data-backdrop="static" data-keyboard="false"
-                                    data-target="#modal{{$permission['id']}}">
-                                <i class="fa fa-times"></i>
+                                    data-target="#modal{{$permission['permission_id']}}">
+                                <i class="material-icons">close</i>
                             </button>
                         </td>
                     </tr>
