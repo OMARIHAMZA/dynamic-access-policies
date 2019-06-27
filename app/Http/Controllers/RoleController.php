@@ -10,7 +10,6 @@ use Illuminate\Validation\Validator;
 
 class RoleController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *
@@ -44,15 +43,17 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|unique:roles',
-            //'description' => 'required'
+            'description' => 'required'
         ]);
 
-        $role = new Role();
-        $role->title = $request->request->get('title');
-        $role->description = $request->request->get('description');
+        Role::create([
+            'title' => $request['title'],
+            'description' => $request['description'],
+        ]);
 
-        $role->save();
-
+        session()->put('alerts', [
+            ["icon" => "fa fa-info", "message" => "Role added successfully"]
+        ]);
         return redirect('/roles');
     }
 

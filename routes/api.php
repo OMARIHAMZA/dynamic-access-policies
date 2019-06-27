@@ -22,6 +22,7 @@ Route::post('/integrate', 'API\IntegrateSystem@integrate');
 
 Route::get('/access_request', 'API\AccessPermissionRequest@accessRequest');
 
-Route::post('/emergency_access_log', "API\AccessPermissionRequest@emergencyAccessLog");
+Route::get('/requests/history', "API\AccessPermissionRequest@history");
+Route::post('/requests/{id}/OK', "API\AccessPermissionRequest@okay");
 
-Route::get('/access_permission_request', 'API\AccessPermissionRequest@check');
+//Route::get('/access_permission_request', 'API\AccessPermissionRequest@check');

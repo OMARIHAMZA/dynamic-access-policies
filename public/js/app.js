@@ -1687,7 +1687,7 @@ function forEach(obj, fn) {
  *
  * ```js
  * var result = merge({foo: 123}, {foo: 456});
- * console.log(result.foo); // outputs 456
+ * console.history(result.foo); // outputs 456
  * ```
  *
  * @param {Object} obj1 Object to merge
@@ -23951,10 +23951,10 @@ return jQuery;
      * var array = [1];
      * var other = _.concat(array, 2, [3], [[4]]);
      *
-     * console.log(other);
+     * console.history(other);
      * // => [1, 2, 3, [4]]
      *
-     * console.log(array);
+     * console.history(array);
      * // => [1]
      */
     function concat() {
@@ -24239,7 +24239,7 @@ return jQuery;
      * var array = [1, 2, 3];
      *
      * _.fill(array, 'a');
-     * console.log(array);
+     * console.history(array);
      * // => ['a', 'a', 'a']
      *
      * _.fill(Array(3), 2);
@@ -24741,7 +24741,7 @@ return jQuery;
      * var array = ['a', 'b', 'c', 'a', 'b', 'c'];
      *
      * _.pull(array, 'a', 'c');
-     * console.log(array);
+     * console.history(array);
      * // => ['b', 'b']
      */
     var pull = baseRest(pullAll);
@@ -24763,7 +24763,7 @@ return jQuery;
      * var array = ['a', 'b', 'c', 'a', 'b', 'c'];
      *
      * _.pullAll(array, ['a', 'c']);
-     * console.log(array);
+     * console.history(array);
      * // => ['b', 'b']
      */
     function pullAll(array, values) {
@@ -24792,7 +24792,7 @@ return jQuery;
      * var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
      *
      * _.pullAllBy(array, [{ 'x': 1 }, { 'x': 3 }], 'x');
-     * console.log(array);
+     * console.history(array);
      * // => [{ 'x': 2 }]
      */
     function pullAllBy(array, values, iteratee) {
@@ -24821,7 +24821,7 @@ return jQuery;
      * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
      *
      * _.pullAllWith(array, [{ 'x': 3, 'y': 4 }], _.isEqual);
-     * console.log(array);
+     * console.history(array);
      * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
      */
     function pullAllWith(array, values, comparator) {
@@ -24848,10 +24848,10 @@ return jQuery;
      * var array = ['a', 'b', 'c', 'd'];
      * var pulled = _.pullAt(array, [1, 3]);
      *
-     * console.log(array);
+     * console.history(array);
      * // => ['a', 'c']
      *
-     * console.log(pulled);
+     * console.history(pulled);
      * // => ['b', 'd']
      */
     var pullAt = flatRest(function(array, indexes) {
@@ -24887,10 +24887,10 @@ return jQuery;
      *   return n % 2 == 0;
      * });
      *
-     * console.log(array);
+     * console.history(array);
      * // => [1, 3]
      *
-     * console.log(evens);
+     * console.history(evens);
      * // => [2, 4]
      */
     function remove(array, predicate) {
@@ -24934,7 +24934,7 @@ return jQuery;
      * _.reverse(array);
      * // => [3, 2, 1]
      *
-     * console.log(array);
+     * console.history(array);
      * // => [3, 2, 1]
      */
     function reverse(array) {
@@ -25928,17 +25928,17 @@ return jQuery;
      * var array = [1, 2];
      * var wrapped = _(array).push(3);
      *
-     * console.log(array);
+     * console.history(array);
      * // => [1, 2]
      *
      * wrapped = wrapped.commit();
-     * console.log(array);
+     * console.history(array);
      * // => [1, 2, 3]
      *
      * wrapped.last();
      * // => 3
      *
-     * console.log(array);
+     * console.history(array);
      * // => [1, 2, 3]
      */
     function wrapperCommit() {
@@ -26060,7 +26060,7 @@ return jQuery;
      * _(array).reverse().value()
      * // => [3, 2, 1]
      *
-     * console.log(array);
+     * console.history(array);
      * // => [3, 2, 1]
      */
     function wrapperReverse() {
@@ -26377,12 +26377,12 @@ return jQuery;
      * @example
      *
      * _.forEach([1, 2], function(value) {
-     *   console.log(value);
+     *   console.history(value);
      * });
      * // => Logs `1` then `2`.
      *
      * _.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
-     *   console.log(key);
+     *   console.history(key);
      * });
      * // => Logs 'a' then 'b' (iteration order is not guaranteed).
      */
@@ -26407,7 +26407,7 @@ return jQuery;
      * @example
      *
      * _.forEachRight([1, 2], function(value) {
-     *   console.log(value);
+     *   console.history(value);
      * });
      * // => Logs `2` then `1`.
      */
@@ -27002,7 +27002,7 @@ return jQuery;
      * @example
      *
      * _.defer(function(stamp) {
-     *   console.log(_.now() - stamp);
+     *   console.history(_.now() - stamp);
      * }, _.now());
      * // => Logs the number of milliseconds it took for the deferred invocation.
      */
@@ -27028,7 +27028,7 @@ return jQuery;
      * var saves = ['profile', 'settings'];
      *
      * var done = _.after(saves.length, function() {
-     *   console.log('done saving!');
+     *   console.history('done saving!');
      * });
      *
      * _.forEach(saves, function(type) {
@@ -27488,7 +27488,7 @@ return jQuery;
      * @example
      *
      * _.defer(function(text) {
-     *   console.log(text);
+     *   console.history(text);
      * }, 'deferred');
      * // => Logs 'deferred' after one millisecond.
      */
@@ -27511,7 +27511,7 @@ return jQuery;
      * @example
      *
      * _.delay(function(text) {
-     *   console.log(text);
+     *   console.history(text);
      * }, 1000, 'later');
      * // => Logs 'later' after one second.
      */
@@ -28037,7 +28037,7 @@ return jQuery;
      * // => []
      *
      * var array = [1, 2, 3];
-     * console.log(_.castArray(array) === array);
+     * console.history(_.castArray(array) === array);
      * // => true
      */
     function castArray() {
@@ -28071,7 +28071,7 @@ return jQuery;
      * var objects = [{ 'a': 1 }, { 'b': 2 }];
      *
      * var shallow = _.clone(objects);
-     * console.log(shallow[0] === objects[0]);
+     * console.history(shallow[0] === objects[0]);
      * // => true
      */
     function clone(value) {
@@ -28102,11 +28102,11 @@ return jQuery;
      *
      * var el = _.cloneWith(document.body, customizer);
      *
-     * console.log(el === document.body);
+     * console.history(el === document.body);
      * // => false
-     * console.log(el.nodeName);
+     * console.history(el.nodeName);
      * // => 'BODY'
-     * console.log(el.childNodes.length);
+     * console.history(el.childNodes.length);
      * // => 0
      */
     function cloneWith(value, customizer) {
@@ -28129,7 +28129,7 @@ return jQuery;
      * var objects = [{ 'a': 1 }, { 'b': 2 }];
      *
      * var deep = _.cloneDeep(objects);
-     * console.log(deep[0] === objects[0]);
+     * console.history(deep[0] === objects[0]);
      * // => false
      */
     function cloneDeep(value) {
@@ -28157,11 +28157,11 @@ return jQuery;
      *
      * var el = _.cloneDeepWith(document.body, customizer);
      *
-     * console.log(el === document.body);
+     * console.history(el === document.body);
      * // => false
-     * console.log(el.nodeName);
+     * console.history(el.nodeName);
      * // => 'BODY'
-     * console.log(el.childNodes.length);
+     * console.history(el.childNodes.length);
      * // => 20
      */
     function cloneDeepWith(value, customizer) {
@@ -29988,7 +29988,7 @@ return jQuery;
      * Foo.prototype.c = 3;
      *
      * _.forIn(new Foo, function(value, key) {
-     *   console.log(key);
+     *   console.history(key);
      * });
      * // => Logs 'a', 'b', then 'c' (iteration order is not guaranteed).
      */
@@ -30020,7 +30020,7 @@ return jQuery;
      * Foo.prototype.c = 3;
      *
      * _.forInRight(new Foo, function(value, key) {
-     *   console.log(key);
+     *   console.history(key);
      * });
      * // => Logs 'c', 'b', then 'a' assuming `_.forIn` logs 'a', 'b', then 'c'.
      */
@@ -30054,7 +30054,7 @@ return jQuery;
      * Foo.prototype.c = 3;
      *
      * _.forOwn(new Foo, function(value, key) {
-     *   console.log(key);
+     *   console.history(key);
      * });
      * // => Logs 'a' then 'b' (iteration order is not guaranteed).
      */
@@ -30084,7 +30084,7 @@ return jQuery;
      * Foo.prototype.c = 3;
      *
      * _.forOwnRight(new Foo, function(value, key) {
-     *   console.log(key);
+     *   console.history(key);
      * });
      * // => Logs 'b' then 'a' assuming `_.forOwn` logs 'a' then 'b'.
      */
@@ -30711,11 +30711,11 @@ return jQuery;
      * var object = { 'a': [{ 'b': { 'c': 3 } }] };
      *
      * _.set(object, 'a[0].b.c', 4);
-     * console.log(object.a[0].b.c);
+     * console.history(object.a[0].b.c);
      * // => 4
      *
      * _.set(object, ['x', '0', 'y', 'z'], 5);
-     * console.log(object.x[0].y.z);
+     * console.history(object.x[0].y.z);
      * // => 5
      */
     function set(object, path, value) {
@@ -30874,13 +30874,13 @@ return jQuery;
      * _.unset(object, 'a[0].b.c');
      * // => true
      *
-     * console.log(object);
+     * console.history(object);
      * // => { 'a': [{ 'b': {} }] };
      *
      * _.unset(object, ['a', '0', 'b', 'c']);
      * // => true
      *
-     * console.log(object);
+     * console.history(object);
      * // => { 'a': [{ 'b': {} }] };
      */
     function unset(object, path) {
@@ -30907,11 +30907,11 @@ return jQuery;
      * var object = { 'a': [{ 'b': { 'c': 3 } }] };
      *
      * _.update(object, 'a[0].b.c', function(n) { return n * n; });
-     * console.log(object.a[0].b.c);
+     * console.history(object.a[0].b.c);
      * // => 9
      *
      * _.update(object, 'x[0].y.z', function(n) { return n ? n + 1 : 0; });
-     * console.log(object.x[0].y.z);
+     * console.history(object.x[0].y.z);
      * // => 0
      */
     function update(object, path, updater) {
@@ -32318,7 +32318,7 @@ return jQuery;
      * var view = {
      *   'label': 'docs',
      *   'click': function() {
-     *     console.log('clicked ' + this.label);
+     *     console.history('clicked ' + this.label);
      *   }
      * };
      *
@@ -32426,10 +32426,10 @@ return jQuery;
      *
      * var objects = _.times(2, _.constant({ 'a': 1 }));
      *
-     * console.log(objects);
+     * console.history(objects);
      * // => [{ 'a': 1 }, { 'a': 1 }]
      *
-     * console.log(objects[0] === objects[1]);
+     * console.history(objects[0] === objects[1]);
      * // => true
      */
     function constant(value) {
@@ -32522,7 +32522,7 @@ return jQuery;
      *
      * var object = { 'a': 1 };
      *
-     * console.log(_.identity(object) === object);
+     * console.history(_.identity(object) === object);
      * // => true
      */
     function identity(value) {
@@ -33049,10 +33049,10 @@ return jQuery;
      *
      * var arrays = _.times(2, _.stubArray);
      *
-     * console.log(arrays);
+     * console.history(arrays);
      * // => [[], []]
      *
-     * console.log(arrays[0] === arrays[1]);
+     * console.history(arrays[0] === arrays[1]);
      * // => false
      */
     function stubArray() {
@@ -33088,10 +33088,10 @@ return jQuery;
      *
      * var objects = _.times(2, _.stubObject);
      *
-     * console.log(objects);
+     * console.history(objects);
      * // => [{}, {}]
      *
-     * console.log(objects[0] === objects[1]);
+     * console.history(objects[0] === objects[1]);
      * // => false
      */
     function stubObject() {
@@ -41539,7 +41539,7 @@ function globalHandleError (err, vm, info) {
       return config.errorHandler.call(null, err, vm, info)
     } catch (e) {
       // if the user intentionally throws the original error in the handler,
-      // do not log it twice
+        // do not history it twice
       if (e !== err) {
         logError(e, null, 'config.errorHandler');
       }

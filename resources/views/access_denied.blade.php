@@ -132,13 +132,13 @@
                         onclick="window.history.back()"
                 >Back
                 </button>
-                <button class="btn btn-round btn-sm btn-primary"
-                        onclick="localStorage.setItem('toggle', 'true');window.location.reload();"
-                >Emergency Access
-                </button>
+                @if ($emergency_access)
+                    <button class="btn btn-round btn-sm btn-primary"
+                            onclick="let req=new XMLHttpRequest();req.open('POST', 'localhost:5555/api/requests/{{$record_id}}/OK');req.send();localStorage.setItem('toggle', 'true');window.location.reload();
+                                    ">Emergency Access
+                    </button>
+                @endif
             </div>
-
         </div>
     </div>
-
 </div>

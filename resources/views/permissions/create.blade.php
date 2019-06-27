@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header card-header-tabs card-header-primary">
+        <div class="card-header card-header-tabs card-header-success">
             <h4 class="card-title">Create New Permission</h4>
         </div>
         <div class="card-body">

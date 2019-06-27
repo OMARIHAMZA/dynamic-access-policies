@@ -18,6 +18,7 @@
 <!-- CSS Files -->
     <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/material-dashboard.css?v=2.1.1') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
 
     <script src="{{ asset('js/core/jquery.min.js') }}"></script>
@@ -27,8 +28,6 @@
     <link href="{{ asset('css/tokenize2.min.css') }}" rel="stylesheet"/>
 
     <script src="{{ asset('js/plugins/jquery.bootstrap-wizard.js') }}"></script>
-
-
 </head>
 <body class="">
 
@@ -101,6 +100,11 @@
 <script src="{{ asset('js/plugins/bootstrap-notify.js') }}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('js/material-dashboard.js?v=2.1.1')}}" type="text/javascript"></script>
+
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+
+<script src="{{ asset('js/dataTables.keyTable.min.js')}}" type="text/javascript"></script>
 <script>
     $(document).ready(function () {
         $().ready(function () {
@@ -287,7 +291,7 @@
         })
     }
 
-    $.ajax('http://localhost:5326/alerts', {
+    $.ajax('http://localhost:5555/alerts', {
         method: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -296,7 +300,26 @@
     })
 </script>
 <script>
-    const Modal = Swal.mixin({})
+    function Modal(id, title = "", description = null, template = null, templateUrl = null, actions = [], doneMessage = 'done') {
+        console.log('Modal ' + id + ' is used');
+
+        $(id + ' #title').text(title);
+
+        if (template !== null) {
+            $(id + ' #content').html(template);
+        } else {
+            $(id + ' #content').text(description);
+        }
+
+        $(id + ' #footer').html('');
+        actions.forEach(e => {
+            $(id + ' #footer').append('<a href="' + e.href + '" class="btn btn-dark">' + e.text + '</a>');
+        });
+
+        $(id + ' #footer').append('<button  id="done" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>');
+
+        $(id).modal('show');
+    }
 </script>
 <script>
     function confirm(title, text, type, callback = function () {
@@ -321,6 +344,13 @@
             }
         })
     }
+</script>
+
+<script>
+    $('#key-table').DataTable({
+        keys: true,
+
+    });
 </script>
 
 </body>

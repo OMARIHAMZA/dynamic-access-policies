@@ -2,27 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\ExternalRole;
-use App\ExternalTable;
+use App\AccessRequestsHistory;
 use App\Policy;
-use App\Rule;
-use EmergencyAccessHistory;
-use http\Env\Response;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Routing\Route;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
-use Symfony\Component\Console\Helper\Table;
-use test\Mockery\AllowsExpectsSyntaxTest;
 
 class AccessPermissionRequest extends Controller
 {
-
-    public function rekt(Request $request)
-    {
-        dd($request);
-    }
 
     public function check(Request $request)
     {
@@ -100,7 +87,7 @@ class AccessPermissionRequest extends Controller
                 ]);
         }
 
-        $user = \App\User::where('token', $request['token'])->first();
+        $user = User::where('token', $request['token'])->first();
 
         if (!$user) {
             return response()
@@ -119,54 +106,76 @@ class AccessPermissionRequest extends Controller
         }
 
         $request->validate([
-
             'external_tables' => 'json|required',
             'keys' => 'json|required'
-
         ]);
 
         $externalTables = json_decode($request["external_tables"]);
 
         $keys = json_decode($request['keys'], true);
 
+        $data = [];
+
         if (!$this->allRulesSatisfied($externalTables, $keys, 'rules')) {
-
             if ($this->allRulesSatisfied($externalTables, $keys, 'emergency_rules')) {
-
-                return response()->json([
+                $data = [
                     "status" => true,
                     "permission_granted" => true,
                     "emergency_access" => true
-                ]);
+                ];
 
+                $request_data = [
+                    "emergency" => true,
+                    "result" => true
+                ];
             } else {
-
-                return response()->json([
+                $data = [
                     "status" => true,
                     "permission_granted" => false,
-                    "emergency_access" => false
-                ]);
+                    "emergency_access" => false,
+                ];
 
+                $request_data = [
+                    "emergency" => false,
+                    "requested" => false,
+                    "result" => false
+                ];
             }
-
-
         } else {
-
-            return response()->json([
+            $data = [
                 "status" => true,
                 "permission_granted" => true,
-                "emergency_access" => false
-            ]);
+                "emergency_access" => false,
+            ];
 
+            $request_data = [
+                "emergency" => false,
+                "requested" => true,
+                "result" => true
+            ];
         }
 
-    }
+        $request_data["requester_id"] = $user->id;
+        $request_data["external_tables"] = $request['external_tables'];
+        //$request_data["access_date"] = new Date();
 
+        $id = AccessRequestsHistory::create($request_data)->id;
+
+        if ($data['emergency_access'] || !$data['permission_granted']) {
+            $html = \view('access_denied', [
+                'emergency_access' => $data['emergency_access'],
+                'record_id' => $id
+            ])->render();
+
+            $data['view'] = $html;
+            $data["record_id"] = $id;
+        }
+
+        return response()->json($data);
+    }
 
     function allRulesSatisfied($externalTables, $keys, $rulesColumn)
     {
-
-
         foreach ($externalTables as $tableId) {
 
             $queryResult = json_decode(Policy::select($rulesColumn)->where("data_element", "=", $tableId)->get(), true);
@@ -176,35 +185,25 @@ class AccessPermissionRequest extends Controller
 
                 $currentRules = json_decode($rules[$rulesColumn], true);
 
-
                 foreach ($currentRules as $rule => $value) {
 
                     if (!isset($keys[$rule])) {
 
                         return false;
-
                     }
 
                     if (!in_array($keys[$rule], $value)) {
 
                         return false;
-
                     }
-
                 }
-
             }
-
         }
-
         return true;
-
     }
-
 
     public function permissionDenied(Request $request)
     {
-
         $request->validate([
             "external_tables" => "json|required",
             "keys" => "json|required"
@@ -220,9 +219,19 @@ class AccessPermissionRequest extends Controller
 
     }
 
-    public function emergencyAccessLog(Request $request)
+    public function okay(Request $request)
     {
+        $history = AccessRequestsHistory::find($request['id']);
+        $history->requested = true;
+        $history->save();
 
+        return response()->json([
+            'status' => 'done'
+        ]);
+    }
+
+    public function history(Request $request)
+    {
         if (!isset($request['token'])) {
             return response()
                 ->json([
@@ -231,7 +240,7 @@ class AccessPermissionRequest extends Controller
                 ]);
         }
 
-        $user = \App\User::where('token', $request['token'])->first();
+        $user = User::where('token', $request['token'])->first();
 
         if (!$user) {
             return response()
@@ -249,31 +258,11 @@ class AccessPermissionRequest extends Controller
                 ]);
         }
 
-        $request->validate([
-
-            'external_tables' => 'json|required'
-
-        ]);
-
-        $log = new \App\EmergencyAccessHistory();
-
-        $log->requester_id = $user->id;
-        $log->external_tables = $request['external_tables'];
-        $log->save();
+        $requests = $user->requestsHistory();
 
         return response()->json([
-            "success" => true,
-            "message" => "Log inserted successfully"
-        ]);
-    }
-
-    public function showHistory()
-    {
-
-        $logs = \App\EmergencyAccessHistory::all();
-
-        return view('log.history', [
-            "logs" => $logs
+            "status" => "Done",
+            "data" => $requests
         ]);
     }
 }

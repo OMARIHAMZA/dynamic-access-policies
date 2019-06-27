@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ExternalTable::class);
     }
+
+    public function requestsHistory()
+    {
+        return $this->hasMany(AccessRequestsHistory::class, 'requester_id');
+    }
 }

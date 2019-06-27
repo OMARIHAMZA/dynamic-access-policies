@@ -10,7 +10,7 @@ return [
     | Default Log Channel
     |--------------------------------------------------------------------------
     |
-    | This option defines the default log channel that gets used when writing
+    | This option defines the default history channel that gets used when writing
     | messages to the logs. The name specified in this option should match
     | one of the channels defined in the "channels" configuration array.
     |
@@ -23,9 +23,9 @@ return [
     | Log Channels
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the log channels for your application. Out of
+    | Here you may configure the history channels for your application. Out of
     | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
+    | you a variety of powerful history handlers / formatters to utilize.
     |
     | Available Drivers: "single", "daily", "slack", "syslog",
     |                    "errorlog", "monolog",
@@ -42,13 +42,13 @@ return [
 
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/laravel.history'),
             'level' => 'debug',
         ],
 
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/laravel.history'),
             'level' => 'debug',
             'days' => 14,
         ],

@@ -19,6 +19,6 @@ let BASE_URL = 'http://localhost:5555/';
 //     link.href = BASE_URL + href + string;
 //     link.click();
 //
-//     //console.log(BASE_URL + href + string);
+//     //console.history(BASE_URL + href + string);
 //     //window.location.href = BASE_URL + href + string;
 // }
