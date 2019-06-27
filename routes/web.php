@@ -61,11 +61,12 @@ Route::post('/purposes/{id}', 'PurposeController@update');
 Route::get('/purposes/{id}/delete', 'PurposeController@destroy');
 
 //Policies
-Route::get('/policies', ["uses" => "PolicyController@listPolicies", "middleware" => "authorized"])->name('policies.show');
+Route::get('/policies', ["uses" => "PolicyController@index", "middleware" => "authorized"])->name('policies.show');
 Route::get('/policies/delete/{policy_id}', 'PolicyController@destroy')->name('policies.destroy');
 Route::get('/policies/create', 'PolicyController@create')->name('policies.create');
 Route::post('/policies', 'PolicyController@store')->name('policies.store');
-Route::get('/policies/{policy_id}', 'PolicyController@showPolicyInfo')->name('policies.info');
+Route::get('/policies/show/{policy_id}', 'PolicyController@showPolicyInfo');
+Route::get('/policies/edit/{policy_id}', 'PolicyController@editPolicyInfo');
 Route::post('/policies/{policy_id}/update', 'PolicyController@update')->name('policies.update');
 
 //Permissions
