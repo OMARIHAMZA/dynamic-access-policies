@@ -40,33 +40,35 @@ class IntegrateSystem extends Controller
                 ]);
         }
 
-        $data = json_decode($request['data']);
+        $data = json_decode($request['data'], true);
 
-        $roles = $data->roles;
-//        foreach ($roles as $role) {
-//            ExternalRole::create([
-//                'name' => "$role",
-//                'creator_id' => $user->id
-//            ]);
-//        }
+        foreach ($data as $table) {
 
-        $tables = $data->tables;
-        foreach ($tables as $table) {
-            $name = $table->name;
-            $policy = $table->policy;
+            $table_id = -1;
 
-            $table_id = ExternalTable::create([
-                'creator_id' => $user->id,
-                'name' => $name
-            ])->table_id;
+            foreach ($table as $key => $value) {
 
-            Policy::create([
-                'creator_id' => $user->id,
-                'data_element' => $table_id,
-                'name' => $policy->name,
-                'rules' => json_encode($policy->rules),
-                'emergency_rules' => json_encode($policy->emergency_rules)
-            ]);
+                if ($key == "name") {
+
+                    $name = $table["name"];
+                    $table_id = ExternalTable::create([
+                        'creator_id' => $user->id,
+                        'name' => $name
+                    ])->table_id;
+
+                } else if ($key == 'policy') {
+
+                    $policy = $table["policy"];
+                    Policy::create([
+                        'creator_id' => $user->id,
+                        'data_element' => $table_id,
+                        'name' => $policy["name"],
+                        'rules' => json_encode($policy["rules"]),
+                        'emergency_rules' => json_encode($policy["emergency_rules"])
+                    ]);
+                }
+
+            }
         }
 
         return response()->json([

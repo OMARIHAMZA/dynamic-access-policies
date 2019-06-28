@@ -49,9 +49,9 @@ class User extends Authenticatable
         return $this->role()->first()['title'];
     }
 
-    public function purposes()
+    public function permissions()
     {
-        return $this->belongsToMany(Purpose::class);
+        return $this->role()->permissions();
     }
 
     public function externalRoles()

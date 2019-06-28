@@ -2,10 +2,13 @@
     @include("layouts.integration")
 @endif
 
-<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top border-bottom">
     <div class="container-fluid">
         <div class="navbar-wrapper">
-            <a class="navbar-brand" href=""> Dynamic Medical Records Access Policies</a>
+            <a class="navbar-brand" href="/"
+               style="font-family: 'Matura MT Script Capitals',serif;font-weight: 900;font-size: 12pt">
+                Dynamic Medical Records Access Policies
+            </a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -53,11 +56,12 @@
                             <p class="d-lg-none d-md-block">
                                 Account
                             </p>
+                            {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
                             <button class="dropdown-item w-100 mx-0 cursor-pointer"
                                     onclick="document.getElementById('logout-form').submit();">
-                                <i class="fa fa-sign-out-alt"></i> Logout
+                                <i class="fa fa-sign-out-alt mr-2"></i> Logout
                             </button>
 
                             @if (Auth::user()->role_id == 2)
@@ -80,3 +84,4 @@
         @endauth
     </div>
 </nav>
+

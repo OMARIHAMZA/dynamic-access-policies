@@ -5,7 +5,7 @@
       Tip 2: you can also add an image using data-image tag
   -->
     <div class="logo">
-        <a href="" class="simple-text logo-normal">
+        <a href="/" class="simple-text logo-normal" style="font-family: 'Stencil',serif">
             DMRAP
         </a>
     </div>
@@ -15,8 +15,8 @@
                 <li class="{{strpos(request()->fullUrl(), $nav) ? 'active' : 'nav-item'}}">
                     <a class="nav-link" href="/{{$nav}}">
                         <p>{{$nav}}</p>
-                </a>
-            </li>
+                    </a>
+                </li>
             @endforeach
         </ul>
     </div>

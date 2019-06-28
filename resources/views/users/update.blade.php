@@ -6,7 +6,7 @@
             <h4 class="card-title">Update user details</h4>
         </div>
         <div class="card-body">
-            <form class="pt-4" action="/users/update" method="post">
+            <form class="pt-4" action="/users/{{$user->id}}/update" method="post">
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -24,7 +24,6 @@
                 </div>
 
                 <input class="form-control" id="hidden_id" name="role_id" type="hidden" value="{{$user -> role_id}}">
-                <input class="form-control" id="hidden_id" name="id" type="hidden" value="{{$user -> id}}">
 
                 <div class="btn-group form-group">
                     <button id="role" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
@@ -39,7 +38,7 @@
                             <option id="role_id" class="dropdown-item form-control" name="role_id"
                                     value="{{$role -> id}}"
                                     onclick="document.getElementById('role').innerText = '{{$role -> title}}';
-                                            document.getElementById('hidden_id').value = '{{$role -> id}}'">{{$role -> title}}</option>
+                                            document.getElementById('hidden_id').value = '{{$role -> role_id}}'">{{$role -> title}}</option>
 
                         @endforeach
 

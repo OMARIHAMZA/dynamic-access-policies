@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Illuminate\Http\Request;
+use App\Notification;
+use App\Work;
 
 class HomeController extends Controller
 {
@@ -24,14 +24,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
+        $works = [
+            new Work('Policy "PLC#01" emergency rules does not defined', 'localhost:5555/policies/'),
+            new Work('Policy "PLC#01" emergency rules does not defined', 'localhost:5555/policies/'),
+            new Work('Policy "PLC#01" emergency rules does not defined', 'localhost:5555/policies/'),
+            new Work('Policy "PLC#01" emergency rules does not defined', 'localhost:5555/policies/'),
+            new Work('Policy "PLC#01" emergency rules does not defined', 'localhost:5555/policies/'),
+            new Work('Policy "PLC#01" emergency rules does not defined', 'localhost:5555/policies/'),
+            new Work('Policy "PLC#01" emergency rules does not defined', 'localhost:5555/policies/'),
+            new Work('Policy "PLC#01" emergency rules does not defined', 'localhost:5555/policies/'),
+            new Work('Policy "PLC#01" emergency rules does not defined', 'localhost:5555/policies/')
+        ];
 
-    public function display_all_users()
-    {
-        $users = User::all();
-        return view('users/users', [
-            "users" => $users
+        $notifications = [
+            new Notification("Nazeer Allahham", '/'),
+            new Notification("Nazeer Allahham", '/'),
+            new Notification("Nazeer Allahham", '/'),
+            new Notification("Nazeer Allahham", '/'),
+        ];
+
+        return view('home', [
+            'works' => $works,
+            'notifications' => $notifications
         ]);
     }
 }

@@ -11,11 +11,10 @@
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
-    <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">--}}
-<!-- CSS Files -->
+          href="https://fonts.googleapis.com/css?family=Material+Icons"/>
+
+    <!-- CSS Files -->
     <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/material-dashboard.css?v=2.1.1') }}" rel="stylesheet"/>
     <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>
@@ -31,7 +30,6 @@
 
 </head>
 <body class="">
-
 
 <div id="app">
     <div class="wrapper ">
@@ -100,10 +98,10 @@
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('js/material-dashboard.js?v=2.1.1')}}" type="text/javascript"></script>
 
-<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+{{--<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>--}}
+{{--<script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>--}}
 
-<script src="{{ asset('js/dataTables.keyTable.min.js')}}" type="text/javascript"></script>
+{{--<script src="{{ asset('js/dataTables.keyTable.min.js')}}" type="text/javascript"></script>--}}
 
 
 <script>$('.custom-tokens').tokenize2({
@@ -354,9 +352,7 @@
 </script>
 
 <script>
-    $('#key-table').DataTable({
-        keys: true,
-    });
+    $('#key-table').DataTable();
 </script>
 
 </body>

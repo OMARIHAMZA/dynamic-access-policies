@@ -30,14 +30,14 @@
                         <td>{{$user->role ?  $user -> role ->title : "null"}}</td>
                         <td class="td-actions text-right">
                             <button type="button" rel="tooltip" class="btn btn-dark"
-                                    onclick="document.location.href = 'users/{{$user->role_id}}'">
+                                    onclick="document.location.href = 'users/{{$user->id}}/'">
                                 <i class="material-icons">edit</i>
                             </button>
 
                             <button type="button"
                                     rel="tooltip"
                                     class="btn btn-dark"
-                                    onclick="Modal('#delete', 'Delete Confirmation', 'Are you sure you want to delete user {{$user->name}}?', null, null, [{text:'Delete', href:'/users/delete/{{$user->id}}'}], doneMessage = 'Cancel')">
+                                    onclick="Modal('#delete', 'Delete Confirmation', 'Are you sure you want to delete user {{$user->name}}?', null, null, [{text:'Delete', href:'/users/{{$user->id}}/delete'}], doneMessage = 'Cancel')">
                                 <i class="material-icons">close</i>
                             </button>
                         </td>

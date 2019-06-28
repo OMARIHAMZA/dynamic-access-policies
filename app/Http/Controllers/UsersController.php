@@ -76,17 +76,15 @@ class UsersController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
 
         $request->validate([
-
-            'name' => 'unique:users,name,' . $request->request->get('id'),
-            'email' => 'email|unique:users,email,' . $request->request->get('id'),
-
+            'name' => 'unique:users,name,' . $id,
+            'email' => 'email|unique:users,email,' . $id,
         ]);
 
-        $user = User::find($request->request->get('id'));
+        $user = User::find($id);
 
         $user->name = $request->request->get('name');
 
@@ -117,7 +115,7 @@ class UsersController extends Controller
 
         } else {
             if (!$is_admin) {
-                return Redirect::action('HomeController@display_all_users')->withErrors(['You don\'t have required permissions']);
+                return Redirect::action('UsersController@index')->withErrors(['You don\'t have required permissions']);
             }
         }
 

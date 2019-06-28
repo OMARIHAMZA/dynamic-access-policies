@@ -11,10 +11,6 @@
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/material-dashboard.css?v=2.1.1') }}" rel="stylesheet"/>
@@ -78,8 +74,10 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
             <div class="container-fluid">
                 <div class="navbar-wrapper mx-auto">
-                    <a class="logo" href="/">
-                        <img src="{{ asset('img/logo.png') }}" class="img-fluid img-thumbnail">
+                    <a class="text-success" href="/"
+                       style="font-family: 'Matura MT Script Capitals',serif;font-size:28pt;line-height: 28pt;">
+                        {{--<img src="{{ asset('img/logo.png') }}" class="img-fluid img-thumbnail">--}}
+                        Dynamic Medical Records <br>Access Policies
                     </a>
                 </div>
             </div>
@@ -157,59 +155,8 @@
 <script src="{{ asset('js/core/jquery.min.js')}}"></script>
 <script src="{{ asset('js/core/popper.min.js')}}"></script>
 <script src="{{ asset('js/core/bootstrap-material-design.min.js')}}"></script>
-<script src="{{ asset('js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
-<!-- Plugin for the momentJs  -->
-<script src="{{ asset('js/plugins/moment.min.js')}}"></script>
-<!--  Plugin for Sweet Alert -->
-<script src="{{ asset('js/plugins/sweetalert2.js')}}"></script>
-<!-- Forms Validations Plugin -->
-<script src="{{ asset('js/plugins/jquery.validate.min.js')}}"></script>
-<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-<script src="{{ asset('js/plugins/jquery.bootstrap-wizard.js')}}"></script>
-<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-<script src="{{ asset('js/plugins/bootstrap-selectpicker.js')}}"></script>
-<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-<script src="{{ asset('js/plugins/bootstrap-datetimepicker.min.js')}}"></script>
-<!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-<script src="{{ asset('js/plugins/jquery.dataTables.min.js')}}"></script>
-<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-<script src="{{ asset('js/plugins/bootstrap-tagsinput.js')}}"></script>
-<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-<script src="{{ asset('js/plugins/jasny-bootstrap.min.js')}}"></script>
-<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-<script src="{{ asset('js/plugins/fullcalendar.min.js')}}"></script>
-<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-<script src="{{ asset('js/plugins/jquery-jvectormap.js')}}"></script>
-<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="{{ asset('js/plugins/nouislider.min.js')}}"></script>
-<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-<script src="{{ asset('js/core.js') }}"></script>
-<!-- Library for adding dinamically elements -->
-<script src="{{ asset('js/plugins/arrive.min.js')}}"></script>
-<!--  Google Maps Plugin    -->
-<!-- Chartist JS -->
-<script src="{{ asset('js/plugins/chartist.min.js')}}"></script>
-<!--  Notifications Plugin    -->
-<script src="{{ asset('js/plugins/bootstrap-notify.js')}}"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('js/material-dashboard.js?v=2.1.1')}}" type="text/javascript"></script>
 <script>
-    $(document).ready(function () {
-        $('.brand-title span').each(function (index) {
-            setTimeout(function (children) {
-                let child = $(children);
-                child['movementToggle'] = false;
-                setInterval(() => {
-                    child.movementToggle = !child.movementToggle;
-                    if (child.movementToggle) {
-                        child.css('top', '1px');
-                    } else {
-                        child.css('top', '-1px');
-                    }
-                }, 500);
-            }, index * 100, this)
-        });
-    });
 </script>
 </body>
 

@@ -23,18 +23,18 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 //Users
-
 Route::get('/users', 'UsersController@index')->name('users.index');
-
-Route::get('/users/delete/{user_id}', 'UsersController@destroy')->name('users.destroy');
-
-Route::get('/users/create', 'UsersController@create')->name('users.create');
 
 Route::post('/users', 'UsersController@store')->name('users.store');
 
+Route::get('/users/create', 'UsersController@create')->name('users.create');
+
 Route::get('/users/{user_id}', 'UsersController@showUserInfo')->name('user.show');
 
-Route::post('/users/update', 'UsersController@update')->name('users.update');
+Route::get('/users/{user_id}/delete/', 'UsersController@destroy')->name('users.destroy');
+
+Route::post('/users/{user_id}/update', 'UsersController@update')->name('users.update');
+
 
 //Roles
 
