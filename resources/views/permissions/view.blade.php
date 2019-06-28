@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header card-header-tabs card-header-primary">
-            <a href="{{$permission['id']}}/edit" class="float-right btn btn-light btn-sm"
+            <a href="{{$permission['permission_id']}}/edit" class="float-right btn btn-light btn-sm"
                title="Edit">
                 <i class="fa fa-pen text-primary"></i>
             </a>

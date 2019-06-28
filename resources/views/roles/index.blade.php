@@ -33,14 +33,14 @@
                         <td></td>
                         <td class="td-actions text-right">
                             <button type="button" rel="tooltip" class="btn btn-dark"
-                                    onclick="document.location.href = 'roles/{{$role->id}}'">
+                                    onclick="document.location.href = 'roles/{{$role->role_id}}/edit'">
                                 <i class="material-icons">edit</i>
                             </button>
 
                             <button type="button"
                                     rel="tooltip"
                                     class="btn btn-dark"
-                                    onclick="Modal('#delete', 'Delete Confirmation', 'Are you sure you want to delete role \'{{$role->title}}\'?', null, null, [{text:'Delete', href:'/roles/delete/{{$role->id}}'}], doneMessage = 'Cancel')">
+                                    onclick="Modal('#delete', 'Delete Confirmation', 'Are you sure you want to delete role \'{{$role->title}}\'?', null, null, [{text:'Delete', href:'/roles/{{$role->role_id}}/delete'}], doneMessage = 'Cancel')">
                                 <i class="material-icons">close</i>
                             </button>
 

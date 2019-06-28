@@ -8,7 +8,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
-                    <form class="pt-4" action="/permissions/{{$permission->id}}" method="post">
+                    <form class="pt-4" action="/permissions/{{$permission->permission_id}}" method="post">
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="title">Title</label>

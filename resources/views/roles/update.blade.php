@@ -6,7 +6,7 @@
             <h4 class="card-title">Edit role details</h4>
         </div>
         <div class="card-body">
-            <form class="pt-4" action="/roles/update" method="post">
+            <form class="pt-4" action="/roles/{{$role->role_id}}" method="post">
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -18,8 +18,6 @@
                     <textarea rows="5" type="text" class="form-control" id="description"
                               name="description"> {{$role -> description}} </textarea>
                 </div>
-
-                <input type="hidden" name="id" value="{{$role -> id}}">
 
                 @if ($errors->any())
                     <div class="alert alert-danger">

@@ -36,18 +36,26 @@
                                 User Role
                             </button>
                             <div class="dropdown-menu form-group">
-
                                 @foreach($roles as $role)
-
-                                    <option id="role_id" class="dropdown-item form-control" name="role_id"
+                                    <option id="role_id" class="dropdown-item form-control" name="role-id"
                                             value="{{$role -> id}}"
-                                            onclick="document.getElementById('role').innerText = '{{$role -> title}}';
-                                                    document.getElementById('hidden_id').value = '{{$role -> id}}'">{{$role -> title}}</option>
-
+                                            onclick="document.getElementById('role').innerText = '{{$role->title}}';
+                                                    document.getElementById('hidden_id').value = '{{$role->role_id}}'">{{$role->title}}</option>
                                 @endforeach
-
                             </div>
                         </div>
+
+                        @if ($errors->any())
+                            <div class="mt-5">
+                                <div class="alert alert-danger py-1">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
 
                         <button type="submit" class="btn btn-primary">Submit</button>
 

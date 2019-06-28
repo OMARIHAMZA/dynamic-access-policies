@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AccessRequestsHistory extends Model
 {
-//    protected $table = "access_requests_history";
+    protected $table = "access_requests_history";
 
     public $timestamps = false;
 

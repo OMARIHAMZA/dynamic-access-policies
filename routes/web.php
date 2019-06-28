@@ -22,7 +22,6 @@ Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
-
 //Users
 
 Route::get('/users', 'UsersController@index')->name('users.index');
@@ -39,34 +38,32 @@ Route::post('/users/update', 'UsersController@update')->name('users.update');
 
 //Roles
 
-Route::get('/roles', 'RoleController@listRoles')->name('roles.show');
+Route::get('/roles', 'RoleController@index');
 
-Route::get('/roles/delete/{role_id}', 'RoleController@destroy')->name('role.destroy');
+Route::post('/roles', 'RoleController@store');
 
-Route::get('/roles/create', 'RoleController@create')->name('role.create');
+Route::get('/roles/create', 'RoleController@create');
 
-Route::post('/roles', 'RoleController@store')->name('role.save');
+Route::get('/roles/{id}/edit', 'RoleController@edit');
 
-Route::get('/roles/{role_id}', 'RoleController@showRoleInfo')->name('role.info');
+Route::post('/roles/{id}', 'RoleController@update');
 
-Route::post('/roles/update', 'RoleController@update')->name('role.update');
+Route::get('/roles/{id}/delete', 'RoleController@destroy');
 
-// Purposes
-Route::get('/purposes', 'PurposeController@index');
-Route::post('/purposes', 'PurposeController@store');
-Route::get('/purposes/create', 'PurposeController@create');
-Route::get('/purposes/{id}', 'PurposeController@show');
-Route::get('/purposes/{id}/edit', 'PurposeController@edit');
-Route::post('/purposes/{id}', 'PurposeController@update');
-Route::get('/purposes/{id}/delete', 'PurposeController@destroy');
 
 //Policies
 Route::get('/policies', ["uses" => "PolicyController@index", "middleware" => "authorized"])->name('policies.show');
+
 Route::get('/policies/delete/{policy_id}', 'PolicyController@destroy')->name('policies.destroy');
+
 Route::get('/policies/create', 'PolicyController@create')->name('policies.create');
+
 Route::post('/policies', 'PolicyController@store')->name('policies.store');
+
 Route::get('/policies/show/{policy_id}', 'PolicyController@showPolicyInfo');
+
 Route::get('/policies/edit/{policy_id}', 'PolicyController@editPolicyInfo');
+
 Route::post('/policies/{policy_id}/update', 'PolicyController@update')->name('policies.update');
 
 //Permissions

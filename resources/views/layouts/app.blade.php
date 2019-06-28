@@ -349,7 +349,6 @@
 <script>
     $('#key-table').DataTable({
         keys: true,
-
     });
 </script>
 

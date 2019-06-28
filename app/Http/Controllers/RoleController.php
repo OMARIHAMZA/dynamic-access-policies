@@ -20,22 +20,19 @@ class RoleController extends Controller
         $this->middleware('auth');
     }
 
-    public function listRoles()
+    public function index()
     {
-
         $roles = Role::all();
-        return view('roles/roles', [
 
+        return view('roles.index', [
             'roles' => $roles
-
         ]);
-
     }
 
     public function create()
     {
 
-        return view('roles/create');
+        return view('roles.create');
 
     }
 
@@ -57,36 +54,36 @@ class RoleController extends Controller
         return redirect('/roles');
     }
 
-    public function showRoleInfo($id)
+    public function edit($id)
     {
 
         $role = Role::find($id);
 
-        return view('roles/update', [
+        return view('roles.update', [
             'role' => $role
         ]);
 
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
 
         $request->validate([
 
-            'title' => 'required|unique:roles,title,' . $request->request->get('id')
+            'title' => 'required',
+            'description' => 'required'
 
         ]);
 
-        $role = Role::find($request->request->get('id'));
+        $role = Role::where('role_id', $id)->first();
 
-        $role->title = $request->request->get('title');
+        $role->title = $request['title'];
 
-        $role->description = $request->request->get('description');
+        $role->description = $request['description'];
 
         $role->update();
 
         return redirect('/roles');
-
     }
 
     public function destroy($id)

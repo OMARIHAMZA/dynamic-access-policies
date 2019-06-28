@@ -30,7 +30,7 @@
                         <td>{{$user->role ?  $user -> role ->title : "null"}}</td>
                         <td class="td-actions text-right">
                             <button type="button" rel="tooltip" class="btn btn-dark"
-                                    onclick="document.location.href = 'users/{{$user->id}}'">
+                                    onclick="document.location.href = 'users/{{$user->role_id}}'">
                                 <i class="material-icons">edit</i>
                             </button>
 

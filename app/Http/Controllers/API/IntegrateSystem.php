@@ -32,7 +32,7 @@ class IntegrateSystem extends Controller
                 ]);
         }
 
-        if ($user->roleTitle() != "user") { // user role must be 'User'
+        if ($user->roleTitle() != 'user') { // user role must be 'User'
             return response()
                 ->json([
                     "status" => "ERROR",
@@ -55,14 +55,14 @@ class IntegrateSystem extends Controller
             $name = $table->name;
             $policy = $table->policy;
 
-//            ExternalTable::create([
-//                'creator_id' => $user->id,
-//                'name' => $name
-//            ]);
+            $table_id = ExternalTable::create([
+                'creator_id' => $user->id,
+                'name' => $name
+            ])->table_id;
 
             Policy::create([
                 'creator_id' => $user->id,
-                'data_element' => 101,
+                'data_element' => $table_id,
                 'name' => $policy->name,
                 'rules' => json_encode($policy->rules),
                 'emergency_rules' => json_encode($policy->emergency_rules)

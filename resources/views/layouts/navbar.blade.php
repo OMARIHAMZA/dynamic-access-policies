@@ -1,5 +1,6 @@
-
-@include("layouts.integration")
+@if (Auth::user()->role_id == 2)
+    @include("layouts.integration")
+@endif
 
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
     <div class="container-fluid">
@@ -59,12 +60,14 @@
                                 <i class="fa fa-sign-out-alt"></i> Logout
                             </button>
 
-                            <button type="button" class="dropdown-item w-100 mx-0 cursor-pointer"
-                                    title="Integrate"
-                                    data-toggle="modal"
-                                    data-backdrop="static" data-keyboard="false" data-target="#integration_modal">
-                                Integrate
-                            </button>
+                            @if (Auth::user()->role_id == 2)
+                                <button type="button" class="dropdown-item w-100 mx-0 cursor-pointer"
+                                        title="Integrate"
+                                        data-toggle="modal"
+                                        data-backdrop="static" data-keyboard="false" data-target="#integration_modal">
+                                    Integrate
+                                </button>
+                            @endif
 
                             <form method="post" action="logout" id="logout-form">
                                 @csrf
