@@ -69,7 +69,7 @@
                                 </button>
                             @endif
 
-                            <form method="post" action="logout" id="logout-form">
+                            <form method="post" action="/logout" id="logout-form">
                                 @csrf
                             </form>
 

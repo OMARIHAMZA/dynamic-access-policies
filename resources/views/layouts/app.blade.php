@@ -23,11 +23,12 @@
 
     <script src="{{ asset('js/core/jquery.min.js') }}"></script>
 
-    <script src="{{ asset('js/tokenize2.min.js') }}"></script>
-
-    <link href="{{ asset('css/tokenize2.min.css') }}" rel="stylesheet"/>
-
     <script src="{{ asset('js/plugins/jquery.bootstrap-wizard.js') }}"></script>
+
+    <link href="{{asset('/css/tokenize2.min.css')}}" rel="stylesheet"/>
+
+    <script src="{{asset('/js/tokenize2.min.js') }}"></script>
+
 </head>
 <body class="">
 
@@ -92,8 +93,6 @@
 <script src="{{ asset('js/plugins/nouislider.min.js') }}"></script>
 <!-- Library for adding dinamically elements -->
 <script src="{{ asset('js/plugins/arrive.min.js') }}"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!-- Chartist JS -->
 <script src="{{ asset('js/plugins/chartist.min.js') }}"></script>
 <!--  Notifications Plugin    -->
@@ -105,6 +104,14 @@
 <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
 
 <script src="{{ asset('js/dataTables.keyTable.min.js')}}" type="text/javascript"></script>
+
+
+<script>$('.custom-tokens').tokenize2({
+        tokensAllowCustom: true,
+        delimiter: [',', '-']
+    });
+</script>
+
 <script>
     $(document).ready(function () {
         $().ready(function () {

@@ -16,21 +16,19 @@
 
                 </div>
 
-                <div class=" mt-4 ">
+                <div class="mt-4">
                     <label for="{{str_replace(' ', '', $title)}}_values">Values</label>
                     <select id="{{str_replace(' ', '', $title)}}_values"
                             class="{{str_replace(' ', '', $title)}}-roles-tokens custom-tokens form-control"
-                            multiple></select>
+                            multiple>
+                    </select>
 
                 </div>
 
-                <script>$('.custom-tokens').tokenize2({
-                        tokensAllowCustom: true,
-                        delimiter: [',', '-']
-                    });</script>
 
 
             </div>
+
             <div class="modal-footer">
                 <button id="addItemButton" type="button" class="btn btn-success"
                         onclick="addItem('<?php Print(str_replace(' ', '', $title))?>')">Add
