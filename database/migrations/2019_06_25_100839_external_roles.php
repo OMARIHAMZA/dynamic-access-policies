@@ -14,7 +14,7 @@ class ExternalRoles extends Migration
     public function up()
     {
         Schema::create('external_roles', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('role_id');
             $table->bigInteger('creator_id')->nullable(false);
             $table->string('name')->nullable(false);
             $table->timestamps();

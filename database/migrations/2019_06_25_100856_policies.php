@@ -14,10 +14,12 @@ class Policies extends Migration
     public function up()
     {
         Schema::create('policies', function (Blueprint $table) {
+            $table->bigIncrements('policy_id');
             $table->bigInteger('creator_id');
             $table->bigInteger('data_element');
             $table->string('name')->nullable(false);
-            $table->json('rules')->nullable(false);
+            $table->json('rules')->nullable(true);
+            $table->json('emergency_rules')->nullable(true);
 
             $table->timestamps();
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EmergencyAccessHistory extends Migration
+class AccessRequestsHistory extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class EmergencyAccessHistory extends Migration
      */
     public function up()
     {
-        Schema::create('emergency_access_histories', function (Blueprint $table) {
+        Schema::create('access_requests_history', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('requester_id');
             $table->json('external_tables');
             $table->timestamp('access_date')->useCurrent();
+            $table->boolean('result')->nullable(true);
+            $table->boolean('emergency')->default(false);
+            $table->boolean('requested')->nullable(true);
+
             $table->foreign('requester_id')->references('id')->on('users');
         });
     }

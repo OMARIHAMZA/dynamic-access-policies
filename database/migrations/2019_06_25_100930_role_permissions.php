@@ -17,8 +17,8 @@ class RolePermissions extends Migration
             $table->bigInteger('role_id');
             $table->bigInteger('permission_id');
 
-//            $table->foreign('role_id')->references('role_id')->on('roles');
-//            $table->foreign('permission_id')->references('permission_id')->on('permissions');
+            $table->foreign('role_id')->references('role_id')->on('roles');
+            $table->foreign('permission_id')->references('permission_id')->on('permissions');
         });
     }
 

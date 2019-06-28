@@ -21,6 +21,11 @@ class UsersController extends Controller
         $this->middleware('auth');
     }
 
+    public function getUser()
+    {
+
+    }
+
     public function index()
     {
         $users = User::all();
