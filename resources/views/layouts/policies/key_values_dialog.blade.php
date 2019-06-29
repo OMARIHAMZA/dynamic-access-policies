@@ -26,7 +26,6 @@
                 </div>
 
 
-
             </div>
 
             <div class="modal-footer">
@@ -73,7 +72,7 @@
              <td>[${values}]</td>
              <td class="text-right">
                  <button type="button" class="btn btn-danger btn-fab"
-                         onclick="deleteRow(this, ${title})">
+                         onclick="deleteRow(this, '${title}')">
                      <i class="material-icons">close</i>
                  </button>
              </td>

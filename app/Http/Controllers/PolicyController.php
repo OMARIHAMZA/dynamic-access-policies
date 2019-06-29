@@ -85,9 +85,12 @@ class PolicyController extends Controller
     {
         $policy = Policy::find($id);
 
+        $external_tables = ExternalTable::all();
+
         return view('policies.update', [
 
-            'policy' => $policy
+            'policy' => $policy,
+            'external_tables' => $external_tables
 
         ]);
 

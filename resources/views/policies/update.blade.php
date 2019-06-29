@@ -29,9 +29,10 @@
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div id="data_element" class="dropdown-menu">
-                {{--@foreach($policy -> external_tables as $external_table)
-                    <a class="dropdown-item" onclick="setSelection(`{{$external_table["table_id"]}}`,`{{$external_table["name"]}}`)">{{$external_table["name"]}}</a>
-                @endforeach--}}
+                @foreach($external_tables as $external_table)
+                    <a class="dropdown-item"
+                       onclick="setSelection(`{{$external_table["table_id"]}}`,`{{$external_table["name"]}}`)">{{$external_table["name"]}}</a>
+                @endforeach
             </div>
         </div>
 
