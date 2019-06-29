@@ -25,8 +25,14 @@ class PolicyController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
 
-        $policies = Policy::all();
+        if ($user->role_id == 1) //admin
+        {
+            $policies = Policy::all();
+        } else {
+            $policies = $user->policies;
+        }
 
         return view('policies.index', [
             'policies' => $policies
@@ -36,12 +42,16 @@ class PolicyController extends Controller
 
     public function create()
     {
+        $user = Auth::user();
 
-        $logged_user = Auth::user();
-        $external_tables = ExternalTable::all();
+        if ($user->roleTitle() == "admin") {
+            $external_tables = ExternalTable::where('policy_defined', false);
+        } else {
+            $external_tables = $user->externalTables()->where('policy_defined', false)->get();
+        }
 
         return view('policies/create', [
-            'user_id' => $logged_user->id,
+            'user_id' => $user->id,
             'external_tables' => $external_tables
         ]);
 
@@ -69,7 +79,7 @@ class PolicyController extends Controller
         return redirect('/policies');
     }
 
-    public function showPolicyInfo($id)
+    public function show($id)
     {
         $policy = Policy::find($id);
 
@@ -81,7 +91,7 @@ class PolicyController extends Controller
 
     }
 
-    public function editPolicyInfo($id)
+    public function edit($id)
     {
         $policy = Policy::find($id);
 
@@ -113,7 +123,6 @@ class PolicyController extends Controller
 
         return redirect('/policies');
     }
-
 
     public function destroy($id)
     {

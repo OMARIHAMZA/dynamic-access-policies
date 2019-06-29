@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ExternalRole;
 use App\ExternalTable;
+use App\Http\Controllers\API\IntegrateSystem;
 use App\Role;
 use App\User;
 use http\Env\Response;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\ValidationException;
+use function Symfony\Component\HttpKernel\Tests\controller_func;
 
 class UsersController extends Controller
 {
@@ -125,39 +127,18 @@ class UsersController extends Controller
 
     public function cmsIntegration(Request $request)
     {
-
         $request->validate([
 
-            'tables' => 'required|min:1',
-            'roles' => 'required|min:1'
+            'data' => 'required|min:1',
+            //    'roles' => 'required|min:1'
 
         ]);
 
-        $user_id = Auth()->user()->id;
+        $token = Auth()->user()->token;
 
-        foreach (explode(',', $request->get('tables')) as $table) {
-            $external_table = new ExternalTable([
-                'creator_id' => $user_id,
-                'name' => $table
-            ]);
-            $external_table->save();
-        }
+        $request['token'] = $token;
 
-        foreach (explode(',', $request->get('roles')) as $role) {
-            $role = new ExternalRole([
-                'creator_id' => $user_id,
-                'name' => $role,
-                'description' => ""
-            ]);
-            $role->save();
-        }
-
-        session()->put('notifications', [
-            ["icon" => "fa fa-info", "message" => "System integrated successfully."]
-        ]);
-
-        return back();
-
+        return App::call('App\Http\Controllers\API\IntegrationSystem@integrate');
     }
 
     public function integrate(Request $request)

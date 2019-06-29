@@ -18,20 +18,21 @@
                         <select id="tables_list" class="tables-tokens custom-tokens form-control" multiple></select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="roles_list">Roles</label>
-                        <select id="roles_list" class="roles-tokens custom-tokens form-control" multiple></select>
-                    </div>
+                    {{--<div class="form-group">--}}
+                    {{--<label for="roles_list">Roles</label>--}}
+                    {{--<select id="roles_list" class="roles-tokens custom-tokens form-control" multiple></select>--}}
+                    {{--</div>--}}
 
                     <input type="hidden" id="tables" name="tables">
 
                     <input type="hidden" id="roles" name="roles">
 
-                    <script>$('.custom-tokens').tokenize2({
+                    <script>
+                        $('.custom-tokens').tokenize2({
                             tokensAllowCustom: true,
                             delimiter: [',', '-']
-                        });</script>
-
+                        });
+                    </script>
                 </form>
 
             </div>

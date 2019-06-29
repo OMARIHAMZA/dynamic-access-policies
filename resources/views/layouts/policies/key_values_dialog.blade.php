@@ -46,20 +46,27 @@
 <script>
 
     function addItem(title) {
-
-
         let key = document.getElementById(title + '_key').value;
 
         let values = $(`.${title}-roles-tokens`).data('tokenize2').toArray().join(',');
 
 
         if (!key) {
-            alert('The key is required');
+            makeNotification({icon: 'error', message: 'The key is required'});
             return;
         }
 
+        let rows = $(`#${title}_table_body`).children();
+        for (let i = 0; i < rows.length; i++) {
+            if ($(rows[i]).children()[1].innerText === key) {
+                // alert("Rule keys must be unique");
+                makeNotification({icon: 'error', message: 'Rule keys must be unique'});
+                return;
+            }
+        }
+
         if (!values) {
-            alert('At least one value is required');
+            makeNotification({icon: 'error', message: 'At least one value is required'});
             return;
         }
 

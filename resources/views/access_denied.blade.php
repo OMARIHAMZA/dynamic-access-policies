@@ -5,21 +5,56 @@
     }
 
     #root {
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        height: 100%;
-
+        padding: 8px 12px;
+        margin: 4px auto;
+        width: 768px;
+        height: 606px;
+        border: 2pt solid #333;
+        border-radius: 12pt;
+        /*background-color: #888;*/
     }
 
-    #root .container {
-        width: 100%;
-        height: 100%;
-        padding: 28px 48px;
+    #root #footer {
+        text-align: center;
+
+        color: #fff;
+        background-color: #2a6496;
+
+        font-size: 11pt;
+        line-height: 11pt;
+        font-weight: bold;
+        font-family: 'Century Gothic', sans-serif;
+        text-decoration: none;
+
+        padding: 4px;
+
+        margin-top: 48px;
+
+        border-radius: 16px;
+    }
+
+    #root #footer a:hover {
+        color: #fff !important;
+    }
+
+    #root #footer div span {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    #root #content {
         position: relative;
+
+        margin: 0;
+        padding: 4pt 12pt;
+
+        width: 100%;
+        height: 475px;
+
+
     }
 
-    #root .container .background {
+    #root #content .heading {
         max-width: 920px;
         width: 100%;
         line-height: 1.4;
@@ -28,8 +63,8 @@
         padding-right: 15px;
     }
 
-    #root .container .background .error-403 {
-        position: absolute;
+    #root #content .heading .error-403 {
+        position: relative;
         height: 200px;
         top: 0;
         left: 50%;
@@ -39,7 +74,7 @@
         z-index: 1;
     }
 
-    #root .container .background .error-403 h1 {
+    #root #content .heading .error-403 h1 {
         font-family: 'Century Gothic', sans-serif;
         color: #aabbcc;
         font-weight: 900;
@@ -53,15 +88,14 @@
         transform: translate(-50%, -50%);
     }
 
-    #root .container .foreground {
+    #root #content .body {
         max-width: 920px;
         width: 100%;
         line-height: 1.4;
         text-align: center !important;
         padding-left: 15px;
         padding-right: 15px;
-        padding-top: 128px;
-        margin: 0 auto !important;
+        margin: 8px auto !important;
         z-index: 12;
     }
 
@@ -69,9 +103,9 @@
 
     }
 
-    #root .container .foreground h2 {
+    #root #content .body div h2 {
         font-family: 'Century Gothic', sans-serif;
-        font-size: 46px;
+        font-size: 32pt;
         color: #000;
         font-weight: 900;
         text-transform: uppercase;
@@ -79,19 +113,20 @@
         z-index: 3;
     }
 
-    #root .container .foreground h4 {
-        font-family: 'Century Gothic', sans-serif;
-        font-size: 32px;
+    #root #content .body h4 {
+        font-family: 'Calibri', sans-serif;
+        font-size: 24pt;
+        line-height: 24pt;
         color: #000;
         font-weight: 600;
         /*text-transform: uppercase;*/
-        margin: 0;
+        margin: 0 0 8px;
         z-index: 3;
     }
 
-    #root .container .foreground p {
-        font-family: 'Century Gothic', sans-serif;
-        font-size: 16px;
+    #root #content .body p {
+        font-family: 'Calibri', sans-serif;
+        font-size: 16pt;
         color: #000;
         font-weight: 400;
         text-transform: uppercase;
@@ -99,7 +134,7 @@
         z-index: 3;
     }
 
-    #root .container .foreground button {
+    #root #content .body button {
         font-family: 'Century Gothic', sans-serif;
         font-size: 14px;
         text-decoration: none;
@@ -111,37 +146,26 @@
         transition: 0.2s all;
     }
 
-    #root .container .foreground button.first {
+    #root #content .body button.first {
         background: #dc3545;
         color: #fff;
     }
 
-    #root .container .foreground button.first:hover {
+    #root #content .body button.first:hover {
         background-color: #fff;
         border-color: #dc3540;
         color: #dc3545;
     }
 
-    #root .container .foreground button.second {
+    #root #content .body button.second {
         background: #28a745;
         color: #fff;
     }
 
-    #root .container .foreground button.second:hover {
+    #root #content .body button.second:hover {
         background-color: #fff;
         border-color: #28a740;
         color: #28a745;
-    }
-
-    #root .container .foreground .footer {
-        margin-top: 48px;
-        text-align: center;
-        color: #fff;
-        background-color: #ffc107;
-        font-family: 'Century Gothic', sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-        text-decoration: none;
     }
 
     .badge {
@@ -150,17 +174,25 @@
     }
 </style>
 <div id="root">
-    <div class="container">
-        <div class="background">
+    <div id="header">
+
+    </div>
+    <div id="content">
+        <div class="heading">
             <div class="error-403">
                 <h1>403</h1>
             </div>
         </div>
-        <div class="foreground">
+        <div class="body">
             <div style="display: flex !important; flex-direction: column !important;">
                 <h2>We are sorry, ACCESS DENIED!</h2>
-                <h4>You don't have sufficient privileges to access this data.</h4>
-                @if ($emergency_access)
+                @if (isset($error))
+                    <h4 style="color: #f44336;">{{$error}}</h4>
+                @else
+                    <h4>You don't have sufficient privileges to access this data.</h4>
+                @endif
+
+                @if (isset($emergency_access) && $emergency_access)
                     <p>It seems like you can access this data in emergency access cases.</p>
                 @endif
                 <div>
@@ -168,21 +200,23 @@
                             onclick="window.history.back()"
                     >Back
                     </button>
-                    @if ($emergency_access)
+                    @if (isset($emergency_access) && $emergency_access)
                         <button class="badge first"
                                 onclick="let req=new XMLHttpRequest();req.open('POST', 'localhost:5555/api/requests/{{$record_id}}/OK');req.send();localStorage.setItem('toggle', 'true');window.location.reload();
                                         ">Emergency Access
                         </button>
                     @endif
                 </div>
-
-                <hr/>
-
-                <div class="badge footer">
-                    Access to this site's data is controlled by <a href="http://localhost:5555">DMRAP</a> &copy;
-                    2019
-                </div>
             </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div>
+            Access to this site's data is controlled by
+            <div>
+                <a href="http://localhost:5555/">Dynamic Medical Record <br> Access Policies</a>
+            </div>
+            &copy; 2019
         </div>
     </div>
 </div>

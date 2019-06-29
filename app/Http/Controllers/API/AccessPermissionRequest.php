@@ -16,7 +16,10 @@ class AccessPermissionRequest extends Controller
             return response()
                 ->json([
                     "status" => false,
-                    "cause" => "Token is required"
+                    "cause" => "Token is required",
+                    "view" => view('access_denied', [
+                        "error" => "Token is required"
+                    ])->render()
                 ]);
         }
 
@@ -26,7 +29,10 @@ class AccessPermissionRequest extends Controller
             return response()
                 ->json([
                     "status" => false,
-                    "cause" => "Invalid user token."
+                    "cause" => "Invalid user token.",
+                    "view" => view('access_denied', [
+                        "error" => "Invalid user token."
+                    ])->render()
                 ]);
         }
 
@@ -34,7 +40,10 @@ class AccessPermissionRequest extends Controller
             return response()
                 ->json([
                     "status" => false,
-                    "cause" => "You aren't allowed to use this system function."
+                    "cause" => "You aren't allowed to use this system function.",
+                    "view" => view('access_denied', [
+                        "error" => "You aren't allowed to use this system function."
+                    ])->render()
                 ]);
         }
 

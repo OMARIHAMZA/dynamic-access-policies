@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->role()->permissions();
     }
 
+    public function policies()
+    {
+        return $this->hasMany(Policy::class, 'creator_id');
+    }
+
     public function externalRoles()
     {
         return $this->hasMany(ExternalRole::class);
@@ -61,7 +66,7 @@ class User extends Authenticatable
 
     public function externalTables()
     {
-        return $this->hasMany(ExternalTable::class);
+        return $this->hasMany(ExternalTable::class, 'creator_id');
     }
 
     public function requestsHistory()

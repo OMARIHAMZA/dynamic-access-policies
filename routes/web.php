@@ -27,6 +27,8 @@ Route::get('/users', 'UsersController@index')->name('users.index');
 
 Route::post('/users', 'UsersController@store')->name('users.store');
 
+Route::post('/users/integrate', 'UsersController@cmsIntegration');
+
 Route::get('/users/create', 'UsersController@create')->name('users.create');
 
 Route::get('/users/{user_id}', 'UsersController@showUserInfo')->name('user.show');
@@ -52,27 +54,33 @@ Route::get('/roles/{id}/delete', 'RoleController@destroy');
 
 
 //Policies
-Route::get('/policies', ["uses" => "PolicyController@index", "middleware" => "authorized"])->name('policies.show');
+Route::get('/policies', ["uses" => "PolicyController@index", "middleware" => "authorized"])->name('policies.index');
 
-Route::get('/policies/delete/{policy_id}', 'PolicyController@destroy')->name('policies.destroy');
+Route::post('/policies', 'PolicyController@store');
 
-Route::get('/policies/create', 'PolicyController@create')->name('policies.create');
+Route::get('/policies/create', 'PolicyController@create');
 
-Route::post('/policies', 'PolicyController@store')->name('policies.store');
+Route::get('/policies/{id}', 'PolicyController@show');
 
-Route::get('/policies/show/{policy_id}', 'PolicyController@showPolicyInfo');
+Route::get('/policies/{id}/edit', 'PolicyController@edit');
 
-Route::get('/policies/edit/{policy_id}', 'PolicyController@editPolicyInfo');
+Route::post('/policies/{id}/update', 'PolicyController@update');
 
-Route::post('/policies/{policy_id}/update', 'PolicyController@update')->name('policies.update');
+Route::get('/policies/{id}/delete', 'PolicyController@destroy');
 
 //Permissions
 Route::get('/permissions', 'PermissionController@index');
+
 Route::post('/permissions', 'PermissionController@store');
+
 Route::get('/permissions/create', 'PermissionController@create');
+
 Route::get('/permissions/{id}', 'PermissionController@show');
+
 Route::get('/permissions/{id}/edit', 'PermissionController@edit');
+
 Route::post('/permissions/{id}', 'PermissionController@update');
+
 Route::get('/permissions/{id}/delete', 'PermissionController@destroy');
 
 //Rules
@@ -83,8 +91,6 @@ Route::get('/alerts', function () {
     session()->remove('alerts');
     return $data;
 });
-
-Route::post('/users/integrate', 'UsersController@cmsIntegration');
 
 //Permission Denied
 Route::get('/access_denied', 'api\AccessPermissionRequest@permissionDenied')->name('access_denied');
