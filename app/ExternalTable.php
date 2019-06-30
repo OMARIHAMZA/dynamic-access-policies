@@ -13,15 +13,18 @@ class ExternalTable extends Model
         'name'
     ];
 
-    public $creator_id;
-    public $name;
-
     public function creator()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'creator_id');
     }
 
-    public function policy(){
+    public function creatorName()
+    {
+        return $this->creator()->first()['name'];
+    }
+
+    public function policy()
+    {
         return $this->belongsTo(Policy::class);
     }
 }

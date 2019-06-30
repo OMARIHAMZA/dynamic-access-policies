@@ -17,15 +17,23 @@ class ExternalTableController extends Controller
     {
         $user = Auth::user();
 
+        $flag = false;
         if ($user->role_id == 1) //admin
         {
             $tables = ExternalTable::all();
+
+            foreach ($tables as $t) {
+                $t['creator_name'] = $t->creatorName();
+            }
+
+            $flag = true;
         } else {
             $tables = $user->externalTables;
         }
 
         return view('external_tables.index', [
             'tables' => $tables,
+            'flag' => $flag
         ]);
     }
 
@@ -73,8 +81,16 @@ class ExternalTableController extends Controller
             'creator_id' => 'required|numeric',
         ]);
 
+        if (Auth::user()->roleTitle() !== "admin" && isset($request['creator_id'])) {
+            session()->put('alerts', [
+                ["icon" => "warning", "message" => "You cannot change Data Element owner. Please contact us."]
+            ]);
+            return redirect('/data_elements');
+        }
+
         $table = ExternalTable::find($id);
         $table['name'] = $request['name'];
+        $table['creator_id'] = $request['creator_id'];
         $table->update();
 
         session()->put('alerts', [

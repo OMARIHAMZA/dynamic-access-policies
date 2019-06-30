@@ -303,7 +303,7 @@
     })
 </script>
 <script>
-    function Modal(id, title = "", description = null, template = null, templateUrl = null, actions = [], doneMessage = 'done', size = 'sm') {
+    function Modal(id, title = "", description = null, template = null, templateUrl = null, actions = [], doneMessage = 'done', size = 'md') {
         console.log('Modal ' + id + ' is used');
 
         $(id + ' #title').text(title);
@@ -311,7 +311,7 @@
         if (size === 'lg') {
             $(`${id} .modal-dialog`).removeClass('modal-sm');
             $(`${id} .modal-dialog`).addClass('modal-lg');
-        } else {
+        } else if (size === 'sm') {
             $(`${id} .modal-dialog`).removeClass('modal-lg');
             $(`${id} .modal-dialog`).addClass('modal-sm');
         }
@@ -328,7 +328,13 @@
 
         $(id + ' #footer').html('');
         actions.forEach(e => {
-            $(id + ' #footer').append('<a href="' + e.href + '" class="btn btn-dark">' + e.text + '</a>');
+            if (e.button) {
+                $(id + ' #footer').append('<button onclick="' + e.click + '" class="btn btn-dark">' + e.text + '</button>');
+
+            } else {
+
+                $(id + ' #footer').append('<a href="' + e.href + '" class="btn btn-dark">' + e.text + '</a>');
+            }
         });
 
         $(id + ' #footer').append(`<button  id="done" type="button" class="btn btn-custom" data-dismiss="modal">${doneMessage}</button>`);
@@ -415,6 +421,14 @@
             json[L0[i].text] = values;
         }
         return json;
+    }
+</script>
+<script>
+    function fillHiddenElement(HIDDEN, value1, DROPDOWN, value2) {
+
+        document.getElementById(HIDDEN).value = value1;
+        document.getElementById(DROPDOWN).innerText = value2;
+
     }
 </script>
 </body>
