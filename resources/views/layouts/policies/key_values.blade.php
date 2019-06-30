@@ -1,11 +1,11 @@
 <div class="card">
     <div class="card-header card-header-tabs card-header-primary">
-       @if (!isset($view_only))
-            <a class="float-right btn btn-primary" title="New Item" data-toggle="modal"
+        @if (!isset($view_only))
+            <a href="" class="float-right btn btn-primary btn-sm" title="New Item" data-toggle="modal"
                data-backdrop="static" data-keyboard="false" data-target="#kv_dialog_{{$title}}">
-                <i class="fa fa-plus-circle text-light"></i>
+                <i class="fa fa-plus-circle text-light"></i> Add Item
             </a>
-       @endif
+        @endif
         <h4 class="card-title">{{$title}}</h4>
 
     </div>
@@ -47,9 +47,7 @@
             @endif
 
             {{--Content will be added by the key_values_dialog--}}
-
             </tbody>
-
         </table>
     </div>
 </div>

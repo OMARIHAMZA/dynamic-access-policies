@@ -6,7 +6,7 @@
             <h4 class="card-title">{{$requests->count()}} Total access requests</h4>
         </div>
         <div class="card-body">
-            <table id="key-table" class="table table-bordered">
+            <table class="table table-shopping data-table">
                 <thead>
                 <tr>
                     <th>#</th>

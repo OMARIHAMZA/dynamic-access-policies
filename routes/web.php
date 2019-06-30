@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -83,6 +84,21 @@ Route::post('/permissions/{id}', 'PermissionController@update');
 
 Route::get('/permissions/{id}/delete', 'PermissionController@destroy');
 
+//External Tables
+Route::get('/data_elements', 'ExternalTableController@index');
+
+Route::post('/data_elements', 'ExternalTableController@store');
+
+Route::get('/data_elements/create', 'ExternalTableController@create');
+
+Route::get('/data_elements/{id}', 'ExternalTableController@show');
+
+Route::get('/data_elements/{id}/edit', 'ExternalTableController@edit');
+
+Route::post('/data_elements/{id}', 'ExternalTableController@update');
+
+Route::get('/data_elements/{id}/delete', 'ExternalTableController@destroy');
+
 //Rules
 Route::get('/rules', 'RuleController@index');
 
@@ -97,3 +113,7 @@ Route::get('/access_denied', 'api\AccessPermissionRequest@permissionDenied')->na
 
 //Access Requests History
 Route::get('/history', 'AccessRequestsHistoryController@index');
+
+//Templates makes
+Route::get('/templates/{name}', 'TemplatesController@index');
+

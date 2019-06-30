@@ -20,6 +20,8 @@
     <link href="{{ asset('css/material-dashboard.css?v=2.1.1') }}" rel="stylesheet"/>
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet"/>
 
+    <link href="{{ asset('css/jstree/themes/default/style.min.css') }}" rel="stylesheet"/>
+
     <script src="{{ asset('js/core/jquery.min.js') }}"></script>
 
     <script src="{{ asset('js/plugins/jquery.bootstrap-wizard.js') }}"></script>
@@ -97,19 +99,15 @@
 <script src="{{ asset('js/plugins/bootstrap-notify.js') }}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('js/material-dashboard.js?v=2.1.1')}}" type="text/javascript"></script>
+{{-- JS Tree --}}
+<script src="{{ asset('js/jstree.min.js')}}" type="text/javascript"></script>
 
-{{--<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>--}}
-{{--<script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>--}}
-
-{{--<script src="{{ asset('js/dataTables.keyTable.min.js')}}" type="text/javascript"></script>--}}
-
-
-<script>$('.custom-tokens').tokenize2({
+<script>
+    $('.custom-tokens').tokenize2({
         tokensAllowCustom: true,
         delimiter: [',', '-']
     });
 </script>
-
 <script>
     $(document).ready(function () {
         $().ready(function () {
@@ -305,12 +303,24 @@
     })
 </script>
 <script>
-    function Modal(id, title = "", description = null, template = null, templateUrl = null, actions = [], doneMessage = 'done') {
+    function Modal(id, title = "", description = null, template = null, templateUrl = null, actions = [], doneMessage = 'done', size = 'sm') {
         console.log('Modal ' + id + ' is used');
 
         $(id + ' #title').text(title);
 
-        if (template !== null) {
+        if (size === 'lg') {
+            $(`${id} .modal-dialog`).removeClass('modal-sm');
+            $(`${id} .modal-dialog`).addClass('modal-lg');
+        } else {
+            $(`${id} .modal-dialog`).removeClass('modal-lg');
+            $(`${id} .modal-dialog`).addClass('modal-sm');
+        }
+
+        if (templateUrl !== null) {
+            console.log(`http://localhost:5555/${templateUrl}`);
+
+            $(id + ' #content').load(`http://localhost:5555/${templateUrl}`);
+        } else if (template !== null) {
             $(id + ' #content').html(template);
         } else {
             $(id + ' #content').text(description);
@@ -321,7 +331,7 @@
             $(id + ' #footer').append('<a href="' + e.href + '" class="btn btn-dark">' + e.text + '</a>');
         });
 
-        $(id + ' #footer').append('<button  id="done" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>');
+        $(id + ' #footer').append(`<button  id="done" type="button" class="btn btn-custom" data-dismiss="modal">${doneMessage}</button>`);
 
         $(id).modal('show');
     }
@@ -350,11 +360,43 @@
         })
     }
 </script>
-
 <script>
-    $('#key-table').DataTable();
+    $('.data-table').DataTable();
 </script>
+<script>
+    function convertJSON2JSTreeJSON(object) {
+        let json = {
+            'text': 'Rules',
+            'state': {
+                'opened': true,
+                'selected': true
+            },
+            'children': []
+        };
 
+        for (const key in object) {
+            if (object.hasOwnProperty(key)) {
+                let obj = {
+                    'text': key,
+                    'state': {
+                        'opened': true,
+                        //'selected': true
+                    },
+                    'children': []
+                };
+
+                let value = object[key];
+                value.forEach(v => {
+                    obj.children.push({'text': v})
+                });
+
+                json.children.push(obj);
+            }
+        }
+
+        return json;
+    }
+</script>
 </body>
 
 </html>

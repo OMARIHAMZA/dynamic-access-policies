@@ -30,11 +30,15 @@ class Navigations
             array_push($navigations, 'permissions');
         }
 
+        if (CanUseService::isAuthorized('can_viewExternalTables')) {
+            array_push($navigations, 'data_elements');
+        }
+
         if (CanUseService::isAuthorized('can_viewPolicies')) {
             array_push($navigations, 'policies');
         }
 
-        if (CanUseService::isAuthorized('can_viewHistory')){
+        if (CanUseService::isAuthorized('can_viewHistory')) {
             array_push($navigations, 'history');
         }
 

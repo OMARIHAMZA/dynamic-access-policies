@@ -9,13 +9,13 @@
             <h4>{{$policies->count()}} Total policies</h4>
         </div>
         <div class="card-body">
-            <table class="table" style="table-layout: fixed">
+            <table class="table table-bordered table-striped data-table">
                 <thead>
                 <tr>
                     <th class="text-center">#</th>
                     <th>Title</th>
                     <th>Created By</th>
-                    <th class="text-right">Actions</th>
+                    <th class="text-right">&nbsp;</th>
                 </tr>
                 </thead>
 
@@ -28,9 +28,14 @@
                         <td class="td-actions text-right">
 
                             <button type="button" rel="tooltip" class="btn btn-info"
-                                    onclick="document.location.href = '/policies/{{$policy->policy_id}}'">
+                                    onclick="Modal('#show', 'Policy Details', null, null, `templates/policies.show?table=policies&PK=policy_id&ID={{$policy->policy_id}}`, [], doneMessage = 'Done', size = 'lg')">
                                 <i class="material-icons">remove_red_eye</i>
                             </button>
+
+                            {{--<button type="button" rel="tooltip" class="btn btn-info"--}}
+                            {{--onclick="document.location.href = '/policies/{{$policy->policy_id}}'">--}}
+                            {{--<i class="material-icons">remove_red_eye</i>--}}
+                            {{--</button>--}}
 
                             <button type="button" rel="tooltip" class="btn btn-success"
                                     onclick="document.location.href = '/policies/{{$policy->policy_id}}/edit'">
@@ -50,6 +55,7 @@
                 </tbody>
             </table>
             @include("layouts.dialog", ['id' => 'delete'])
+            @include("layouts.dialog", ['id' => 'show'])
         </div>
     </div>
 

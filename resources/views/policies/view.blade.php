@@ -2,94 +2,68 @@
 
 @section('content')
 
-    <h3>{{$policy -> name}}</h3>
+    <style>
+        i.jstree-icon.jstree-themeicon {
+            background-image: url('');
+        }
+    </style>
 
-    <h4>Data Element: {{\App\ExternalTable::find($policy -> data_element)["name"]}}</h4>
+    <div class="card">
+        <div class="card-header card-header-tabs card-header-success">
+            <h4>Policy Details</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-group list-group-item-action">
+                <label for="name" class="badge badge-pill badge-success">Name</label>
+                <p id="name"> {{$policy->name}}</p>
+            </div>
 
-    <br>
-    <div class="card-body">
+            <div class="form-group list-group-item-action">
+                <label for="data_element" class="badge badge-pill badge-success">Data Element</label>
+                <p id="data_element"> {{$policy->data_element}}</p>
+            </div>
 
-        @include('layouts.policies.key_values', [
+            <div class="form-group list-group-item-action">
+                <label for="rules" class="badge badge-pill badge-success">Rules</label>
+                <div id="rules"></div>
+            </div>
 
-            'title' => 'Rules',
-            'rules' => $policy -> rules,
-            'view_only' => true
-
-        ])
-
-        <br>
-        <br>
-        @include('layouts.policies.key_values', [
-
-            'title' => 'Emergency Rules',
-            'rules' => $policy -> emergency_rules,
-            'view_only' => true
-
-        ])
-
-
+            <div class="form-group list-group-item-action">
+                <label for="emergency_rules" class="badge badge-pill badge-success">Emergency Rules</label>
+                <div id="emergency_rules"></div>
+            </div>
+        </div>
     </div>
 
-    <input type="hidden" name="rules" id="_rules" value="{{$policy -> rules}}">
-    <input type="hidden" name="emergency_rules" id="_emergency_rules" value="{{$policy -> emergency_rules}}">
-    <input type="hidden" name="data_element" id="_table_id" value="{{$policy->data_element}}">
-    <input type="hidden" name="policy_id" value="{{$policy->policy_id}}">
-
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-
-
     <script>
-
-        function setSelection(id, name) {
-
-            document.getElementById('_table_id').value = id;
-            document.getElementById('dataElementName').innerText = name;
-
-        }
-
-
-        function parseRules() {
-
-            let rules = {};
-            // Get Rules
-            let rulesTable = document.getElementById('Rules_table');
-            for (let i = 1; i < rulesTable.rows.length; i++) {
-                let currentRow = rulesTable.rows[i];
-                rules[currentRow.cells[1].innerText] = currentRow.cells[2].innerText;
-            }
-
-
-            let emergencyRules = {};
-            // Get Rules
-            let emergencyRulesTable = document.getElementById('EmergencyRules_table');
-            for (let i = 1; i < emergencyRulesTable.rows.length; i++) {
-                let currentRow = emergencyRulesTable.rows[i];
-                emergencyRules[currentRow.cells[1].innerText] = currentRow.cells[2].innerText;
-            }
-
-            document.getElementById('_rules').value = JSON.stringify(rules);
-            document.getElementById('_emergency_rules').value = JSON.stringify(emergencyRules);
-
-        }
-
-
-        {{--DON'T DELETE THIS FUCNTION, IT IS BEING USED BY THE KEYS_VALUES LAYOUT--}}
-        function deleteRow(currentElement, title) {
-            let parentRowIndex = currentElement.parentNode.parentNode.rowIndex;
-            document.getElementById(`${title}_table`).deleteRow(parentRowIndex);
-            parseRules();
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#rules').jstree({
+                "core": {
+                    "animation": 0,
+                    "check_callback": true,
+                    "themes": {"stripes": true},
+                    'data': [
+                        convertJSON2JSTreeJSON(<?= $policy->rules ?>)
+                    ]
+                },
+                // "plugins": [
+                //     "contextmenu"
+                // ]
+            });
+            $('#emergency_rules').jstree({
+                "core": {
+                    "animation": 0,
+                    "check_callback": true,
+                    "themes": {"stripes": true},
+                    'data': [
+                        convertJSON2JSTreeJSON(<?= $policy->emergency_rules ?>)
+                    ]
+                },
+                // "plugins": [
+                //     "contextmenu"
+                // ]
+            });
+        })
 
     </script>
-
 @stop

@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('smart-multiselect', require('./components/SmartMultiselect.vue').default);
+Vue.component('modal', require('./components/modal.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,4 +31,7 @@ Vue.component('smart-multiselect', require('./components/SmartMultiselect.vue').
 
 const app = new Vue({
     el: '#app',
+    data: {
+        showModal: false
+    }
 });

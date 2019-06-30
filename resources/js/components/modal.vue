@@ -1,23 +1,29 @@
 <template>
-    <div id="modal{{id}}" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="dialog">
-            <div class="modal-content">
+    <div class="modal-mask">
+        <div class="modal-wrapper">
+            <div class="modal-container">
+
                 <div class="modal-header">
-                    <h5 class="modal-title">{{title}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <slot name="header">
+                        default header
+                    </slot>
                 </div>
+
                 <div class="modal-body">
-                    <p>{{$body}}</p>
+                    <slot name="body">
+                        default body
+                    </slot>
                 </div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" onclick="document.location.href= '{{$href}}'">Delete
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <slot name="footer">
+                        default footer
+                        <button class="modal-default-button" @click="$emit('close')">
+                            OK
+                        </button>
+                    </slot>
                 </div>
             </div>
-
         </div>
     </div>
 </template>

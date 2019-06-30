@@ -1687,7 +1687,7 @@ function forEach(obj, fn) {
  *
  * ```js
  * var result = merge({foo: 123}, {foo: 456});
- * console.history(result.foo); // outputs 456
+ * console.log(result.foo); // outputs 456
  * ```
  *
  * @param {Object} obj1 Object to merge
@@ -1835,6 +1835,58 @@ __webpack_require__.r(__webpack_exports__);
                         // {name: 'Phoenix', language: 'Elixir'}
                     ]
                 };
+            }
+        });
+
+        /***/
+    }),
+
+    /***/
+    "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal.vue?vue&type=script&lang=js&":
+    /*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modal.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+    /*! exports provided: default */
+    /***/ (function (module, __webpack_exports__, __webpack_require__) {
+
+        "use strict";
+        __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+        /* harmony default export */
+        __webpack_exports__["default"] = ({
+            name: "modal",
+            props: {
+                id: Number,
+                title: String
             }
         });
 
@@ -6394,7 +6446,8 @@ __webpack_require__.r(__webpack_exports__);
         }
 
 
-        /***/ }),
+        /***/
+    }),
 
 /***/ "./node_modules/is-buffer/index.js":
 /*!*****************************************!*\
@@ -23951,10 +24004,10 @@ return jQuery;
      * var array = [1];
      * var other = _.concat(array, 2, [3], [[4]]);
      *
-     * console.history(other);
+     * console.log(other);
      * // => [1, 2, 3, [4]]
      *
-     * console.history(array);
+     * console.log(array);
      * // => [1]
      */
     function concat() {
@@ -24239,7 +24292,7 @@ return jQuery;
      * var array = [1, 2, 3];
      *
      * _.fill(array, 'a');
-     * console.history(array);
+     * console.log(array);
      * // => ['a', 'a', 'a']
      *
      * _.fill(Array(3), 2);
@@ -24741,7 +24794,7 @@ return jQuery;
      * var array = ['a', 'b', 'c', 'a', 'b', 'c'];
      *
      * _.pull(array, 'a', 'c');
-     * console.history(array);
+     * console.log(array);
      * // => ['b', 'b']
      */
     var pull = baseRest(pullAll);
@@ -24763,7 +24816,7 @@ return jQuery;
      * var array = ['a', 'b', 'c', 'a', 'b', 'c'];
      *
      * _.pullAll(array, ['a', 'c']);
-     * console.history(array);
+     * console.log(array);
      * // => ['b', 'b']
      */
     function pullAll(array, values) {
@@ -24792,7 +24845,7 @@ return jQuery;
      * var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
      *
      * _.pullAllBy(array, [{ 'x': 1 }, { 'x': 3 }], 'x');
-     * console.history(array);
+     * console.log(array);
      * // => [{ 'x': 2 }]
      */
     function pullAllBy(array, values, iteratee) {
@@ -24821,7 +24874,7 @@ return jQuery;
      * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
      *
      * _.pullAllWith(array, [{ 'x': 3, 'y': 4 }], _.isEqual);
-     * console.history(array);
+     * console.log(array);
      * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
      */
     function pullAllWith(array, values, comparator) {
@@ -24848,10 +24901,10 @@ return jQuery;
      * var array = ['a', 'b', 'c', 'd'];
      * var pulled = _.pullAt(array, [1, 3]);
      *
-     * console.history(array);
+     * console.log(array);
      * // => ['a', 'c']
      *
-     * console.history(pulled);
+     * console.log(pulled);
      * // => ['b', 'd']
      */
     var pullAt = flatRest(function(array, indexes) {
@@ -24887,10 +24940,10 @@ return jQuery;
      *   return n % 2 == 0;
      * });
      *
-     * console.history(array);
+     * console.log(array);
      * // => [1, 3]
      *
-     * console.history(evens);
+     * console.log(evens);
      * // => [2, 4]
      */
     function remove(array, predicate) {
@@ -24934,7 +24987,7 @@ return jQuery;
      * _.reverse(array);
      * // => [3, 2, 1]
      *
-     * console.history(array);
+     * console.log(array);
      * // => [3, 2, 1]
      */
     function reverse(array) {
@@ -25928,17 +25981,17 @@ return jQuery;
      * var array = [1, 2];
      * var wrapped = _(array).push(3);
      *
-     * console.history(array);
+     * console.log(array);
      * // => [1, 2]
      *
      * wrapped = wrapped.commit();
-     * console.history(array);
+     * console.log(array);
      * // => [1, 2, 3]
      *
      * wrapped.last();
      * // => 3
      *
-     * console.history(array);
+     * console.log(array);
      * // => [1, 2, 3]
      */
     function wrapperCommit() {
@@ -26060,7 +26113,7 @@ return jQuery;
      * _(array).reverse().value()
      * // => [3, 2, 1]
      *
-     * console.history(array);
+     * console.log(array);
      * // => [3, 2, 1]
      */
     function wrapperReverse() {
@@ -26377,12 +26430,12 @@ return jQuery;
      * @example
      *
      * _.forEach([1, 2], function(value) {
-     *   console.history(value);
+     *   console.log(value);
      * });
      * // => Logs `1` then `2`.
      *
      * _.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
-     *   console.history(key);
+     *   console.log(key);
      * });
      * // => Logs 'a' then 'b' (iteration order is not guaranteed).
      */
@@ -26407,7 +26460,7 @@ return jQuery;
      * @example
      *
      * _.forEachRight([1, 2], function(value) {
-     *   console.history(value);
+     *   console.log(value);
      * });
      * // => Logs `2` then `1`.
      */
@@ -27002,7 +27055,7 @@ return jQuery;
      * @example
      *
      * _.defer(function(stamp) {
-     *   console.history(_.now() - stamp);
+     *   console.log(_.now() - stamp);
      * }, _.now());
      * // => Logs the number of milliseconds it took for the deferred invocation.
      */
@@ -27028,7 +27081,7 @@ return jQuery;
      * var saves = ['profile', 'settings'];
      *
      * var done = _.after(saves.length, function() {
-     *   console.history('done saving!');
+     *   console.log('done saving!');
      * });
      *
      * _.forEach(saves, function(type) {
@@ -27488,7 +27541,7 @@ return jQuery;
      * @example
      *
      * _.defer(function(text) {
-     *   console.history(text);
+     *   console.log(text);
      * }, 'deferred');
      * // => Logs 'deferred' after one millisecond.
      */
@@ -27511,7 +27564,7 @@ return jQuery;
      * @example
      *
      * _.delay(function(text) {
-     *   console.history(text);
+     *   console.log(text);
      * }, 1000, 'later');
      * // => Logs 'later' after one second.
      */
@@ -28037,7 +28090,7 @@ return jQuery;
      * // => []
      *
      * var array = [1, 2, 3];
-     * console.history(_.castArray(array) === array);
+     * console.log(_.castArray(array) === array);
      * // => true
      */
     function castArray() {
@@ -28071,7 +28124,7 @@ return jQuery;
      * var objects = [{ 'a': 1 }, { 'b': 2 }];
      *
      * var shallow = _.clone(objects);
-     * console.history(shallow[0] === objects[0]);
+     * console.log(shallow[0] === objects[0]);
      * // => true
      */
     function clone(value) {
@@ -28102,11 +28155,11 @@ return jQuery;
      *
      * var el = _.cloneWith(document.body, customizer);
      *
-     * console.history(el === document.body);
+     * console.log(el === document.body);
      * // => false
-     * console.history(el.nodeName);
+     * console.log(el.nodeName);
      * // => 'BODY'
-     * console.history(el.childNodes.length);
+     * console.log(el.childNodes.length);
      * // => 0
      */
     function cloneWith(value, customizer) {
@@ -28129,7 +28182,7 @@ return jQuery;
      * var objects = [{ 'a': 1 }, { 'b': 2 }];
      *
      * var deep = _.cloneDeep(objects);
-     * console.history(deep[0] === objects[0]);
+     * console.log(deep[0] === objects[0]);
      * // => false
      */
     function cloneDeep(value) {
@@ -28157,11 +28210,11 @@ return jQuery;
      *
      * var el = _.cloneDeepWith(document.body, customizer);
      *
-     * console.history(el === document.body);
+     * console.log(el === document.body);
      * // => false
-     * console.history(el.nodeName);
+     * console.log(el.nodeName);
      * // => 'BODY'
-     * console.history(el.childNodes.length);
+     * console.log(el.childNodes.length);
      * // => 20
      */
     function cloneDeepWith(value, customizer) {
@@ -29988,7 +30041,7 @@ return jQuery;
      * Foo.prototype.c = 3;
      *
      * _.forIn(new Foo, function(value, key) {
-     *   console.history(key);
+     *   console.log(key);
      * });
      * // => Logs 'a', 'b', then 'c' (iteration order is not guaranteed).
      */
@@ -30020,7 +30073,7 @@ return jQuery;
      * Foo.prototype.c = 3;
      *
      * _.forInRight(new Foo, function(value, key) {
-     *   console.history(key);
+     *   console.log(key);
      * });
      * // => Logs 'c', 'b', then 'a' assuming `_.forIn` logs 'a', 'b', then 'c'.
      */
@@ -30054,7 +30107,7 @@ return jQuery;
      * Foo.prototype.c = 3;
      *
      * _.forOwn(new Foo, function(value, key) {
-     *   console.history(key);
+     *   console.log(key);
      * });
      * // => Logs 'a' then 'b' (iteration order is not guaranteed).
      */
@@ -30084,7 +30137,7 @@ return jQuery;
      * Foo.prototype.c = 3;
      *
      * _.forOwnRight(new Foo, function(value, key) {
-     *   console.history(key);
+     *   console.log(key);
      * });
      * // => Logs 'b' then 'a' assuming `_.forOwn` logs 'a' then 'b'.
      */
@@ -30711,11 +30764,11 @@ return jQuery;
      * var object = { 'a': [{ 'b': { 'c': 3 } }] };
      *
      * _.set(object, 'a[0].b.c', 4);
-     * console.history(object.a[0].b.c);
+     * console.log(object.a[0].b.c);
      * // => 4
      *
      * _.set(object, ['x', '0', 'y', 'z'], 5);
-     * console.history(object.x[0].y.z);
+     * console.log(object.x[0].y.z);
      * // => 5
      */
     function set(object, path, value) {
@@ -30874,13 +30927,13 @@ return jQuery;
      * _.unset(object, 'a[0].b.c');
      * // => true
      *
-     * console.history(object);
+     * console.log(object);
      * // => { 'a': [{ 'b': {} }] };
      *
      * _.unset(object, ['a', '0', 'b', 'c']);
      * // => true
      *
-     * console.history(object);
+     * console.log(object);
      * // => { 'a': [{ 'b': {} }] };
      */
     function unset(object, path) {
@@ -30907,11 +30960,11 @@ return jQuery;
      * var object = { 'a': [{ 'b': { 'c': 3 } }] };
      *
      * _.update(object, 'a[0].b.c', function(n) { return n * n; });
-     * console.history(object.a[0].b.c);
+     * console.log(object.a[0].b.c);
      * // => 9
      *
      * _.update(object, 'x[0].y.z', function(n) { return n ? n + 1 : 0; });
-     * console.history(object.x[0].y.z);
+     * console.log(object.x[0].y.z);
      * // => 0
      */
     function update(object, path, updater) {
@@ -32318,7 +32371,7 @@ return jQuery;
      * var view = {
      *   'label': 'docs',
      *   'click': function() {
-     *     console.history('clicked ' + this.label);
+     *     console.log('clicked ' + this.label);
      *   }
      * };
      *
@@ -32426,10 +32479,10 @@ return jQuery;
      *
      * var objects = _.times(2, _.constant({ 'a': 1 }));
      *
-     * console.history(objects);
+     * console.log(objects);
      * // => [{ 'a': 1 }, { 'a': 1 }]
      *
-     * console.history(objects[0] === objects[1]);
+     * console.log(objects[0] === objects[1]);
      * // => true
      */
     function constant(value) {
@@ -32522,7 +32575,7 @@ return jQuery;
      *
      * var object = { 'a': 1 };
      *
-     * console.history(_.identity(object) === object);
+     * console.log(_.identity(object) === object);
      * // => true
      */
     function identity(value) {
@@ -33049,10 +33102,10 @@ return jQuery;
      *
      * var arrays = _.times(2, _.stubArray);
      *
-     * console.history(arrays);
+     * console.log(arrays);
      * // => [[], []]
      *
-     * console.history(arrays[0] === arrays[1]);
+     * console.log(arrays[0] === arrays[1]);
      * // => false
      */
     function stubArray() {
@@ -33088,10 +33141,10 @@ return jQuery;
      *
      * var objects = _.times(2, _.stubObject);
      *
-     * console.history(objects);
+     * console.log(objects);
      * // => [{}, {}]
      *
-     * console.history(objects[0] === objects[1]);
+     * console.log(objects[0] === objects[1]);
      * // => false
      */
     function stubObject() {
@@ -37910,7 +37963,90 @@ render._withStripped = true
         render._withStripped = true
 
 
-        /***/ }),
+        /***/
+    }),
+
+    /***/
+    "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal.vue?vue&type=template&id=478d961c&scoped=true&":
+    /*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modal.vue?vue&type=template&id=478d961c&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************/
+    /*! exports provided: render, staticRenderFns */
+    /***/ (function (module, __webpack_exports__, __webpack_require__) {
+
+        "use strict";
+        __webpack_require__.r(__webpack_exports__);
+        /* harmony export (binding) */
+        __webpack_require__.d(__webpack_exports__, "render", function () {
+            return render;
+        });
+        /* harmony export (binding) */
+        __webpack_require__.d(__webpack_exports__, "staticRenderFns", function () {
+            return staticRenderFns;
+        });
+        var render = function () {
+            var _vm = this
+            var _h = _vm.$createElement
+            var _c = _vm._self._c || _h
+            return _c("div", {staticClass: "modal-mask"}, [
+                _c("div", {staticClass: "modal-wrapper"}, [
+                    _c("div", {staticClass: "modal-container"}, [
+                        _c(
+                            "div",
+                            {staticClass: "modal-header"},
+                            [
+                                _vm._t("header", [
+                                    _vm._v("\n                    default header\n                ")
+                                ])
+                            ],
+                            2
+                        ),
+                        _vm._v(" "),
+                        _c(
+                            "div",
+                            {staticClass: "modal-body"},
+                            [
+                                _vm._t("body", [
+                                    _vm._v("\n                    default body\n                ")
+                                ])
+                            ],
+                            2
+                        ),
+                        _vm._v(" "),
+                        _c(
+                            "div",
+                            {staticClass: "modal-footer"},
+                            [
+                                _vm._t("footer", [
+                                    _vm._v(
+                                        "\n                    default footer\n                    "
+                                    ),
+                                    _c(
+                                        "button",
+                                        {
+                                            staticClass: "modal-default-button",
+                                            on: {
+                                                click: function ($event) {
+                                                    return _vm.$emit("close")
+                                                }
+                                            }
+                                        },
+                                        [_vm._v("\n                        OK\n                    ")]
+                                    )
+                                ])
+                            ],
+                            2
+                        )
+                    ])
+                ])
+            ])
+        }
+        var staticRenderFns = []
+        render._withStripped = true
+
+
+        /***/
+    }),
 
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
@@ -39652,7 +39788,8 @@ function normalizeComponent (
             }])
         });
 
-        /***/ }),
+        /***/
+    }),
 
 /***/ "./node_modules/vue/dist/vue.common.dev.js":
 /*!*************************************************!*\
@@ -41539,7 +41676,7 @@ function globalHandleError (err, vm, info) {
       return config.errorHandler.call(null, err, vm, info)
     } catch (e) {
       // if the user intentionally throws the original error in the handler,
-        // do not history it twice
+        // do not log it twice
       if (e !== err) {
         logError(e, null, 'config.errorHandler');
       }
@@ -49420,7 +49557,7 @@ function parse (
       if (isForbiddenTag(element) && !isServerRendering()) {
         element.forbidden = true;
         warn$2(
-          'Templates should only be responsible for mapping the state to the ' +
+            'TemplatesController should only be responsible for mapping the state to the ' +
           'UI. Avoid placing tags with side-effects in your templates, such as ' +
           "<" + tag + ">" + ', as they will not be parsed.',
           { start: element.start }
@@ -51710,6 +51847,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
         Vue.component('smart-multiselect', __webpack_require__(/*! ./components/SmartMultiselect.vue */ "./resources/js/components/SmartMultiselect.vue")["default"]);
+        Vue.component('modal', __webpack_require__(/*! ./components/modal.vue */ "./resources/js/components/modal.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51717,7 +51855,10 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+    el: '#app',
+    data: {
+        showModal: false
+    }
 });
 
 /***/ }),
@@ -51807,7 +51948,6 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-
 )
 
 /* hot reload */
@@ -51827,7 +51967,8 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+        /* empty/unused harmony star reexport */ /* harmony default export */
+        __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -51930,6 +52071,91 @@ __webpack_require__.r(__webpack_exports__);
         /* harmony reexport (safe) */
         __webpack_require__.d(__webpack_exports__, "staticRenderFns", function () {
             return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SmartMultiselect_vue_vue_type_template_id_ecd9fb52_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"];
+        });
+
+
+        /***/
+    }),
+
+    /***/
+    "./resources/js/components/modal.vue":
+    /*!*******************************************!*\
+  !*** ./resources/js/components/modal.vue ***!
+  \*******************************************/
+    /*! exports provided: default */
+    /***/ (function (module, __webpack_exports__, __webpack_require__) {
+
+        "use strict";
+        __webpack_require__.r(__webpack_exports__);
+        /* harmony import */
+        var _modal_vue_vue_type_template_id_478d961c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal.vue?vue&type=template&id=478d961c&scoped=true& */ "./resources/js/components/modal.vue?vue&type=template&id=478d961c&scoped=true&");
+        /* harmony import */
+        var _modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal.vue?vue&type=script&lang=js& */ "./resources/js/components/modal.vue?vue&type=script&lang=js&");
+        /* empty/unused harmony star reexport *//* harmony import */
+        var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+        /* normalize component */
+
+        var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+            _modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+            _modal_vue_vue_type_template_id_478d961c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+            _modal_vue_vue_type_template_id_478d961c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+            false,
+            null,
+            "478d961c",
+            null
+        )
+
+        /* hot reload */
+        if (false) {
+            var api;
+        }
+        component.options.__file = "resources/js/components/modal.vue"
+        /* harmony default export */
+        __webpack_exports__["default"] = (component.exports);
+
+        /***/
+    }),
+
+    /***/
+    "./resources/js/components/modal.vue?vue&type=script&lang=js&":
+    /*!********************************************************************!*\
+  !*** ./resources/js/components/modal.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+    /*! exports provided: default */
+    /***/ (function (module, __webpack_exports__, __webpack_require__) {
+
+        "use strict";
+        __webpack_require__.r(__webpack_exports__);
+        /* harmony import */
+        var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./modal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal.vue?vue&type=script&lang=js&");
+        /* empty/unused harmony star reexport */ /* harmony default export */
+        __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+        /***/
+    }),
+
+    /***/
+    "./resources/js/components/modal.vue?vue&type=template&id=478d961c&scoped=true&":
+    /*!**************************************************************************************!*\
+  !*** ./resources/js/components/modal.vue?vue&type=template&id=478d961c&scoped=true& ***!
+  \**************************************************************************************/
+    /*! exports provided: render, staticRenderFns */
+    /***/ (function (module, __webpack_exports__, __webpack_require__) {
+
+        "use strict";
+        __webpack_require__.r(__webpack_exports__);
+        /* harmony import */
+        var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_vue_vue_type_template_id_478d961c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./modal.vue?vue&type=template&id=478d961c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal.vue?vue&type=template&id=478d961c&scoped=true&");
+        /* harmony reexport (safe) */
+        __webpack_require__.d(__webpack_exports__, "render", function () {
+            return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_vue_vue_type_template_id_478d961c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"];
+        });
+
+        /* harmony reexport (safe) */
+        __webpack_require__.d(__webpack_exports__, "staticRenderFns", function () {
+            return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_modal_vue_vue_type_template_id_478d961c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"];
         });
 
 

@@ -21,27 +21,28 @@
 
                 <tbody>
                 @foreach($permissions as $index=>$permission)
-                    <td class="text-center">{{ $index+1 }}</td>
-                    <td>{{$permission['title']}}</td>
-                    <td>{{$permission['description']}}</td>
-                    <td class="td-actions text-right">
-                        <button type="button" class="btn btn-default"
-                                title="Show"
-                                onclick="document.location.href = 'permissions/{{$permission['permission_id']}}'">
-                            <i class="fa fa-expand"></i>
-                        </button>
-                        <button type="button" class="btn btn-default"
-                                title="Edit"
-                                onclick="document.location.href = 'permissions/{{$permission['permission_id']}}/edit'">
-                            <i class="fa fa-pen"></i>
-                        </button>
-                        <button type="button"
-                                rel="tooltip"
-                                class="btn btn-dark"
-                                onclick="Modal('#delete', 'Delete Confirmation', 'Are you sure you want to delete permission \'{{$permission["title"]}}\'?', null, null, [{text:'Delete', href:'/permissions/{{$permission['permission_id']}}/delete'}], doneMessage = 'Cancel')">
-                            <i class="material-icons">close</i>
-                        </button>
-                    </td>
+                    <tr>
+                        <td class="text-center">{{ $index+1 }}</td>
+                        <td>{{$permission['title']}}</td>
+                        <td>{{$permission['description']}}</td>
+                        <td class="td-actions text-right">
+                            <button type="button" class="btn btn-default"
+                                    title="Show"
+                                    onclick="document.location.href = 'permissions/{{$permission['permission_id']}}'">
+                                <i class="fa fa-expand"></i>
+                            </button>
+                            <button type="button" class="btn btn-default"
+                                    title="Edit"
+                                    onclick="document.location.href = 'permissions/{{$permission['permission_id']}}/edit'">
+                                <i class="fa fa-pen"></i>
+                            </button>
+                            <button type="button"
+                                    rel="tooltip"
+                                    class="btn btn-dark"
+                                    onclick="Modal('#delete', 'Delete Confirmation', 'Are you sure you want to delete permission \'{{$permission["title"]}}\'?', null, null, [{text:'Delete', href:'/permissions/{{$permission['permission_id']}}/delete'}], doneMessage = 'Cancel')">
+                                <i class="material-icons">close</i>
+                            </button>
+                        </td>
                     </tr>
                 @endforeach
 

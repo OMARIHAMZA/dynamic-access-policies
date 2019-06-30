@@ -25,6 +25,9 @@
 
                 </div>
 
+                <div class="errors mt-2">
+                    <span class="badge-danger" id="error"></span>
+                </div>
 
             </div>
 
@@ -52,6 +55,7 @@
 
 
         if (!key) {
+            $('#error').text('* The key is required');
             makeNotification({icon: 'error', message: 'The key is required'});
             return;
         }
@@ -60,12 +64,14 @@
         for (let i = 0; i < rows.length; i++) {
             if ($(rows[i]).children()[1].innerText === key) {
                 // alert("Rule keys must be unique");
+                $('#error').text('* Rule keys must be unique');
                 makeNotification({icon: 'error', message: 'Rule keys must be unique'});
                 return;
             }
         }
 
         if (!values) {
+            $('#error').text('* At least one value is required');
             makeNotification({icon: 'error', message: 'At least one value is required'});
             return;
         }
@@ -91,6 +97,5 @@
 
         parseRules();
     }
-
 </script>
 

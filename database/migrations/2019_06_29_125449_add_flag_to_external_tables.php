@@ -14,7 +14,7 @@ class AddFlagToExternalTables extends Migration
     public function up()
     {
         Schema::table('external_tables', function (Blueprint $table) {
-            $table->boolean('policy_defined')->nullable(false)->default(true);
+            $table->boolean('policy_defined')->nullable(false)->default(false);
         });
     }
 

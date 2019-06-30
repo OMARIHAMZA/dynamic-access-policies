@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\ExternalTable;
 use App\Policy;
-use App\PolicyPurpose;
-use App\Purpose;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +20,6 @@ class PolicyController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index()
     {
         $user = Auth::user();
@@ -35,7 +32,7 @@ class PolicyController extends Controller
         }
 
         return view('policies.index', [
-            'policies' => $policies
+            'policies' => $policies,
         ]);
 
     }
@@ -45,10 +42,11 @@ class PolicyController extends Controller
         $user = Auth::user();
 
         if ($user->roleTitle() == "admin") {
-            $external_tables = ExternalTable::where('policy_defined', false);
+            $external_tables = ExternalTable::where('policy_defined', false)->get();
         } else {
             $external_tables = $user->externalTables()->where('policy_defined', false)->get();
         }
+
 
         return view('policies/create', [
             'user_id' => $user->id,
@@ -93,9 +91,15 @@ class PolicyController extends Controller
 
     public function edit($id)
     {
-        $policy = Policy::find($id);
+        $user = Auth::user();
 
-        $external_tables = ExternalTable::all();
+        if ($user->roleTitle() == "admin") {
+            $external_tables = ExternalTable::where('policy_defined', false)->get();
+        } else {
+            $external_tables = $user->externalTables()->where('policy_defined', false)->get();
+        }
+
+        $policy = Policy::find($id);
 
         return view('policies.update', [
 
@@ -110,11 +114,13 @@ class PolicyController extends Controller
     {
 
         $request->validate([
-//              'name' => 'unique:policies'
+            'name' => 'required',
+            'data_element' => 'required|number',
+            'creator_id' => 'required|number',
         ]);
 
         $policy = Policy::find($id);
-        $policy->name = $request->request->get('name');
+        $policy->name = $request['name'];
         $policy->rules = $request->request->get('rules');
         $policy->emergency_rules = $request->request->get('emergency_rules');
         $policy->data_element = $request->request->get('data_element');
