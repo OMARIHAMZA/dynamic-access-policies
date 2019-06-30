@@ -129,7 +129,6 @@
                                             <button type="submit" class="btn btn-success">
                                                 <i class="fa fa-sign-in-alt"></i>
                                                 {{ __('Login') }}
-
                                             </button>
                                         </form>
                                     </div>
