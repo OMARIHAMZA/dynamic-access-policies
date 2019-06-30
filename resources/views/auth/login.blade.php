@@ -130,15 +130,6 @@
                                                 <i class="fa fa-sign-in-alt"></i>
                                                 {{ __('Login') }}
                                             </button>
-
-                                            <div class="text-center">
-                                                @if (Route::has('password.request'))
-                                                    <a class="btn btn-link text-success"
-                                                       href="{{ route('password.request') }}">
-                                                        {{ __('Forgot Your Password?') }}
-                                                    </a>
-                                                @endif
-                                            </div>
                                         </form>
                                     </div>
                                 </div>
