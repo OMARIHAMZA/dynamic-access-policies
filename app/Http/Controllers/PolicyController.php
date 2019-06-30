@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\ExternalTable;
 use App\Policy;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PolicyController extends Controller
 {
@@ -43,6 +46,10 @@ class PolicyController extends Controller
 
         if ($user->roleTitle() == "admin") {
             $external_tables = ExternalTable::where('policy_defined', false)->get();
+
+            $external_users = User::where([
+                'role_id' => Role::where('title', 'user')->first()->role_id
+            ])->get();
         } else {
             $external_tables = $user->externalTables()->where('policy_defined', false)->get();
         }
@@ -50,7 +57,8 @@ class PolicyController extends Controller
 
         return view('policies/create', [
             'user_id' => $user->id,
-            'external_tables' => $external_tables
+            'external_tables' => $external_tables,
+            'external_users' => $external_users
         ]);
 
     }
@@ -104,8 +112,8 @@ class PolicyController extends Controller
         return view('policies.update', [
 
             'policy' => $policy,
-            'external_tables' => $external_tables
-
+            'external_tables' => $external_tables,
+            'user_id' => $user->id
         ]);
 
     }
@@ -115,17 +123,22 @@ class PolicyController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'data_element' => 'required|number',
-            'creator_id' => 'required|number',
+            'data_element' => 'required|numeric',
+            'creator_id' => 'required|numeric',
+            'rules' => 'required|json',
+            'emergency_rules' => 'required|json',
         ]);
 
         $policy = Policy::find($id);
         $policy->name = $request['name'];
-        $policy->rules = $request->request->get('rules');
-        $policy->emergency_rules = $request->request->get('emergency_rules');
-        $policy->data_element = $request->request->get('data_element');
-        $policy->save();
+        $policy->rules = $request['rules'];
+        $policy->emergency_rules = $request['emergency_rules'];
+        $policy->data_element = $request['data_element'];
+        $policy->update();
 
+        session()->put('alerts', [
+            ["icon" => "success", "message" => "Policy updated successfully"]
+        ]);
 
         return redirect('/policies');
     }

@@ -396,6 +396,26 @@
 
         return json;
     }
+
+    function convertJSTreeJSON2JSON(object) {
+        let json = {};
+
+        L0 = object[0].children;
+
+        for (let i = 0; i < L0.length; i++) {
+
+            let L1 = L0[i].children;
+
+            let values = [];
+            for (let j = 0; j < L1.length; j++) {
+
+                values.push(L1[j].text);
+            }
+
+            json[L0[i].text] = values;
+        }
+        return json;
+    }
 </script>
 </body>
 

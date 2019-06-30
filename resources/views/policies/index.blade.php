@@ -56,6 +56,7 @@
             </table>
             @include("layouts.dialog", ['id' => 'delete'])
             @include("layouts.dialog", ['id' => 'show'])
+            @include("layouts.dialog", ['id' => 'edit'])
         </div>
     </div>
 

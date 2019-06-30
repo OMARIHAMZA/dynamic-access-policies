@@ -20,23 +20,64 @@
                     <form class="pt-4" action="/policies" method="post">
                         {{csrf_field()}}
 
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
+                        <div class="row pb-3">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                           value="{{old('name')}}">
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="btn-group">
-                            <button id="dataElementName" type="button" class="btn btn-primary">Data Element</button>
-                            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div id="data_element" class="dropdown-menu">
-                                @foreach($external_tables as $external_table)
-                                    <a class="dropdown-item"
-                                       onclick="setSelection(`{{$external_table["table_id"]}}`,`{{$external_table["name"]}}`)">{{$external_table["name"]}}</a>
-                                @endforeach
+                        <div class="row">
+                            @if (isset($external_users))
+                                <div class="col-3">
+                                    <div>
+                                        <label for="external_user">External User</label>
+                                    </div>
+
+                                    <div class="btn-group">
+                                        <button id="external_user" type="button" class="btn btn-primary">None</button>
+
+                                        <button type="button"
+                                                class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <div id="data_element" class="dropdown-menu">
+                                            @foreach($external_users as $user)
+                                                <a class="dropdown-item"
+                                                   onclick="setSelection('_creator_id', `{{$user->id}}`, 'external_user',`{{$user->name}}`)">{{$user->name}}</a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="col-3">
+                                <div>
+                                    <label for="external_user">Data Element</label>
+                                </div>
+
+                                <div class="btn-group">
+                                    <button id="dataElementName"
+                                            type="button" class="btn btn-primary">None
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div id="data_element" class="dropdown-menu">
+                                        @foreach($external_tables as $external_table)
+                                            <a class="dropdown-item"
+                                               onclick="setSelection('_table_id', `{{$external_table["table_id"]}}`, 'dataElementName',`{{$external_table["name"]}}`)">{{$external_table["name"]}}</a>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -56,7 +97,8 @@
                            ])
                         </div>
 
-                        <input type="hidden" name="creator_id" value="{{$user_id}}">
+                        <input type="hidden" name="creator_id" id="_creator_id"
+                               @if(!isset($external_users)) value="{{$user_id}}" @endif>
                         <input type="hidden" name="rules" id="_rules">
                         <input type="hidden" name="emergency_rules" id="_emergency_rules">
                         <input type="hidden" name="data_element" id="_table_id">
@@ -80,10 +122,14 @@
     </div>
 
     <script>
-        function setSelection(id, name) {
+        function setSelection(HIDDEN, value1, DROPDOWN, value2) {
 
-            document.getElementById('_table_id').value = id;
-            document.getElementById('dataElementName').innerText = name;
+            document.getElementById(HIDDEN).value = value1;
+            document.getElementById(DROPDOWN).innerText = value2;
+
+        }
+
+        function update_rows(i) {
 
         }
 
