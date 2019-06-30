@@ -5,6 +5,7 @@
         <div class="card-header card-header-tabs card-header-success">
             <a href="data_elements/create" class="float-right btn btn-success btn-sm" title="New Element">
                 <i class="fa fa-plus-circle text-light"></i> Add element
+
             </a>
             <h4 class="card-title">{{$tables->count()}} Total elements</h4>
         </div>
