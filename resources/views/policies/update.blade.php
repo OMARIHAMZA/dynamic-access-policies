@@ -61,7 +61,7 @@
                 <input type="hidden" name="emergency_rules" id="_emergency_rules"
                        value="{{$policy -> emergency_rules}}">
                 <input type="hidden" name="data_element" id="_table_id" value="{{$policy->data_element}}">
-                <input type="hidden" name="creator_id" value="{{$user_id}}">
+                <input type="hidden" name="creator_id" value="{{$policy->creator_id}}">
 
                 @if ($errors->any())
                     <div class="alert alert-danger">

@@ -17,7 +17,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-8">
-                    <form class="pt-4" action="/policies" method="post">
+                    <form class="pt-4" action="/policies" method="post" id="form">
                         {{csrf_field()}}
 
                         <div class="row pb-3">
@@ -129,33 +129,46 @@
 
         }
 
-        function update_rows(i) {
+        function prepareRules() {
 
-        }
-
-        function parseRules() {
-
+            // Prepare Rules
             let rules = {};
-            // Get Rules
-            let rulesTable = document.getElementById('Rules_table');
-            for (let i = 1; i < rulesTable.rows.length; i++) {
-                let currentRow = rulesTable.rows[i];
-                rules[currentRow.cells[1].innerText] = '[' + currentRow.cells[2].innerText + ']';
-            }
+            $('#Rules_table > tbody > tr').each(function () {
+
+                let td = $(this).children('td');
+
+                rules[td[1].innerText] = td[2].innerText.split(",");
+            });
+
+            console.log('rules', rules);
 
 
+            // Get Emergency Rules
             let emergencyRules = {};
-            // Get Rules
-            let emergencyRulesTable = document.getElementById('EmergencyRules_table');
-            for (let i = 1; i < emergencyRulesTable.rows.length; i++) {
-                let currentRow = emergencyRulesTable.rows[i];
-                emergencyRules[currentRow.cells[1].innerText] = '[' + currentRow.cells[2].innerText + ']';
-            }
+
+            $('#EmergencyRules_table > tbody > tr').each(function () {
+
+                let td = $(this).children('td');
+
+                emergencyRules[td[1].innerText] = td[2].innerText.split(",");
+            });
 
             document.getElementById('_rules').value = JSON.stringify(rules);
             document.getElementById('_emergency_rules').value = JSON.stringify(emergencyRules);
 
+            console.log('emergencyRules', emergencyRules);
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#form').submit(function (event) {
+
+                event.preventDefault();
+
+                prepareRules();
+
+                this.submit();
+            })
+        });
 
 
         {{--DON'T DELETE THIS FUCNTION, IT IS BEING USED BY THE KEYS_VALUES LAYOUT--}}

@@ -78,18 +78,18 @@
 
         let no = document.getElementById(title + "_table").rows.length;
 
-        document.getElementById(`${title}_table_body`).innerHTML +=
+        $(`#${title}_table_body`).append(
             `<tr>
-             <td class="text-center">${no}</td>
+            <td class="text-center">${no}</td>
              <td>${key}</td>
-             <td>[${values}]</td>
-             <td class="text-right">
+             <td>${values}</td>
+<td class="text-right">
                  <button type="button" class="btn btn-danger btn-fab"
                          onclick="deleteRow(this, '${title}')">
                      <i class="material-icons">close</i>
                  </button>
              </td>
-             </tr>`;
+            </tr>`);
 
         $("#" + title + "_closeButton").click();
         document.getElementById(title + '_key').value = '';

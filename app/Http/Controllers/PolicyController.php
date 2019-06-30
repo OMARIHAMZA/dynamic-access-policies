@@ -65,22 +65,29 @@ class PolicyController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required|unique:policies',
             'creator_id' => 'required|numeric',
-            'data_element' => 'required'
+            'data_element' => 'required|numeric',
+            'rules' => 'required|json',
+            'emergency_rules' => 'required|json',
         ]);
 
-        $logged_user = Auth::user();
+        Policy::create([
+            'name' => $request['name'],
+            'creator_id' => $request['creator_id'],
+            'rules' => $request['rules'],
+            'emergency_rules' => $request['emergency_rules'],
+            'data_element' => $request['data_element'],
+        ]);
 
-        $policy = new Policy();
-        $policy->name = $request->request->get('name');
-        $policy->creator_id = $logged_user->id;
-        $policy->rules = $request->request->get('rules');
-        $policy->emergency_rules = $request->request->get('emergency_rules');
-        $policy->data_element = $request->request->get('data_element');
-        $policy->save();
+        $data = ExternalTable::find($request['data_element']);
+        $data->policy_defined = true;
+        $data->update();
+
+        session()->put('alerts', [
+            ["icon" => "success", "message" => "Policy created successfully"]
+        ]);
 
         return redirect('/policies');
     }
@@ -94,7 +101,6 @@ class PolicyController extends Controller
             'policy' => $policy
 
         ]);
-
     }
 
     public function edit($id)
@@ -148,7 +154,15 @@ class PolicyController extends Controller
 
         $policy = Policy::find($id);
 
+        $data = ExternalTable::find($policy->data_element);
+        $data->policy_defined = false;
+        $data->update();
+
         $policy->delete();
+
+        session()->put('alerts', [
+            ["icon" => "success", "message" => "Policy deleted successfully"]
+        ]);
 
         return redirect('/policies');
 
