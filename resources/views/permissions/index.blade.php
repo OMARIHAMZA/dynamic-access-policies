@@ -9,7 +9,7 @@
             <h4 class="card-title">{{$permissions->count()}} Total permissions</h4>
         </div>
         <div class="card-body">
-            <table class="table" style="table-layout: fixed">
+            <table class="table data-table" style="table-layout: fixed">
                 <thead>
                 <tr>
                     <th class="text-center">#</th>

@@ -9,7 +9,7 @@
             <h4 class="card-title">{{$tables->count()}} Total elements</h4>
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table data-table">
                 <thead>
                 <tr>
                     <th class="text-center">#</th>
