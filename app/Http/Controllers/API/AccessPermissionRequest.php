@@ -122,6 +122,8 @@ class AccessPermissionRequest extends Controller
 
             $queryResult = json_decode(Policy::select($rulesColumn)->where("data_element", "=", $tableId)->get(), true);
 
+            if (count($queryResult) == 0) return false;
+
             //External Table Rules
             foreach ($queryResult as $rules) {
 
